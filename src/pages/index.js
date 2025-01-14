@@ -1,5 +1,9 @@
-import Home from "./Home";	    
+import Home from "./Home";
+import Login from "./Login";	 
+import ProtectedPage from "./ProtectedPage";   
 
 export {
-     Home
+     Home,
+     Login,
+     ProtectedPage,
 }
