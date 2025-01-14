@@ -11,6 +11,8 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
+import { setupListeners } from "@reduxjs/toolkit/query";
+import { api } from "../state/api/reducer";
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
@@ -28,7 +30,8 @@ export const store = configureStore({
           REGISTER
         ],
       },
-    }),
+    }).concat(api.middleware),
 });
 
+setupListeners(store.dispatch);
 export const persistor = persistStore(store);
