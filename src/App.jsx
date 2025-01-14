@@ -4,9 +4,10 @@ import {
   createRoutesFromElements,
   RouterProvider,
 } from "react-router-dom";
+import { ProtectedRoutes } from "./components";
 import { MainLayout } from "./layout";
 
-import { Home } from "./pages";
+import { Home, Login, ProtectedPage } from "./pages";
 
 function App() {
   const Router = createBrowserRouter(
@@ -15,9 +16,19 @@ function App() {
         {/* Public Routes  */}
         <Route element={<MainLayout />}>
           <Route path="/" index element={<Home />} />
-        </Route>
+          <Route path="/login" index element={<Login />} />
 
-        
+          {/* Protected Routes */}
+          <Route
+            path="/protectedtest"
+            index
+            element={
+              <ProtectedRoutes userRole={["Admin"]}>
+                <ProtectedPage />
+              </ProtectedRoutes>
+            }
+          />
+        </Route>
       </Route>
     )
   );
