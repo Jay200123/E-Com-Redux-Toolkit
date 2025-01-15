@@ -1,42 +1,44 @@
-import {
-  Route,
-  createBrowserRouter,
-  createRoutesFromElements,
-  RouterProvider,
-} from "react-router-dom";
-import { ProtectedRoutes } from "./components";
-import { MainLayout } from "./layout";
+  import {
+    Route,
+    createBrowserRouter,
+    createRoutesFromElements,
+    RouterProvider,
+  } from "react-router-dom";
+  import { ProtectedRoutes } from "./components";
+  import { MainLayout } from "./layout";
 
-import { Home, Login, ProtectedPage } from "./pages";
+  import { Home, Login, Register, ProtectedPage } from "./pages";
 
-function App() {
-  const Router = createBrowserRouter(
-    createRoutesFromElements(
-      <Route>
-        {/* Public Routes  */}
-        <Route element={<MainLayout />}>
-          <Route path="/" index element={<Home />} />
-          <Route path="/login" index element={<Login />} />
+  function App() {
+    const Router = createBrowserRouter(
+      createRoutesFromElements(
+        <Route>
+          {/* Public Routes  */}
+          <Route element={<MainLayout />}>
+            <Route path="/" index element={<Home />} />
+            <Route path="/register" index element={<Register />} />
 
-          {/* Protected Routes */}
-          <Route
-            path="/protectedtest"
-            index
-            element={
-              <ProtectedRoutes userRole={["Admin"]}>
-                <ProtectedPage />
-              </ProtectedRoutes>
-            }
-          />
+            <Route path="/login" index element={<Login />} />
+
+            {/* Protected Routes */}
+            <Route
+              path="/protectedtest"
+              index
+              element={
+                <ProtectedRoutes userRole={["Admin"]}>
+                  <ProtectedPage />
+                </ProtectedRoutes>
+              }
+            />
+          </Route>
         </Route>
-      </Route>
-    )
-  );
-  return (
-    <>
-      <RouterProvider router={Router} />
-    </>
-  );
-}
+      )
+    );
+    return (
+      <>
+        <RouterProvider router={Router} />
+      </>
+    );
+  }
 
-export default App;
+  export default App;
