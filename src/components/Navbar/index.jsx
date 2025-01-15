@@ -1,19 +1,51 @@
 import { logout } from "../../state/slice/auth";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export default function () {
+  const navigate = useNavigate(); 
   const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
+
+  const register = ()=>{
+    navigate("/register");
+  }
+  
+  const login = ()=>{
+    navigate("/login");
+  }
 
   const handleLogout = () => {
     dispatch(logout());
     toast.success("Logged out successfully");
   };
-  return <nav className="flex items-center justify-between w-full h-16 shadow-md md:flex-row" onClick={handleLogout}>
-    <div>React</div>
-    <ul className="flex flex-row items-center">
-      <li className="mr-1">LOGIN</li>
-      <li className="mr-1">SIGN UP</li>
-    </ul>
-  </nav>;
+  return (
+    <nav className="flex items-center justify-between w-full h-16 shadow-md md:flex-row">
+      <div>
+        <h3 onClick={()=>navigate("/")} className="text-sm font-medium cursor-pointer md:text-lg md:font-bold">React</h3>
+      </div>
+      <ul className="flex flex-row items-center">
+        {auth?.isAuthenticated ? (
+          <>
+            <li
+              onClick={handleLogout}
+              className="mr-1 text-xs font-medium md:font-bold md:text-sm"
+            >
+              LOGOUT
+            </li>
+          </>
+        ) : (
+          <>
+            <li onClick={login} className="mr-1 text-xs font-medium md:font-bold md:text-sm">
+              LOGIN
+            </li>
+            <li onClick={register} className="mr-1 text-xs font-medium md:font-bold md:text-sm">
+              SIGN UP
+            </li>
+          </>
+        )}
+      </ul>
+    </nav>
+  );
 }
