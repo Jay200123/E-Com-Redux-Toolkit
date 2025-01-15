@@ -1,6 +1,8 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { TAGS, API, RESOURCE } from "../../constants";
-import AuthApi  from "./routes/auth";
+import AuthApi from "./routes/auth";
+import ProductApi from "./routes/products";
+import UserApi from "./routes/user";
 
 const prepareHeaders = (headers, { getState }) => {
   if (getState().auth.token && auth.isAuthenticated) {
@@ -23,9 +25,29 @@ export const api = createApi({
   keepUnusedDataFor: 0,
   endpoints: (builder) => ({
     login: AuthApi.login(builder),
+    getProducts: ProductApi.getAll(builder),
+    getProductById: ProductApi.getById(builder),
+    addProduct: ProductApi.Add(builder),
+    updateProduct: ProductApi.updateById(builder),
+    deleteProduct: ProductApi.deleteById(builder),
+    getUsers: UserApi.getAll(builder),
+    getUserById: UserApi.getById(builder),
+    addUser: UserApi.Add(builder),
+    updateUser: UserApi.updateById(builder),
+    deleteUser: UserApi.deleteById(builder),
   }),
-});
+});         
 
-export const { 
-  useLoginMutation
+export const {
+  useLoginMutation,
+  useGetProductsQuery,
+  useGetProductByIdQuery,
+  useAddProductMutation,
+  useUpdateProductMutation,
+  useDeleteProductMutation,
+  useGetUsersQuery,
+  useGetUserByIdQuery,
+  useAddUserMutation,
+  useUpdateUserMutation,
+  useDeleteUserMutation,
 } = api;
