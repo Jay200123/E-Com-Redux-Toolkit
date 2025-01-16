@@ -23,7 +23,7 @@ export default function () {
   return (
     <nav className="flex items-center justify-between w-full h-16 shadow-md md:flex-row">
       <div>
-        <h3 onClick={()=>navigate("/")} className="text-sm font-medium cursor-pointer md:text-lg md:font-bold">React</h3>
+        <h3 onClick={()=>navigate("/")} className="text-sm font-medium cursor-pointer md:text-lg md:font-bold">IT Shop</h3>
       </div>
       <ul className="flex flex-row items-center">
         {auth?.isAuthenticated ? (
