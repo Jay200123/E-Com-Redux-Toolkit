@@ -126,7 +126,7 @@ export default function () {
         </div>
       </div>
       <div className="w-full overflow-hidden">
-        <div className="grid items-center grid-cols-2 gap-2 mt-3 md:grid-cols-4">
+        <div className="grid items-center grid-cols-2 gap-2 mt-3 md:gap-4 md:grid-cols-4">
           <div className="flex flex-col m-2 overflow-hidden text-center p-2 h-[10rem] w-[8rem] md:h-[11.7rem] rounded-md  md:w-[11.7rem] border border-black">
             <i className="text-sm md:text-3xl fa-solid fa-truck-fast"></i>
             <h3 className="text-sm md:text-lg">Free Shipping</h3>
