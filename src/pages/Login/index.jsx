@@ -39,7 +39,7 @@ export default function () {
 
   return (
     <form
-      className="flex justify-center transition-all duration-700 w-full h-[16rem] md:h-[32rem] p-3 bg-white md:p-1"
+      className="flex justify-center transition-all duration-700 w-full h-[30rem] md:h-[32rem] p-3 bg-white md:p-1"
       onSubmit={formik.handleSubmit}
     >
       <div className="hidden md:w-1/2 md:block">
