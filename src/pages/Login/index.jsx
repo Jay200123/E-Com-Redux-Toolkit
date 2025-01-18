@@ -22,7 +22,7 @@ export default function () {
 
       if (res?.data?.success === true) {
         toast.success(res.data.message);
-        navigate("/protectedtest");
+        navigate("/profile");
       } else if (res?.error?.data?.success === false) {
         toast.error(`${res?.error?.data?.error.message}`);
       }
