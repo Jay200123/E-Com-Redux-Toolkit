@@ -21,7 +21,7 @@ export default function () {
     toast.success("Logged out successfully");
   };
   return (
-    <nav className="flex items-center justify-start w-full h-16 overflow-hidden shadow-md md:justify-between md:flex-row">
+    <nav className="flex items-center w-full h-16 overflow-hidden shadow-md md:justify-between md:flex-row">
       <div>
         <h3
           onClick={() => navigate("/")}
