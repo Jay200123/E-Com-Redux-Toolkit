@@ -3,4 +3,5 @@ export default {
   AUTH: "auth",
   PRODUCTS: "products", 
   USERS: "users", 
+  BRANDS: "brands",
 };
