@@ -8,6 +8,9 @@ export default {
   DELETE: "DELETE",
   TAGS: [
     TAGS.API,
-    TAGS.AUTH
+    TAGS.AUTH,
+    TAGS.PRODUCTS,
+    TAGS.USERS,
+    TAGS.BRANDS,
   ]
 };
