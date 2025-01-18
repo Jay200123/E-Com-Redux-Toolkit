@@ -28,10 +28,9 @@ export default function () {
     },
 
     onSubmit: async (values) => {
-      const res = await addUser(values);
       const formData = new FormData();
       formData.append("fullname", values.fullname);
-      formData.append("adress", values.address);
+      formData.append("address", values.address);
       formData.append("city", values.city);
       formData.append("contact_number", values.contact_number);
       formData.append("email", values.email);
@@ -39,6 +38,8 @@ export default function () {
       values.image.forEach((file) => {
         formData.append("image", file);
       });
+
+      const res = await addUser(formData);
 
       if (res?.data?.success === true) {
         toast.success(res.data.message);
@@ -48,14 +49,14 @@ export default function () {
       }
     },
   });
-
+  
   const signIn = () => {
     navigate("/login");
-  };  
+  };
 
   return (
     <form
-      className="flex justify-center transition-all duration-700 w-full h-[16rem] md:h-[45rem] p-3 bg-white md:p-1 mt-2"
+      className="flex justify-center transition-all duration-700 w-full h-[36rem] md:h-[45rem] p-3 bg-white md:p-1 mt-2"
       onSubmit={formik.handleSubmit}
     >
       <div className="hidden md:w-1/2 md:block">
@@ -69,7 +70,10 @@ export default function () {
         <h3 className="text-lg md:text-3xl">Sign Up</h3>
         <p className="mb-4 text-xs md:text-[1rem]">
           Already have an account?
-          <span onClick={signIn} className="ml-1 font-bold underline cursor-pointer">
+          <span
+            onClick={signIn}
+            className="ml-1 font-bold underline cursor-pointer"
+          >
             Sign In
           </span>
         </p>
