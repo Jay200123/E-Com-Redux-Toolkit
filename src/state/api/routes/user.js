@@ -18,7 +18,7 @@ export const getById = (builder) => {
 export const Add = (builder) => {
   return builder.mutation({
     query: (payload) => ({
-      url: "/user",
+      url: "/users",
       method: "POST",
       body: payload,
     }),
