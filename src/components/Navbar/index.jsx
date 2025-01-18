@@ -22,14 +22,12 @@ export default function () {
   };
   return (
     <nav className="flex items-center justify-between w-full h-16 overflow-hidden shadow-md md:flex-row">
-      <div>
-        <h3
-          onClick={() => navigate("/")}
-          className="text-sm font-medium truncate cursor-pointer md:text-lg md:font-bold"
-        >
-          IT Shop
-        </h3>
-      </div>
+      <h3
+        onClick={() => navigate("/")}
+        className="text-sm font-medium truncate cursor-pointer md:text-lg md:font-bold"
+      >
+        IT Shop
+      </h3>
       <ul className="flex flex-row items-center">
         <li className="mr-1 text-xs font-medium md:font-bold md:mr-2 md:text-sm">
           Home
