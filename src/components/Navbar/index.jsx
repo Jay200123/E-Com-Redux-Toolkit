@@ -21,15 +21,13 @@ export default function () {
     toast.success("Logged out successfully");
   };
   return (
-    <nav className="flex items-center justify-between w-full h-16 overflow-hidden shadow-md md:flex-row">
-      <div>
-        <h3
-          onClick={() => navigate("/")}
-          className="text-sm font-medium truncate cursor-pointer md:text-lg md:font-bold"
-        >
-          IT Shop
-        </h3>
-      </div>
+    <nav className="flex items-center justify-between w-full h-16 overflow-hidden shadow-md">
+      <h3
+        onClick={() => navigate("/")}
+        className="text-lg font-medium truncate cursor-pointer md:text-2xl md:font-bold"
+      >
+        IT Shop
+      </h3>
       <ul className="flex flex-row items-center">
         <li className="mr-1 text-xs font-medium md:font-bold md:mr-2 md:text-sm">
           Home
@@ -46,7 +44,7 @@ export default function () {
           <>
             <li
               onClick={() => console.log("cart")}
-              className="mr-1 text-xs font-medium md:font-bold md:text-sm"
+              className="mr-4 text-xs font-medium md:font-bold md:text-[1rem]"
             >
               <i className="fa-solid fa-cart-shopping"></i>
             </li>
