@@ -25,7 +25,7 @@
               path="/protectedtest"
               index
               element={
-                <ProtectedRoutes userRole={["Admin"]}>
+                <ProtectedRoutes userRole={["User"]}>
                   <ProtectedPage />
                 </ProtectedRoutes>
               }
