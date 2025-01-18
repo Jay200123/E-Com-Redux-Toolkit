@@ -7,7 +7,13 @@
   import { ProtectedRoutes } from "./components";
   import { MainLayout } from "./layout";
 
-  import { Home, Login, Register, ProtectedPage } from "./pages";
+  import { 
+    Home,
+    Login,
+    Register,
+    Profile,
+    ProtectedPage
+} from "./pages";
 
   function App() {
     const Router = createBrowserRouter(
@@ -22,11 +28,11 @@
 
             {/* Protected Routes */}
             <Route
-              path="/protectedtest"
+              path="/profile"
               index
               element={
                 <ProtectedRoutes userRole={["User"]}>
-                  <ProtectedPage />
+                  <Profile />
                 </ProtectedRoutes>
               }
             />
