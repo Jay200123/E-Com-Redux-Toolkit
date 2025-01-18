@@ -48,7 +48,7 @@ export default function () {
               onClick={() => console.log("cart")}
               className="mr-1 text-xs font-medium md:font-bold md:text-sm"
             >
-              <i class="fa-solid fa-cart-shopping"></i>
+              <i className="fa-solid fa-cart-shopping"></i>
             </li>
             <li
               onClick={handleLogout}
@@ -63,17 +63,17 @@ export default function () {
               onClick={() => console.log("cart")}
               className="mr-1 text-xs font-medium md:mr-2 md:font-bold md:text-sm"
             >
-              <i class="fa-solid fa-cart-shopping"></i>
+              <i className="fa-solid fa-cart-shopping"></i>
             </li>
             <li
               onClick={login}
-              className="mr-1 text-xs font-medium md:mr-2 md:font-bold md:text-sm"
+              className="mr-1 text-xs font-medium cursor-pointer md:mr-2 md:font-bold md:text-sm"
             >
               LOGIN
             </li>
             <li
               onClick={register}
-              className="mr-1 text-xs font-medium truncate md:mr-2 md:font-bold md:text-sm"
+              className="mr-1 text-xs font-medium truncate cursor-pointer md:mr-2 md:font-bold md:text-sm"
             >
               SIGN UP
             </li>
