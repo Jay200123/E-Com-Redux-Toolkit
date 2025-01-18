@@ -21,10 +21,10 @@ export default function () {
     toast.success("Logged out successfully");
   };
   return (
-    <nav className="flex items-center justify-between w-full h-16 overflow-hidden shadow-md md:flex-row">
+    <nav className="flex items-center justify-between w-full h-16 overflow-hidden shadow-md">
       <h3
         onClick={() => navigate("/")}
-        className="text-sm font-medium truncate cursor-pointer md:text-lg md:font-bold"
+        className="text-lg font-medium truncate cursor-pointer md:text-2xl md:font-bold"
       >
         IT Shop
       </h3>
