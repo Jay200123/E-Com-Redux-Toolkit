@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.css";
 import Carousel from "react-bootstrap/Carousel";
-import ImageOne from "../../assets/ImageOne-IT.jpg";
+import ImageOne from "../../assets/imageOne-IT.jpg";
 import ImageTwo from "../../assets/ImageTwo-IT.jpg";
 import ImageThree from "../../assets/ImageThree-IT.jpg";
 
