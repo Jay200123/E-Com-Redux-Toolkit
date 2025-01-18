@@ -3,6 +3,7 @@ import { TAGS, API, RESOURCE } from "../../constants";
 import AuthApi from "./routes/auth";
 import ProductApi from "./routes/products";
 import UserApi from "./routes/user";
+import BrandApi from "./routes/brand";
 
 const prepareHeaders = (headers, { getState }) => {
   if (getState().auth.token && auth.isAuthenticated) {
@@ -35,8 +36,13 @@ export const api = createApi({
     addUser: UserApi.Add(builder),
     updateUser: UserApi.updateById(builder),
     deleteUser: UserApi.deleteById(builder),
+    getBrands: BrandApi.getAll(builder),
+    getBrandById: BrandApi.getById(builder),
+    addBrand: BrandApi.Add(builder),
+    updateBrand: BrandApi.updateById(builder),
+    deleteBrand: BrandApi.deleteById(builder),
   }),
-});         
+});
 
 export const {
   useLoginMutation,
@@ -50,4 +56,9 @@ export const {
   useAddUserMutation,
   useUpdateUserMutation,
   useDeleteUserMutation,
+  useGetBrandsQuery,
+  useGetBrandByIdQuery,
+  useAddBrandMutation,
+  useUpdateBrandMutation,
+  useDeleteBrandMutation,
 } = api;
