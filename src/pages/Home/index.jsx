@@ -1,19 +1,20 @@
 import { Carousel } from "../../components";
-import Kingston from "../../assets/kingston.png";
-import Samsung from "../../assets/samsung.png";
-import Nvidia from "../../assets/nvidia.png";
-import AMD from "../../assets/amd.png";
-import Toshiba from "../../assets/toshiba.png";
-import SeaGate from "../../assets/seagate.png";
-import WesternDigital from "../../assets/western-digital.png";
-import MSI from "../../assets/msi.png";
 import ImageOne from "../../assets/ImageComputerTwo.jpg";
 import ImageTwo from "../../assets/ImageLaptopTwo.jpg";
 import ImageThree from "../../assets/ImageMobileTwo.jpg";
-import RAM from "../../assets/ram.jpg";
 import { FaStar, FaCartPlus } from "react-icons/fa";
+import {
+  useGetBrandsQuery,
+  useGetProductsQuery,
+} from "../../state/api/reducer";
 
 export default function () {
+  const { data } = useGetBrandsQuery();
+  const brands = data?.details || [];
+
+  const { data: products } = useGetProductsQuery();
+  const productsData = products?.details || [];
+
   return (
     <div className="flex flex-col w-full h-full">
       <Carousel />
@@ -21,34 +22,38 @@ export default function () {
         Our Top Brands
       </h3>
       <div className="flex flex-row flex-wrap items-center w-full overflow-hidden">
-        {[
-          { src: Kingston, name: "Kingston", alt: "Kingston" },
-          { src: Samsung, name: "Samsung", alt: "Samsung" },
-          { src: Nvidia, name: "Nvidia", alt: "Nvidia" },
-          { src: AMD, name: "AMD", alt: "AMD" },
-          { src: Toshiba, name: "Toshiba", alt: "Toshiba" },
-          { src: SeaGate, name: "SeaGate", alt: "SeaGate" },
-          {
-            src: WesternDigital,
-            name: "WesternDigital",
-            alt: "Western Digital",
-          },
-          { src: MSI, name: "MSI", alt: "MSI" },
-        ].map((item, index) => (
-          <div
-            key={index}
-            className="flex flex-col items-center justify-center w-1/2 transition-all duration-500 rounded-md cursor-pointer hover:opacity-80 hover:shadow-lg md:p-4 md:w-1/5"
-          >
-            <img
-              src={item.src}
-              alt={item.alt}
-              className="object-contain w-24 h-24 md:w-32 md:h-32"
-            />
-            <p className="text-sm font-medium md:font-bold md:text-lg">
-              {item.name}
-            </p>
-          </div>
-        ))}
+        {brands?.length > 0 ? (
+          brands?.map((b) => (
+            <div
+              key={b?._id}
+              className="flex flex-col items-center justify-center w-1/2 transition-all duration-500 rounded-md cursor-pointer hover:opacity-80 hover:shadow-lg md:p-4 md:w-1/5"
+            >
+              {b?.image?.length > 1 ? (
+                <img
+                  src={
+                    b?.image[Math.floor(Math.random * b?.image?.length)]?.url
+                  }
+                  alt="Brand Image"
+                  className="object-contain w-24 h-24 md:w-32 md:h-32"
+                />
+              ) : (
+                <img
+                  src={b?.image[0]?.url}
+                  alt="Brand Image"
+                  className="object-contain w-24 h-24 md:w-32 md:h-32"
+                />
+              )}
+
+              <p className="text-sm font-medium md:font-bold md:text-lg">
+                {b?.brand_name}
+              </p>
+            </div>
+          ))
+        ) : (
+          <p className="text-sm text-center text-gray-600 md:text-2xl">
+            No Brands Found
+          </p>
+        )}
       </div>
       <h3 className="mt-2 text-lg font-medium md:text-3xl md:font-bold">
         Product Category
@@ -92,38 +97,50 @@ export default function () {
         Other Products You may Like
       </h3>
       <div className="grid grid-cols-2 gap-2 w-full max-h-[38rem] md:grid-cols-4 lg:grid-cols-5 overflow-hidden overflow-y-auto p-2">
-        <div className="flex flex-col border border-gray-500 rounded-md h-[14rem] md:h-[18rem] overflow-hidden p-2">
-          <img src={RAM} className="w-full h-full objet-contain" />
-          <p className="text-sm md:text-sm text-medium">
-            KINGSTON HYPER X FURY 8GB RAM
-          </p>
-          <div className="flex items-center justify-between w-full mb-1">
-            <div className="flex items-center">
-              <FaStar className="text-lg text-yellow-400 md:text-2xl" />
-              <FaStar className="text-lg text-yellow-400 md:text-2xl" />
-              <FaStar className="text-lg text-yellow-400 md:text-2xl" />
-              <FaStar className="text-lg text-yellow-400 md:text-2xl" />
-              <FaStar className="text-lg text-yellow-400 md:text-2xl" />
+        {productsData?.length > 0 ? (
+          productsData.map((p) => (
+            <div
+              key={p?._id}
+              className="flex flex-col border border-gray-500 rounded-md h-[14rem] md:h-[18rem] overflow-hidden p-2"
+            >
+              {p?.image?.length > 1 ? (
+                <img
+                  src={
+                    p?.image[Math.floor(Math.random() * p?.image.length)]?.url
+                  }
+                  alt={p?.name || "Product Image"}
+                  className="object-contain w-full h-full"
+                />
+              ) : (
+                <img
+                  src={p?.image[0]?.url}
+                  alt={p?.name || "Product Image"}
+                  className="object-contain w-full h-full"
+                />
+              )}
+              <p className="text-sm md:text-sm text-medium">
+                {p?.name || "Unnamed Product"}
+              </p>
+              <div className="flex items-center justify-between w-full mb-1">
+                <div className="flex items-center">
+                  {Array(5)
+                    .fill(0)
+                    .map((_, index) => (
+                      <FaStar
+                        key={index}
+                        className="text-lg text-yellow-400 md:text-2xl"
+                      />
+                    ))}
+                </div>
+                <FaCartPlus className="text-lg cursor-pointer md:text-2xl" />
+              </div>
             </div>
-            <FaCartPlus className="text-lg md:text-2xl" />
-          </div>
-        </div>
-        <div className="flex flex-col border border-gray-500 rounded-md h-[14rem] md:h-[18rem] overflow-hidden p-2">
-          <img src={RAM} className="w-full h-full objet-contain" />
-          <p className="text-sm md:text-sm text-medium">
-            KINGSTON HYPER X FURY 8GB RAM
+          ))
+        ) : (
+          <p className="text-sm text-center text-gray-600 md:text-2xl">
+            No Products Found
           </p>
-          <div className="flex items-center justify-between w-full mb-1">
-            <div className="flex items-center">
-              <FaStar className="text-lg text-yellow-400 md:text-2xl" />
-              <FaStar className="text-lg text-yellow-400 md:text-2xl" />
-              <FaStar className="text-lg text-yellow-400 md:text-2xl" />
-              <FaStar className="text-lg text-yellow-400 md:text-2xl" />
-              <FaStar className="text-lg text-yellow-400 md:text-2xl" />
-            </div>
-            <FaCartPlus className="text-lg md:text-2xl" />
-          </div>
-        </div>
+        )}
       </div>
       <div className="w-full overflow-hidden">
         <div className="grid items-center grid-cols-2 gap-2 mt-3 md:gap-4 md:grid-cols-4">
