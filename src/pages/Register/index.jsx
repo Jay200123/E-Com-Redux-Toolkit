@@ -1,11 +1,19 @@
 import { useFormik } from "formik";
-import { useAddProductMutation } from "../../state/api/reducer";
+import { useAddUserMutation } from "../../state/api/reducer";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import ImageOne from "../../assets/register.jpg";
+import { useState } from "react";
 
 export default function () {
   const navigate = useNavigate();
-  const [addProduct] = useAddProductMutation();
+  const [addUser] = useAddUserMutation();
+
+  const [isShow, setIsShow] = useState(false);
+
+  const tooglePassword = () => {
+    setIsShow(!isShow);
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -20,7 +28,7 @@ export default function () {
     },
 
     onSubmit: async (values) => {
-      const res = await addProduct(values);
+      const res = await addUser(values);
       const formData = new FormData();
       formData.append("fullname", values.fullname);
       formData.append("adress", values.address);
@@ -41,66 +49,86 @@ export default function () {
     },
   });
 
+  const signIn = () => {
+    navigate("/login");
+  };  
+
   return (
     <form
-      className="flex justify-center w-full h-full"
+      className="flex justify-center transition-all duration-700 w-full h-[16rem] md:h-[45rem] p-3 bg-white md:p-1 mt-2"
       onSubmit={formik.handleSubmit}
     >
-      <div className="flex flex-col items-center p-4 border border-black rounded-sm">
-        <div className="flex flex-col">
-          <label>Full Name</label>
+      <div className="hidden md:w-1/2 md:block">
+        <img
+          className="object-cover w-full h-full rounded-sm"
+          src={ImageOne}
+          alt="Image"
+        />
+      </div>
+      <div className="flex flex-col justify-center w-full p-4 rounded-md md:border md:border-gray-500 md:h-full md:w-1/2">
+        <h3 className="text-lg md:text-3xl">Sign Up</h3>
+        <p className="mb-4 text-xs md:text-[1rem]">
+          Already have an account?
+          <span onClick={signIn} className="ml-1 font-bold underline cursor-pointer">
+            Sign In
+          </span>
+        </p>
+        <div className="flex flex-col mt-2">
+          <label className="text-sm font-medium md:text-lg">Fullname</label>
           <input
             name="fullname"
             id="fullname"
-            className="border border-black"
+            className="p-2 text-sm border border-black rounded-md"
             onBlur={formik.handleBlur}
             onChange={formik.handleChange}
             value={formik.values.fullname}
             type="text"
           />
         </div>
-        <div className="flex flex-col">
-          <label>Contact Number</label>
+        <div className="flex flex-col mt-2">
+          <label className="text-sm font-medium md:text-lg">
+            Contact Number
+          </label>
           <input
             name="contact_number"
             id="contact_number"
-            className="border border-black"
+            className="p-2 text-sm border border-black rounded-md"
             onBlur={formik.handleBlur}
             onChange={formik.handleChange}
             value={formik.values.contact_number}
             type="text"
           />
         </div>
-        <div className="flex flex-col">
-          <label>Address</label>
+        <div className="flex flex-col mt-2">
+          <label className="text-sm font-medium md:text-lg">Address</label>
           <input
             name="address"
             id="address"
-            className="border border-black"
+            className="p-2 text-sm border border-black rounded-md"
             onBlur={formik.handleBlur}
             onChange={formik.handleChange}
             value={formik.values.address}
             type="text"
           />
         </div>
-        <div className="flex flex-col">
-          <label>City</label>
+        <div className="flex flex-col mt-2">
+          <label className="text-sm font-medium md:text-lg">City</label>
           <input
             name="city"
             id="city"
-            className="border border-black"
+            className="p-2 text-sm border border-black rounded-md"
             onBlur={formik.handleBlur}
             onChange={formik.handleChange}
             value={formik.values.city}
             type="text"
           />
         </div>
-        <div className="flex flex-col">
-          <label>Email</label>
+        <div className="flex flex-col mt-2">
+          <label className="text-sm font-medium md:text-lg">Email</label>
           <input
             name="email"
             id="email"
-            className="border border-black"
+            className="p-2 text-sm border border-black rounded-md"
             onBlur={formik.handleBlur}
             onChange={formik.handleChange}
             value={formik.values.email}
@@ -108,35 +136,38 @@ export default function () {
           />
         </div>
 
-        <div className="flex flex-col">
-          <label>Password</label>
+        <div className="flex flex-col mt-2">
+          <label className="text-sm font-medium md:text-lg">Password</label>
           <input
             name="password"
             id="password"
-            className="border border-black"
+            className="p-2 text-sm border border-black rounded-md"
             onBlur={formik.handleBlur}
             onChange={formik.handleChange}
             value={formik.values.password}
-            type="password"
+            type={isShow ? "text" : "password"}
           />
         </div>
 
-        <div className="flex flex-col">
-          <label>Image</label>
+        <div className="flex flex-col mt-2">
           <input
             type="file"
             name="image"
-            id="image"
             multiple
+            className="text-xs md:text-sm"
             onChange={(e) => {
               const files = Array.from(e.currentTarget.files || []);
               formik.setFieldValue("image", files);
             }}
-            className="text-sm md:text-base"
           />
         </div>
 
-        <button type="submit">Submit</button>
+        <button
+          className="text-[1rem] p-2 bg-black  transition-all duration-500 hover:opacity-75 rounded-md text-white mt-4"
+          type="submit"
+        >
+          Sign Up
+        </button>
       </div>
     </form>
   );
