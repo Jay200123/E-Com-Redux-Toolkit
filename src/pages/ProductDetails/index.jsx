@@ -32,8 +32,6 @@ export default function () {
 
   const productColors = filteredProducts?.map((p) => p?.color?.toLowerCase());
 
-  console.log(productColors);
-
   const back = () => {
     window.history.back();
   };
@@ -41,7 +39,7 @@ export default function () {
   return (
     <>
       <div className="flex flex-col items-center w-full max-h-[56rem] mt-3 md:flex-row">
-        <div className="relative w-full h-full md:w-1/2 ">
+        <div className="relative w-full h-full transition-all duration-500 ease-in-out md:w-1/2 ">
           <i
             onClick={back}
             className="absolute m-2 text-2xl cursor-pointer fa fa-arrow-left"
@@ -65,7 +63,7 @@ export default function () {
             />
           )}
         </div>
-        <div className="flex flex-col w-full h-full p-2 md:w-1/2 justify-evenly">
+        <div className="flex flex-col w-full h-full p-2 transition-all duration-700 ease-in-out md:w-1/2 justify-evenly">
           <h3 className="text-lg text-center md:text-2xl">{product?.product_name}</h3>
           <h3 className="text-sm md:text-lg">Product Description:</h3>
           <p className="text-xs md:text-sm">{product?.description}</p>
