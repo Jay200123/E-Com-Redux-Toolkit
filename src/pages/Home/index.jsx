@@ -108,7 +108,7 @@ export default function () {
                   src={
                     p?.image[Math.floor(Math.random() * p?.image.length)]?.url
                   }
-                  alt={p?.name || "Product Image"}
+                  alt={p?.product_name || "Product Image"}
                   className="object-contain w-full h-full"
                 />
               ) : (
@@ -119,7 +119,7 @@ export default function () {
                 />
               )}
               <p className="text-sm md:text-sm text-medium">
-                {p?.name || "Unnamed Product"}
+                {p?.product_name || "Unnamed Product"}
               </p>
               <div className="flex items-center justify-between w-full mb-1">
                 <div className="flex items-center">
