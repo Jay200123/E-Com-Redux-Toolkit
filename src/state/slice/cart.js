@@ -19,7 +19,7 @@ const cartSlice = createSlice({
         state.item.push({
           ...action.payload,
           product: action.payload.product,
-          orderQty: action.payload.quantity,
+          orderQty: action.payload.orderQty,
         });
       }
     },
