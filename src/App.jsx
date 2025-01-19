@@ -12,7 +12,7 @@
     Login,
     Register,
     Profile,
-    ProtectedPage
+    Cart,
 } from "./pages";
 
   function App() {
@@ -25,6 +25,7 @@
             <Route path="/register" index element={<Register />} />
 
             <Route path="/login" index element={<Login />} />
+            <Route path="/cart" index element={<Cart />} />
 
             {/* Protected Routes */}
             <Route
