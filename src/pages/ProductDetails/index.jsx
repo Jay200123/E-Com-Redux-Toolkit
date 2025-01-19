@@ -5,15 +5,14 @@ import {
   useGetProductByIdQuery,
 } from "../../state/api/reducer";
 import { addCart } from "../../state/slice/cart";
-import { useEffect } from "react";
 
 export default function () {
   const { id } = useParams();
   const { data } = useGetProductByIdQuery(id);
-  const product = data?.details || {};
+  const product = data?.details;
   
   const { data: productDetails } = useGetProductsQuery();
-  const products = productDetails?.products || [];
+  const products = productDetails?.details;
 
   const [quantity, setQuantity] = useState(1);
 
@@ -32,6 +31,8 @@ export default function () {
   );
 
   const productColors = filteredProducts?.map((p) => p?.color?.toLowerCase());
+
+  console.log(productColors);
 
   const back = () => {
     window.history.back();
