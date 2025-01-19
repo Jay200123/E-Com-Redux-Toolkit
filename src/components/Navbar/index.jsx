@@ -2,11 +2,14 @@ import { logout } from "../../state/slice/auth";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { clearCart }  from "../../state/slice/cart"; 
 
 export default function () {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
+  const cart = useSelector((state) => state.cart);
+
 
   const register = () => {
     navigate("/register");
@@ -44,8 +47,11 @@ export default function () {
           <>
             <li
               onClick={() => console.log("cart")}
-              className="mr-4 text-xs font-medium md:font-bold md:text-[1rem]"
+              className="relative p-2 mr-4 text-xs font-medium md:font-bold md:text-lg"
             >
+               <span className="absolute top-0 right-0 flex items-center justify-center w-5 h-5 p-1 text-xs font-medium text-white bg-red-500 rounded-full md:text-sm">
+                {cart?.item?.length || 0}
+              </span>
               <i className="fa-solid fa-cart-shopping"></i>
             </li>
             <li
@@ -59,8 +65,11 @@ export default function () {
           <>
             <li
               onClick={() => console.log("cart")}
-              className="mr-1 text-xs font-medium md:mr-2 md:font-bold md:text-sm"
+              className="relative p-2 mr-4 text-xs font-medium md:font-bold md:text-lg"
             >
+              <span className="absolute top-0 right-0 flex items-center justify-center w-5 h-5 p-1 text-xs font-medium text-white bg-red-500 rounded-full md:text-sm">
+                {cart?.item?.length || 0}
+              </span>
               <i className="fa-solid fa-cart-shopping"></i>
             </li>
             <li
