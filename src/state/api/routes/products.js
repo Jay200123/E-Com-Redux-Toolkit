@@ -16,7 +16,7 @@ export const getById = (builder) => {
   return builder.query({
     query: (id) => {
       return {
-        url: `/products/${id}`,
+        url: `/product/${id}`,
         method: "GET",
         providesTags: [TAGS.PRODUCTS],
       };
