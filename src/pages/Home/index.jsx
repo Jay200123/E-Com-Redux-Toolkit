@@ -7,9 +7,12 @@ import {
   useGetBrandsQuery,
   useGetProductsQuery,
 } from "../../state/api/reducer";
+import { addCart } from "../../state/slice/cart";
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 export default function () {
+  const dispatch = useDispatch();
   const { data, refetch: brandRefetch } = useGetBrandsQuery();
   const brands = data?.details || [];
 
@@ -153,7 +156,17 @@ export default function () {
                       />
                     ))}
                 </div>
-                <FaCartPlus className="text-lg cursor-pointer md:text-2xl" />
+                <FaCartPlus
+                  onClick={() =>
+                    dispatch(
+                      addCart({
+                        product: p,
+                        orderQty: 1,
+                      })
+                    )
+                  }
+                  className="text-lg cursor-pointer md:text-2xl"
+                />
               </div>
             </div>
           ))
