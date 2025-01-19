@@ -40,7 +40,7 @@ export default function () {
 
   return (
     <>
-      <div className="flex flex-col items-center w-full max-h-[32rem] mt-3 overflow-x-auto md:flex-row">
+      <div className="flex flex-col items-center w-full max-h-[56rem] mt-3 md:flex-row">
         <div className="relative w-full h-full md:w-1/2 ">
           <i
             onClick={back}
