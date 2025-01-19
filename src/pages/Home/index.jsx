@@ -10,6 +10,7 @@ import {
 import { addCart } from "../../state/slice/cart";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify"; 
 
 export default function () {
   const dispatch = useDispatch();
@@ -23,6 +24,11 @@ export default function () {
     brandRefetch();
     productRefetch();
   }, [brands, productsData]);
+
+  const handleCart = (product, quantity) => {  
+    dispatch(addCart({ product, orderQty: quantity })); 
+    toast.success("Product added to cart"); 
+  }
 
   return (
     <div className="flex flex-col w-full h-full">
@@ -157,14 +163,7 @@ export default function () {
                     ))}
                 </div>
                 <FaCartPlus
-                  onClick={() =>
-                    dispatch(
-                      addCart({
-                        product: p,
-                        orderQty: 1,
-                      })
-                    )
-                  }
+                  onClick={() => handleCart(p, 1)}  
                   className="text-lg cursor-pointer md:text-2xl"
                 />
               </div>
