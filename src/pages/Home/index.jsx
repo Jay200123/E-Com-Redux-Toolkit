@@ -11,8 +11,10 @@ import { addCart } from "../../state/slice/cart";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify"; 
+import { useNavigate } from "react-router-dom";
 
 export default function () {
+  const navigate = useNavigate(); 
   const dispatch = useDispatch();
   const { data, refetch: brandRefetch } = useGetBrandsQuery();
   const brands = data?.details || [];
@@ -139,13 +141,15 @@ export default function () {
                     p?.image[Math.floor(Math.random() * p?.image.length)]?.url
                   }
                   alt={p?.product_name || "Product Image"}
-                  className="object-contain w-full h-full"
+                  onClick={()=>navigate(`/product/${p?._id}`)}
+                  className="object-contain w-full h-full cursor-pointer"
                 />
               ) : (
                 <img
                   src={p?.image[0]?.url}
                   alt={p?.name || "Product Image"}
-                  className="object-contain w-full h-full"
+                  onClick={()=>navigate(`/product/${p?._id}`)}
+                  className="object-contain w-full h-full cursor-pointer"
                 />
               )}
               <p className="text-sm md:text-sm text-medium">
