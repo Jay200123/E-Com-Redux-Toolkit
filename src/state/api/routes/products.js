@@ -54,7 +54,7 @@ export const deleteById = (builder) => {
   return builder.mutation({
     query: (id) => {
       return {
-        url: `/product/delete/${id}`,
+        url: `/product/${id}`,
         method: "DELETE",
         invalidatesTags: [TAGS.PRODUCTS],
       };
