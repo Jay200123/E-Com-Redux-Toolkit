@@ -51,9 +51,9 @@ export default function () {
           <>
             <li
               onClick={myCart}
-              className="relative p-2 mr-4 text-xs font-medium md:font-bold md:text-lg"
+              className="relative p-2 mr-4 text-lg font-medium md:font-bold"
             >
-               <span className="absolute top-0 right-0 flex items-center justify-center w-5 h-5 p-1 text-xs font-medium text-white bg-red-500 rounded-full md:text-sm">
+               <span className="absolute top-0 right-0 flex items-center justify-center w-5 h-5 p-1 text-xs font-medium text-white bg-red-500 rounded-full cursor-pointer md:text-sm">
                 {cart?.item?.length || 0}
               </span>
               <i className="fa-solid fa-cart-shopping"></i>
@@ -69,9 +69,9 @@ export default function () {
           <>
             <li
               onClick={myCart}
-              className="relative p-2 mr-4 text-xs font-medium md:font-bold md:text-lg"
+              className="relative p-2 mr-4 text-lg font-medium md:font-bold"
             >
-              <span className="absolute top-0 right-0 flex items-center justify-center w-5 h-5 p-1 text-xs font-medium text-white bg-red-500 rounded-full md:text-sm">
+              <span className="absolute top-0 right-0 flex items-center justify-center w-5 h-5 p-1 text-sm font-medium text-white bg-red-500 rounded-full cursor-pointer">
                 {cart?.item?.length || 0}
               </span>
               <i className="fa-solid fa-cart-shopping"></i>
