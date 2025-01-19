@@ -38,7 +38,7 @@ const cartSlice = createSlice({
       );
 
       if (existingItem) {
-        existingItem.orderQty - 1;
+        existingItem.orderQty -= 1; 
       }
     },
     removeCart: (state, action) => {
