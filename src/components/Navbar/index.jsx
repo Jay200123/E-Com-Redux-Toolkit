@@ -19,6 +19,10 @@ export default function () {
     navigate("/login");
   };
 
+  const myCart = ()=>{
+    navigate("/cart");
+  }
+
   const handleLogout = () => {
     dispatch(logout());
     toast.success("Logged out successfully");
@@ -46,7 +50,7 @@ export default function () {
         {auth?.isAuthenticated ? (
           <>
             <li
-              onClick={() => console.log("cart")}
+              onClick={myCart}
               className="relative p-2 mr-4 text-xs font-medium md:font-bold md:text-lg"
             >
                <span className="absolute top-0 right-0 flex items-center justify-center w-5 h-5 p-1 text-xs font-medium text-white bg-red-500 rounded-full md:text-sm">
@@ -64,7 +68,7 @@ export default function () {
         ) : (
           <>
             <li
-              onClick={() => console.log("cart")}
+              onClick={myCart}
               className="relative p-2 mr-4 text-xs font-medium md:font-bold md:text-lg"
             >
               <span className="absolute top-0 right-0 flex items-center justify-center w-5 h-5 p-1 text-xs font-medium text-white bg-red-500 rounded-full md:text-sm">
