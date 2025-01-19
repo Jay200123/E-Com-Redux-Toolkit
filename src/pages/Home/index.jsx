@@ -7,13 +7,19 @@ import {
   useGetBrandsQuery,
   useGetProductsQuery,
 } from "../../state/api/reducer";
+import { useEffect } from "react";
 
 export default function () {
-  const { data } = useGetBrandsQuery();
+  const { data, refetch: brandRefetch } = useGetBrandsQuery();
   const brands = data?.details || [];
 
-  const { data: products } = useGetProductsQuery();
+  const { data: products, refetch: productRefetch } = useGetProductsQuery();
   const productsData = products?.details || [];
+
+  useEffect(() => {
+    brandRefetch();
+    productRefetch();
+  }, [brands, productsData]);
 
   return (
     <div className="flex flex-col w-full h-full">
@@ -60,9 +66,14 @@ export default function () {
       </h3>
       <div className="flex w-full h-[22rem] md:h-[24rem] overflow-hidden">
         <div className="relative w-1/2 mr-1">
-          <h3 className="absolute text-lg font-medium text-white md:text-2xl md:font-bold">
-            Computer Parts
-          </h3>
+          <div className="absolute p-2">
+            <h3 className="text-lg font-medium text-white md:text-2xl md:font-bold">
+              Computer Parts
+            </h3>
+            <p className="text-xs font-medium underline cursor-pointer text-white md:text-[1rem] md:font-bold">
+              Shop Now<i className="ml-1 fa-solid fa-arrow-right"></i>
+            </p>
+          </div>
           <img
             src={ImageOne}
             alt="Computer"
@@ -71,9 +82,14 @@ export default function () {
         </div>
         <div className="flex flex-col w-1/2">
           <div className="relative w-full mb-1 h-1/2">
-            <h3 className="absolute text-lg font-medium text-white md:text-2xl md:font-bold">
-              Laptop Parts
-            </h3>
+            <div className="absolute p-2">
+              <h3 className="text-lg font-medium text-white md:text-2xl md:font-bold">
+                Laptop Parts
+              </h3>
+              <p className="text-xs font-medium underline cursor-pointer text-white md:text-[1rem] md:font-bold">
+                Shop Now<i className="ml-1 fa-solid fa-arrow-right"></i>
+              </p>
+            </div>
             <img
               src={ImageTwo}
               alt="Computer"
@@ -81,9 +97,14 @@ export default function () {
             />
           </div>
           <div className="relative w-full h-1/2">
-            <h3 className="absolute text-lg font-medium text-white md:text-2xl md:font-bold">
-              Mobile Parts
-            </h3>
+            <div className="absolute p-2">
+              <h3 className="text-lg font-medium text-white md:text-2xl md:font-bold">
+                Mobile Parts
+              </h3>
+              <p className="text-xs font-medium underline cursor-pointer text-white md:text-[1rem] md:font-bold">
+                Shop Now<i className="ml-1 fa-solid fa-arrow-right"></i>
+              </p>
+            </div>
             <img
               src={ImageThree}
               alt="Computer"
