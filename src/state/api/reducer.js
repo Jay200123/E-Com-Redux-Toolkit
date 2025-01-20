@@ -4,13 +4,16 @@ import AuthApi from "./routes/auth";
 import ProductApi from "./routes/products";
 import UserApi from "./routes/user";
 import BrandApi from "./routes/brand";
+import OrderApi from "./routes/order";
 
 const prepareHeaders = (headers, { getState }) => {
-  if (getState().auth.token && auth.isAuthenticated) {
-    headers.set("authorization", `Bearer ${getState().auth.token}`);
+  if (getState()?.auth?.isAuthenticated && getState()?.auth?.token) { 
+    headers.set("authorization", `Bearer ${getState()?.auth?.token}`);
     headers.set("accept", `application/json`);
-    return headers;
   }
+
+ 
+  return headers;
 };
 
 const baseQuery = fetchBaseQuery({
@@ -41,6 +44,11 @@ export const api = createApi({
     addBrand: BrandApi.Add(builder),
     updateBrand: BrandApi.updateById(builder),
     deleteBrand: BrandApi.deleteById(builder),
+    getOrders: OrderApi.getAll(builder),
+    getOrderById: OrderApi.getById(builder),
+    addOrder: OrderApi.Add(builder),
+    updateOrder: OrderApi.updateById(builder),
+    deleteOrder: OrderApi.deleteById(builder),
   }),
 });
 
@@ -61,4 +69,9 @@ export const {
   useAddBrandMutation,
   useUpdateBrandMutation,
   useDeleteBrandMutation,
+  useGetOrdersQuery,
+  useGetOrderByIdQuery,
+  useAddOrderMutation,
+  useUpdateOrderMutation,
+  useDeleteOrderMutation,
 } = api;
