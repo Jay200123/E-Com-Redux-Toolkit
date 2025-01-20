@@ -4,4 +4,5 @@ export default {
   PRODUCTS: "products", 
   USERS: "users", 
   BRANDS: "brands",
+  ORDERS: "orders", 
 };
