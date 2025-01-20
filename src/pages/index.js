@@ -5,6 +5,7 @@ import Profile from "./Profile";
 import Cart from "./Cart";   
 import ProductDetails from "./ProductDetails"; 
 import Checkout from "./Cart/checkout"; 
+import EditProfile from "./Profile/editProfile";
 import ProtectedPage from "./ProtectedPage";   
 
 export {
@@ -15,5 +16,6 @@ export {
      Cart,
      ProductDetails,
      Checkout,
+     EditProfile,
      ProtectedPage,
 }
