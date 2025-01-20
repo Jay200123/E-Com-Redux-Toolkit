@@ -9,7 +9,6 @@ export default function () {
   const auth = useSelector((state) => state.auth);
   const cart = useSelector((state) => state.cart);
 
-
   const register = () => {
     navigate("/register");
   };
@@ -26,13 +25,16 @@ export default function () {
     dispatch(logout());
     toast.success("Logged out successfully");
   };
+
+  const randomImage = auth?.user?.image[Math.floor(Math.random() * auth?.user.image.length)]; 
+
   return (
     <nav className="flex items-center justify-between w-full h-16 overflow-hidden shadow-md">
       <h3
         onClick={() => navigate("/")}
         className="text-sm font-medium truncate cursor-pointer md:text-2xl md:font-bold"
       >
-        <i class="fa-solid fa-screwdriver-wrench mr-1"></i>Tech Fix
+        <i className="mr-1 fa-solid fa-screwdriver-wrench"></i>Tech Fix
       </h3>
       <ul className="flex flex-row items-center">
         <li className="mr-1 text-xs font-medium md:font-bold md:mr-2 md:text-sm">
@@ -58,10 +60,16 @@ export default function () {
               <i className="fa-solid fa-cart-shopping"></i>
             </li>
             <li
-              onClick={handleLogout}
-              className="mr-1 text-xs font-medium md:font-bold md:text-sm"
+            onClick={() => navigate("/profile")}  
+              className="space-x-1 text-xs font-medium cursor-pointer md:font-bold md:text-sm"
             >
-              LOGOUT
+              <img src={randomImage.url} alt="avatar" className="w-8 h-8 rounded-full" />  
+            </li>
+            <li
+              onClick={handleLogout}
+              className="p-1 ml-1 font-medium md:p-2 md:font-bold"
+            >
+              <i className="text-sm md:text-lg fa-solid fa-right-from-bracket"></i>
             </li>
           </>
         ) : (
