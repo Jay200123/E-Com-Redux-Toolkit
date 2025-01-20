@@ -14,6 +14,7 @@ import {
   Profile,
   Cart,
   Checkout,
+  EditProfile,
   ProductDetails,
 } from "./pages";
 
@@ -47,6 +48,16 @@ function App() {
             element={
               <ProtectedRoutes userRole={["User"]}>
                 <Checkout />
+              </ProtectedRoutes>
+            }
+          />
+
+          <Route
+            path="/profile/edit"  
+            index
+            element={
+              <ProtectedRoutes userRole={["User"]}>
+                <EditProfile />
               </ProtectedRoutes>
             }
           />
