@@ -10,7 +10,7 @@ export default function () {
   const navigate = useNavigate();
   const [addOrder] = useAddOrderMutation();
   const cartItems = useSelector((state) => state.cart.item);
-  const user = useSelector((state) => state.auth);
+  const user = useSelector((state) => state.auth.user);
 
   const [paymentMethod, setPaymentMethod] = useState("cash");
 
