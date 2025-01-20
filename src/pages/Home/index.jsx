@@ -8,7 +8,6 @@ import {
   useGetProductsQuery,
 } from "../../state/api/reducer";
 import { addCart } from "../../state/slice/cart";
-import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify"; 
 import { useNavigate } from "react-router-dom";
@@ -21,11 +20,6 @@ export default function () {
 
   const { data: products, refetch: productRefetch } = useGetProductsQuery();
   const productsData = products?.details || [];
-
-  useEffect(() => {
-    brandRefetch();
-    productRefetch();
-  }, [brands, productsData]);
 
   const handleCart = (product, quantity) => {  
     dispatch(addCart({ product, orderQty: quantity })); 
