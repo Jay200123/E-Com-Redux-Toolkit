@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
 
 export default function () {
-  const user = useSelector((state) => state.auth.user);  
-  const randomImage = user?.image[Math.floor(Math.random() * user.image.length)];
+  const auth = useSelector((state) => state.auth);  
+  const randomImage = auth?.user?.image[Math.floor(Math.random() * auth?.user.image.length)];
     
   return (
     <div className="flex items-center justify-center w-full h-full p-4 overflow-hidden">
@@ -22,27 +22,27 @@ export default function () {
           <div className="flex flex-col w-full md:flex-row">
             <div className="w-full p-2 md:w-1/2">
               <p className="font-semibold">First Name</p>
-              <p>{user?.fullname}</p>
+              <p>{auth?.user?.fullname}</p>
             </div>
             <div className="w-full p-2 md:w-1/2">
               <p className="font-semibold">Contact Number</p>
-              <p>{user?.contact_number}</p>
+              <p>{auth?.user?.contact_number}</p>
             </div>
           </div>
           <div className="flex flex-col w-full md:flex-row ">
             <div className="w-full p-2 md:w-1/2">
               <p className="font-semibold">Address</p>
-              <p>{user?.address}</p>
+              <p>{auth?.user?.address}</p>
             </div>
             <div className="w-full p-2 md:w-1/2">
               <p className="font-semibold">City</p>
-              <p>{user?.city}</p>
+              <p>{auth?.user?.city}</p>
             </div>
           </div>
           <div className="flex flex-col w-full md:flex-row">
             <div className="w-full p-2 md:w-1/2">
               <p className="font-semibold">Email</p>
-              <p>{user?.email}</p>
+              <p>{auth?.user?.email}</p>
             </div>
           </div>
         </div>
