@@ -12,5 +12,6 @@ export default {
     TAGS.PRODUCTS,
     TAGS.USERS,
     TAGS.BRANDS,
+    TAGS.ORDERS,  
   ]
 };
