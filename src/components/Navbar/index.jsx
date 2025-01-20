@@ -2,7 +2,6 @@ import { logout } from "../../state/slice/auth";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { clearCart }  from "../../state/slice/cart"; 
 
 export default function () {
   const navigate = useNavigate();
@@ -31,9 +30,9 @@ export default function () {
     <nav className="flex items-center justify-between w-full h-16 overflow-hidden shadow-md">
       <h3
         onClick={() => navigate("/")}
-        className="text-lg font-medium truncate cursor-pointer md:text-2xl md:font-bold"
+        className="text-sm font-medium truncate cursor-pointer md:text-2xl md:font-bold"
       >
-        IT Shop
+        <i class="fa-solid fa-screwdriver-wrench mr-1"></i>Tech Fix
       </h3>
       <ul className="flex flex-row items-center">
         <li className="mr-1 text-xs font-medium md:font-bold md:mr-2 md:text-sm">
