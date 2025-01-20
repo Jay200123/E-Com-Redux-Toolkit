@@ -7,8 +7,11 @@ import {
   clearCart,
 } from "../../state/slice/cart";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export default function () {
+  const navigate = useNavigate();
+  
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
 
@@ -54,7 +57,8 @@ export default function () {
               >
                 <div className="flex items-center justify-center w-full mb-4 md:w-1/4 md:mb-0">
                   <img
-                    className="object-cover w-24 h-24 rounded-md"
+                    className="object-cover w-24 h-24 rounded-md cursor-pointer"
+                    onClick={() => navigate(`/product/${item?.product?._id}`)}  
                     src={
                       item?.product?.image?.length > 1
                         ? item?.product?.image[
@@ -157,7 +161,7 @@ export default function () {
               {cart?.item?.length > 0 ? (
                 <>
                 <button
-                  onClick={()=>toast.error("Functionality not implemented")}  
+                  onClick={()=>navigate(`/checkout`)}  
                   className="w-full px-4 py-2 text-white bg-red-600 rounded-md"
                 >
                   Proceed to Checkout
