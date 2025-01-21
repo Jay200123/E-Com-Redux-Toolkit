@@ -6,6 +6,7 @@ import Cart from "./Cart";
 import ProductDetails from "./ProductDetails"; 
 import Checkout from "./Cart/checkout"; 
 import EditProfile from "./Profile/editProfile";
+import ProductCategory from "./ProductCategory"
 import ProtectedPage from "./ProtectedPage";   
 
 export {
@@ -17,5 +18,6 @@ export {
      ProductDetails,
      Checkout,
      EditProfile,
+     ProductCategory,
      ProtectedPage,
 }
