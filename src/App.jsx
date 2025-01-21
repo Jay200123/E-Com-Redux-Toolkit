@@ -32,6 +32,16 @@ function App() {
           <Route path="/cart" index element={<Cart />} />
           <Route path="/product/:id" index element={<ProductDetails />} />
 
+          <Route element={<CategoryLayout />}>
+           <Route
+            path="products/category"  
+            index
+            element={      
+                <ProductCategory />
+            }
+          />
+           </Route>
+
           {/* Protected Routes */}
           <Route
             path="/profile"
@@ -62,17 +72,6 @@ function App() {
               </ProtectedRoutes>
             }
           />
-           <Route element={<CategoryLayout />}>
-           <Route
-            path="products/category"  
-            index
-            element={
-              <ProtectedRoutes userRole={["User"]}>
-                <ProductCategory />
-              </ProtectedRoutes>
-            }
-          />
-           </Route>
         </Route>
       </Route>
     )
