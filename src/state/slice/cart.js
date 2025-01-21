@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { api } from "../api/reducer";
 
 const initialState = {
   item: [],
@@ -38,7 +39,7 @@ const cartSlice = createSlice({
       );
 
       if (existingItem) {
-        existingItem.orderQty -= 1; 
+        existingItem.orderQty -= 1;
       }
     },
     removeCart: (state, action) => {
@@ -52,6 +53,11 @@ const cartSlice = createSlice({
     setState: () => {
       return initialState;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addMatcher(api.endpoints.addOrder.matchFulfilled, (state) => {
+      state.item = [];
+    });
   },
 });
 
