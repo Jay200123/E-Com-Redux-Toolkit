@@ -9,11 +9,12 @@ import {
 } from "../../state/api/reducer";
 import { addCart } from "../../state/slice/cart";
 import { useDispatch } from "react-redux";
-import { toast } from "react-toastify"; 
+import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { setCategory } from "../../state/slice/category";
 
 export default function () {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { data } = useGetBrandsQuery();
   const brands = data?.details || [];
@@ -21,14 +22,34 @@ export default function () {
   const { data: products } = useGetProductsQuery();
   const productsData = products?.details || [];
 
-  const handleCart = (product, quantity) => {  
-    dispatch(addCart({ product, orderQty: quantity })); 
-    toast.success("Product added to cart"); 
-  }
+  const handleCart = (product, quantity) => {
+    dispatch(addCart({ product, orderQty: quantity }));
+    toast.success("Product added to cart");
+  };
 
-  const handleCategory = ()=>{
-    navigate('/products/category');
-  }
+  const handleComputer = () => {
+    dispatch(setCategory("Computer"));
+    navigate("/products/category");
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  const handleLaptop = () => {
+    dispatch(setCategory("Laptop"));
+    navigate("/products/category");
+    window.scrollTo(0, 0);
+  };
+
+  const handleMobile = () => {
+    dispatch(setCategory("Mobile"));
+    navigate("/products/category");
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
   return (
     <div className="flex flex-col w-full h-full">
@@ -79,7 +100,10 @@ export default function () {
             <h3 className="text-lg font-medium text-white md:text-2xl md:font-bold">
               Computer Parts
             </h3>
-            <p onClick={handleCategory} className="text-xs font-medium underline cursor-pointer text-white md:text-[1rem] md:font-bold">
+            <p
+              onClick={handleComputer}
+              className="text-xs font-medium underline cursor-pointer text-white md:text-[1rem] md:font-bold"
+            >
               Shop Now<i className="ml-1 fa-solid fa-arrow-right"></i>
             </p>
           </div>
@@ -95,7 +119,10 @@ export default function () {
               <h3 className="text-lg font-medium text-white md:text-2xl md:font-bold">
                 Laptop Parts
               </h3>
-              <p onClick={handleCategory} className="text-xs font-medium underline cursor-pointer text-white md:text-[1rem] md:font-bold">
+              <p
+                onClick={handleLaptop}
+                className="text-xs font-medium underline cursor-pointer text-white md:text-[1rem] md:font-bold"
+              >
                 Shop Now<i className="ml-1 fa-solid fa-arrow-right"></i>
               </p>
             </div>
@@ -110,7 +137,10 @@ export default function () {
               <h3 className="text-lg font-medium text-white md:text-2xl md:font-bold">
                 Mobile Parts
               </h3>
-              <p onClick={handleCategory} className="text-xs font-medium underline cursor-pointer text-white md:text-[1rem] md:font-bold">
+              <p
+                onClick={handleMobile}
+                className="text-xs font-medium underline cursor-pointer text-white md:text-[1rem] md:font-bold"
+              >
                 Shop Now<i className="ml-1 fa-solid fa-arrow-right"></i>
               </p>
             </div>
@@ -139,14 +169,14 @@ export default function () {
                     p?.image[Math.floor(Math.random() * p?.image.length)]?.url
                   }
                   alt={p?.product_name || "Product Image"}
-                  onClick={()=>navigate(`/product/${p?._id}`)}
+                  onClick={() => navigate(`/product/${p?._id}`)}
                   className="object-contain w-full h-full cursor-pointer"
                 />
               ) : (
                 <img
                   src={p?.image[0]?.url}
                   alt={p?.name || "Product Image"}
-                  onClick={()=>navigate(`/product/${p?._id}`)}
+                  onClick={() => navigate(`/product/${p?._id}`)}
                   className="object-contain w-full h-full cursor-pointer"
                 />
               )}
@@ -165,7 +195,7 @@ export default function () {
                     ))}
                 </div>
                 <FaCartPlus
-                  onClick={() => handleCart(p, 1)}  
+                  onClick={() => handleCart(p, 1)}
                   className="text-lg cursor-pointer md:text-2xl"
                 />
               </div>
