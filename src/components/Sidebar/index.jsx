@@ -1,8 +1,35 @@
 import { useGetBrandsQuery } from "../../state/api/reducer";
 import { FaStar } from "react-icons/fa";
+import { useState } from "react";
 
 export default function () {
   const { data } = useGetBrandsQuery();
+
+  const [fiveStar, setFiveStar] = useState(false);
+  const [fourStar, setFourStar] = useState(false);
+  const [threeStar, setThreeStar] = useState(false);
+  const [twoStar, setTwoStar] = useState(false);
+  const [oneStar, setOneStar] = useState(false);
+
+  const handleFiveStar = () => {
+    setFiveStar(!fiveStar);
+  };
+
+  const handleFourStar = () => {
+    setFourStar(!fourStar);
+  };
+
+  const handleThreeStar = () => {
+    setThreeStar(!threeStar);
+  };
+
+  const handleTwoStar = () => {
+    setTwoStar(!twoStar);
+  };
+
+  const handleOneStar = () => {
+    setOneStar(!oneStar);
+  };
 
   return (
     <div className="flex flex-col justify-between w-full h-full p-2 overflow-hidden">
@@ -18,7 +45,9 @@ export default function () {
         {data?.details?.map((b) => (
           <div key={b?._id} className="flex p-1">
             <input type="checkbox" className="cursor-pointer" />
-            <span className="ml-1 text-xs text-black md:text-sm">{b?.brand_name}</span>
+            <span className="ml-1 text-xs text-black md:text-sm">
+              {b?.brand_name}
+            </span>
           </div>
         ))}
       </div>
@@ -45,27 +74,57 @@ export default function () {
         <h3 className="text-sm md:text-lg">Filter by Rating</h3>
         <div className="flex p-2">
           {[1, 2, 3, 4, 5].map((r) => (
-            <FaStar key={r} className="text-yellow-500 cursor-pointer" />
+            <FaStar
+              key={r}
+              onClick={() => handleFiveStar()}
+              className={`${
+                fiveStar ? "text-yellow-500" : "text-black"
+              } cursor-pointer transition-all duration-500`}
+            />
           ))}
         </div>
         <div className="flex p-2">
           {[1, 2, 3, 4].map((r) => (
-            <FaStar key={r} className="text-yellow-500 cursor-pointer" />
+            <FaStar
+              key={r}
+              onClick={() => handleFourStar()}
+              className={`${
+                fourStar ? "text-yellow-500" : "text-black"
+              } cursor-pointer transition-all duration-500`}
+            />
           ))}
         </div>
         <div className="flex p-2">
           {[1, 2, 3].map((r) => (
-            <FaStar key={r} className="text-yellow-500 cursor-pointer" />
+            <FaStar
+              key={r}
+              onClick={() => handleThreeStar()}
+              className={`${
+                threeStar ? "text-yellow-500" : "text-black"
+              } cursor-pointer transition-all duration-500`}
+            />
           ))}
         </div>
         <div className="flex p-2">
           {[1, 2].map((r) => (
-            <FaStar key={r} className="text-yellow-500 cursor-pointer" />
+            <FaStar
+              key={r}
+              onClick={() => handleTwoStar()}
+              className={`${
+                twoStar ? "text-yellow-500" : "text-black"
+              } cursor-pointer transition-all duration-500`}
+            />
           ))}
         </div>
         <div className="flex p-2">
           {[1].map((r) => (
-            <FaStar key={r} className="text-yellow-500 cursor-pointer" />
+            <FaStar
+              key={r}
+              onClick={() => handleOneStar()}
+              className={`${
+                oneStar ? "text-yellow-500" : "text-black"
+              } cursor-pointer transition-all duration-500`}
+            />
           ))}
         </div>
       </div>
