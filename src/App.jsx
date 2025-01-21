@@ -5,7 +5,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { ProtectedRoutes } from "./components";
-import { MainLayout } from "./layout";
+import { MainLayout, CategoryLayout } from "./layout";
 
 import {
   Home,
@@ -15,6 +15,7 @@ import {
   Cart,
   Checkout,
   EditProfile,
+  ProductCategory,
   ProductDetails,
 } from "./pages";
 
@@ -61,6 +62,17 @@ function App() {
               </ProtectedRoutes>
             }
           />
+           <Route element={<CategoryLayout />}>
+           <Route
+            path="products/category"  
+            index
+            element={
+              <ProtectedRoutes userRole={["User"]}>
+                <ProductCategory />
+              </ProtectedRoutes>
+            }
+          />
+           </Route>
         </Route>
       </Route>
     )
