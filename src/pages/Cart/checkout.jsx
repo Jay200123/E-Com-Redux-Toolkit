@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useFormik } from "formik";
 import { toast } from "react-toastify";
-import { clearCart } from "../../state/slice/cart";
 import { useAddOrderMutation } from "../../state/api/reducer";
 
 export default function () {
@@ -46,7 +45,6 @@ export default function () {
 
       if (res?.data?.success === true) {
         toast.success(res.data.message);
-        clearCart();
         navigate("/");
       } else if (res?.error?.data?.success === false) {
         toast.error(`${res?.error?.data?.error.message}`);
