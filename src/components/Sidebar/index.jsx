@@ -1,34 +1,64 @@
 import { useGetBrandsQuery } from "../../state/api/reducer";
 import { FaStar } from "react-icons/fa";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { setFilter, clearFilter } from "../../state/slice/filter";
 
 export default function () {
+  const dispatch = useDispatch();
   const { data } = useGetBrandsQuery();
 
-  const [fiveStar, setFiveStar] = useState(false);
-  const [fourStar, setFourStar] = useState(false);
-  const [threeStar, setThreeStar] = useState(false);
-  const [twoStar, setTwoStar] = useState(false);
-  const [oneStar, setOneStar] = useState(false);
+  const [search, setSearch] = useState("");
 
-  const handleFiveStar = () => {
-    setFiveStar(!fiveStar);
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
   };
 
-  const handleFourStar = () => {
-    setFourStar(!fourStar);
+  const [findBrand, setBrand] = useState([]);
+
+  const handleSelectBrand = (brand) => {
+    setBrand((prev) =>
+      prev?.includes(brand)
+        ? prev?.filter((b) => b !== brand)
+        : [...prev, brand]
+    );
   };
 
-  const handleThreeStar = () => {
-    setThreeStar(!threeStar);
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(0);
+
+  const handleMinPrice = (e) => {
+    setMinPrice(e.target.value);
   };
 
-  const handleTwoStar = () => {
-    setTwoStar(!twoStar);
+  const handleMaxPrice = (e) => {
+    setMaxPrice(e.target.value);
   };
 
-  const handleOneStar = () => {
-    setOneStar(!oneStar);
+  const [selectedRatings, setSelectedRatings] = useState([]);
+
+  const handleRatingClick = (rating) => {
+    setSelectedRatings((prevRatings) =>
+      prevRatings.includes(rating)
+        ? prevRatings.filter((r) => r !== rating)
+        : [...prevRatings, rating]
+    );
+  };
+
+  const handleFilter = () => {
+    dispatch(
+      setFilter({
+        search: search,
+        minPrice: minPrice,
+        maxPrice: maxPrice,
+        findBrand: findBrand,
+        selectedRatings: selectedRatings,
+      })
+    );
+  };
+
+  const handleClear = () => {
+    dispatch(clearFilter());
   };
 
   return (
@@ -36,6 +66,7 @@ export default function () {
       <input
         type="text"
         id="search"
+        onChange={handleSearch}
         name="search"
         placeholder="Search Product..."
         className="w-full p-1 text-sm border border-gray-500 rounded-md"
@@ -44,7 +75,12 @@ export default function () {
         <h3 className="text-sm md:text-lg">Filter by Brand</h3>
         {data?.details?.map((b) => (
           <div key={b?._id} className="flex p-1">
-            <input type="checkbox" className="cursor-pointer" />
+            <input
+              type="checkbox"
+              className="cursor-pointer"
+              checked={findBrand?.includes(b?.brand_name)}
+              onChange={() => handleSelectBrand(b?.brand_name)}
+            />
             <span className="ml-1 text-xs text-black md:text-sm">
               {b?.brand_name}
             </span>
@@ -58,6 +94,7 @@ export default function () {
             type="text"
             id="min"
             name="min"
+            onChange={handleMinPrice}
             placeholder="Min"
             className="w-1/2 p-1 mr-1 text-sm border border-gray-500 rounded-md"
           />
@@ -65,6 +102,7 @@ export default function () {
             type="text"
             id="max"
             name="max"
+            onChange={handleMaxPrice}
             placeholder="Max"
             className="w-1/2 p-1 text-sm border border-gray-500 rounded-md"
           />
@@ -72,62 +110,42 @@ export default function () {
       </div>
       <div className="w-full mt-2">
         <h3 className="text-sm md:text-lg">Filter by Rating</h3>
-        <div className="flex p-2">
-          {[1, 2, 3, 4, 5].map((r) => (
-            <FaStar
-              key={r}
-              onClick={() => handleFiveStar()}
-              className={`${
-                fiveStar ? "text-yellow-500" : "text-black"
-              } cursor-pointer transition-all duration-500`}
-            />
-          ))}
-        </div>
-        <div className="flex p-2">
-          {[1, 2, 3, 4].map((r) => (
-            <FaStar
-              key={r}
-              onClick={() => handleFourStar()}
-              className={`${
-                fourStar ? "text-yellow-500" : "text-black"
-              } cursor-pointer transition-all duration-500`}
-            />
-          ))}
-        </div>
-        <div className="flex p-2">
-          {[1, 2, 3].map((r) => (
-            <FaStar
-              key={r}
-              onClick={() => handleThreeStar()}
-              className={`${
-                threeStar ? "text-yellow-500" : "text-black"
-              } cursor-pointer transition-all duration-500`}
-            />
-          ))}
-        </div>
-        <div className="flex p-2">
-          {[1, 2].map((r) => (
-            <FaStar
-              key={r}
-              onClick={() => handleTwoStar()}
-              className={`${
-                twoStar ? "text-yellow-500" : "text-black"
-              } cursor-pointer transition-all duration-500`}
-            />
-          ))}
-        </div>
-        <div className="flex p-2">
-          {[1].map((r) => (
-            <FaStar
-              key={r}
-              onClick={() => handleOneStar()}
-              className={`${
-                oneStar ? "text-yellow-500" : "text-black"
-              } cursor-pointer transition-all duration-500`}
-            />
+        <div className="flex flex-col">
+          {[5, 4, 3, 2, 1]?.map((rating) => (
+            <div
+              key={rating}
+              className="flex items-center mb-2 cursor-pointer"
+              onClick={() => handleRatingClick(rating)}
+            >
+              <div className="flex">
+                {[...Array(rating)]?.map((_, index) => (
+                  <FaStar
+                    key={index}
+                    className={`${
+                      selectedRatings.includes(rating)
+                        ? "text-yellow-500"
+                        : "text-gray-400"
+                    } transition-all duration-500`}
+                  />
+                ))}
+              </div>
+            </div>
           ))}
         </div>
       </div>
+      <button
+        onClick={handleClear}
+        className="text-xs md:text-[1rem] p-2 bg-black border transition-all duration-500 hover:opacity-75 rounded-md text-white mt-2"
+      >
+        <i className="mr-1 fa-solid fa-broom"></i> Clear Filter
+      </button>
+      <button
+        onClick={handleFilter}
+        className="text-xs md:text-[1rem] p-2 bg-black border transition-all duration-500 hover:opacity-75 rounded-md text-white mt-2"
+        type="submit"
+      >
+        <i className="mr-1 fa-solid fa-magnifying-glass"></i>Filter Product
+      </button>
     </div>
   );
 }
