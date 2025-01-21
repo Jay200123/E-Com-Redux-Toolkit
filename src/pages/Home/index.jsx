@@ -15,15 +15,19 @@ import { useNavigate } from "react-router-dom";
 export default function () {
   const navigate = useNavigate(); 
   const dispatch = useDispatch();
-  const { data, refetch: brandRefetch } = useGetBrandsQuery();
+  const { data } = useGetBrandsQuery();
   const brands = data?.details || [];
 
-  const { data: products, refetch: productRefetch } = useGetProductsQuery();
+  const { data: products } = useGetProductsQuery();
   const productsData = products?.details || [];
 
   const handleCart = (product, quantity) => {  
     dispatch(addCart({ product, orderQty: quantity })); 
     toast.success("Product added to cart"); 
+  }
+
+  const handleCategory = ()=>{
+    navigate('/products/category');
   }
 
   return (
@@ -75,7 +79,7 @@ export default function () {
             <h3 className="text-lg font-medium text-white md:text-2xl md:font-bold">
               Computer Parts
             </h3>
-            <p className="text-xs font-medium underline cursor-pointer text-white md:text-[1rem] md:font-bold">
+            <p onClick={handleCategory} className="text-xs font-medium underline cursor-pointer text-white md:text-[1rem] md:font-bold">
               Shop Now<i className="ml-1 fa-solid fa-arrow-right"></i>
             </p>
           </div>
@@ -91,7 +95,7 @@ export default function () {
               <h3 className="text-lg font-medium text-white md:text-2xl md:font-bold">
                 Laptop Parts
               </h3>
-              <p className="text-xs font-medium underline cursor-pointer text-white md:text-[1rem] md:font-bold">
+              <p onClick={handleCategory} className="text-xs font-medium underline cursor-pointer text-white md:text-[1rem] md:font-bold">
                 Shop Now<i className="ml-1 fa-solid fa-arrow-right"></i>
               </p>
             </div>
@@ -106,7 +110,7 @@ export default function () {
               <h3 className="text-lg font-medium text-white md:text-2xl md:font-bold">
                 Mobile Parts
               </h3>
-              <p className="text-xs font-medium underline cursor-pointer text-white md:text-[1rem] md:font-bold">
+              <p onClick={handleCategory} className="text-xs font-medium underline cursor-pointer text-white md:text-[1rem] md:font-bold">
                 Shop Now<i className="ml-1 fa-solid fa-arrow-right"></i>
               </p>
             </div>
