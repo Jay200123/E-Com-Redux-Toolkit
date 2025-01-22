@@ -1,4 +1,7 @@
-import { useGetProductsQuery } from "../../state/api/reducer";
+import {
+  useGetProductsQuery,
+  useGetRatingsQuery,
+} from "../../state/api/reducer";
 import { useDispatch, useSelector } from "react-redux";
 import { clearCategory } from "../../state/slice/category";
 import { FaStar, FaCartPlus } from "react-icons/fa";
@@ -12,15 +15,39 @@ export default function () {
   const { data } = useGetProductsQuery();
   const products = data?.details || [];
 
+  const { data: ratings } = useGetRatingsQuery();
+  const ratingData = ratings?.details || [];
+
   const category = useSelector((state) => state.category.categories);
   const filter = useSelector((state) => state.filter);
 
-  const matchFilters = products?.filter((p) => {
+  const allProductsWithRatings = products?.map((product) => {
+    const matchingRatings = ratingData.filter(
+      (rating) => rating?.product?._id === product?._id
+    );
+
+    const count = matchingRatings?.length;
+
+    const averageRating =
+      count > 0
+        ? matchingRatings?.reduce((sum, rating) => sum + rating?.rating, 0) /
+          count
+        : 0;
+
+    return {
+      ...product,
+      averageRating: Number(averageRating.toFixed(1)),
+      reviewCount: count,
+    };
+  });
+
+  const matchFilters = allProductsWithRatings?.filter((p) => {
     const noFiltersApplied =
       !filter?.info?.name &&
       !filter?.info?.minPrice &&
       !filter?.info?.maxPrice &&
-      !filter?.info?.brands.length;
+      !filter?.info?.brands.length &&
+      !filter?.info?.ratings.length;
 
     if (noFiltersApplied) {
       return true;
@@ -31,17 +58,25 @@ export default function () {
         ?.toLowerCase()
         ?.includes(filter?.info?.name?.toLowerCase());
 
-    const matchPrice = (!filter?.info?.minPrice) || (p?.price >= filter?.info?.minPrice && !filter?.info?.maxPrice) || (p?.price <= filter?.info?.maxPrice);
-
+    const matchPrice =
+      !filter?.info?.minPrice ||
+      (p?.price >= filter?.info?.minPrice && !filter?.info?.maxPrice) ||
+      p?.price <= filter?.info?.maxPrice;
 
     const matchBrand =
       !filter?.info?.brands?.length ||
       filter?.info?.brands?.includes(p?.brand?.brand_name);
 
-    return matchName && matchPrice && matchBrand;
+    const matchRating =
+      !filter?.info?.ratings?.length ||
+      filter?.info?.ratings?.some(
+        (rating) => Math.floor(p?.averageRating) === rating
+      );
+
+    return matchName && matchPrice && matchBrand && matchRating;
   });
 
-  const filterProducts = matchFilters?.filter(
+  const filteredProducts = matchFilters?.filter(
     (p) => p?.category?.toLowerCase() === category.toLowerCase()
   );
 
@@ -56,7 +91,7 @@ export default function () {
   };
 
   return (
-    <div className="relative w-full h-full p-2 transition-all duration-500">  
+    <div className="relative w-full h-full p-2 transition-all duration-500">
       <p className="absolute top-0 right-0"></p>
       <span>
         <i
@@ -65,8 +100,8 @@ export default function () {
         ></i>
       </span>
       <div className="grid grid-cols-1 gap-1 w-full max-h-[38rem] md:grid-cols-4 lg:grid-cols-5 overflow-hidden overflow-y-auto p-2">
-        {filterProducts?.length > 0 ? (
-          filterProducts.map((p) => (
+        {filteredProducts?.length > 0 ? (
+          filteredProducts.map((p) => (
             <div
               key={p?._id}
               className="flex mt-2 flex-col  border border-gray-500 rounded-md h-[16rem] md:h-[18rem] overflow-hidden p-2"
@@ -101,7 +136,11 @@ export default function () {
                     .map((_, index) => (
                       <FaStar
                         key={index}
-                        className="text-lg text-yellow-400 md:text-2xl"
+                        className={`text-lg md:text-2xl ${
+                          index < Math.floor(p.averageRating)
+                            ? "text-yellow-400"
+                            : "text-gray-300"
+                        }`}
                       />
                     ))}
                 </div>
