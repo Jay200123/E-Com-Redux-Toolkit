@@ -1,7 +1,7 @@
 import { useGetBrandsQuery } from "../../state/api/reducer";
 import { FaStar } from "react-icons/fa";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { setFilter, clearFilter } from "../../state/slice/filter";
 
 export default function () {
@@ -45,7 +45,11 @@ export default function () {
     );
   };
 
-  const handleFilter = () => {
+  const handleClear = () => {
+    dispatch(clearFilter());
+  };
+
+  useEffect(() => {
     dispatch(
       setFilter({
         search: search,
@@ -55,11 +59,8 @@ export default function () {
         selectedRatings: selectedRatings,
       })
     );
-  };
-
-  const handleClear = () => {
-    dispatch(clearFilter());
-  };
+    return () => {};
+  }, [search, minPrice, maxPrice, findBrand, selectedRatings]);
 
   return (
     <div className="flex flex-col justify-between w-full h-full p-2 overflow-hidden">
@@ -138,13 +139,6 @@ export default function () {
         className="text-xs md:text-[1rem] p-2 bg-black border transition-all duration-500 hover:opacity-75 rounded-md text-white mt-2"
       >
         <i className="mr-1 fa-solid fa-broom"></i> Clear Filter
-      </button>
-      <button
-        onClick={handleFilter}
-        className="text-xs md:text-[1rem] p-2 bg-black border transition-all duration-500 hover:opacity-75 rounded-md text-white mt-2"
-        type="submit"
-      >
-        <i className="mr-1 fa-solid fa-magnifying-glass"></i>Filter Product
       </button>
     </div>
   );
