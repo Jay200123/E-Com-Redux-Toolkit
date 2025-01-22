@@ -13,5 +13,6 @@ export default {
     TAGS.USERS,
     TAGS.BRANDS,
     TAGS.ORDERS,  
+    TAGS.RATINGS,
   ]
 };
