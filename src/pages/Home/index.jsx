@@ -46,7 +46,7 @@ export default function () {
       reviewCount: count,
     };
   });
-  
+
   const handleCart = (product, quantity) => {
     dispatch(addCart({ product, orderQty: quantity }));
     toast.success("Product added to cart");
@@ -219,14 +219,14 @@ export default function () {
                       <FaStar
                         key={index}
                         className={`text-lg md:text-2xl ${
-                          index < Math.round(p.averageRating)
+                          index < Math.floor(p.averageRating)
                             ? "text-yellow-400"
                             : "text-gray-300"
                         }`}
                       />
                     ))}
                   <span className="ml-2 text-sm text-gray-600">
-                    ({p.reviewCount || 0})
+                    ({p.reviewCount || 0}) Reviews
                   </span>
                 </div>
                 <FaCartPlus
