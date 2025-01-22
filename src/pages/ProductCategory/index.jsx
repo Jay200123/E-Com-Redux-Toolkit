@@ -69,7 +69,7 @@ export default function () {
           filterProducts.map((p) => (
             <div
               key={p?._id}
-              className="flex mt-2 flex-col  border border-gray-500 rounded-md h-[14rem] md:h-[18rem] overflow-hidden p-2"
+              className="flex mt-2 flex-col  border border-gray-500 rounded-md h-[16rem] md:h-[18rem] overflow-hidden p-2"
             >
               {p?.image?.length > 1 ? (
                 <img
