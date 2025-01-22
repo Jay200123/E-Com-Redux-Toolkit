@@ -5,4 +5,5 @@ export default {
   USERS: "users", 
   BRANDS: "brands",
   ORDERS: "orders", 
+  RATINGS: "ratings", 
 };
