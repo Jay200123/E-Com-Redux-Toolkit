@@ -136,7 +136,7 @@ export default function () {
                     .map((_, index) => (
                       <FaStar
                         key={index}
-                        className={`text-lg md:text-2xl ${
+                        className={`text-sm md:text-lg ${
                           index < Math.floor(p.averageRating)
                             ? "text-yellow-400"
                             : "text-gray-300"
