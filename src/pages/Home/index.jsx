@@ -218,14 +218,14 @@ export default function () {
                     .map((_, index) => (
                       <FaStar
                         key={index}
-                        className={`text-lg md:text-2xl ${
+                        className={`text-sm md:text-lg ${
                           index < Math.floor(p.averageRating)
                             ? "text-yellow-400"
                             : "text-gray-300"
                         }`}
                       />
                     ))}
-                  <span className="ml-2 text-sm text-gray-600">
+                  <span className="ml-2 text-xs text-gray-600 truncate md:text-sm">
                     ({p.reviewCount || 0}) Reviews
                   </span>
                 </div>
