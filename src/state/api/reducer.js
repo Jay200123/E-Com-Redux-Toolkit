@@ -5,14 +5,14 @@ import ProductApi from "./routes/products";
 import UserApi from "./routes/user";
 import BrandApi from "./routes/brand";
 import OrderApi from "./routes/order";
+import RatingApi from "./routes/rating";
 
 const prepareHeaders = (headers, { getState }) => {
-  if (getState()?.auth?.isAuthenticated && getState()?.auth?.token) { 
+  if (getState()?.auth?.isAuthenticated && getState()?.auth?.token) {
     headers.set("authorization", `Bearer ${getState()?.auth?.token}`);
     headers.set("accept", `application/json`);
   }
 
- 
   return headers;
 };
 
@@ -49,6 +49,11 @@ export const api = createApi({
     addOrder: OrderApi.Add(builder),
     updateOrder: OrderApi.updateById(builder),
     deleteOrder: OrderApi.deleteById(builder),
+    getRatings: RatingApi.getAll(builder),
+    getRatingById: RatingApi.getById(builder),
+    addRating: RatingApi.Add(builder),
+    updateRating: RatingApi.updateById(builder),
+    deleteRating: RatingApi.deleteById(builder),
   }),
 });
 
@@ -74,4 +79,9 @@ export const {
   useAddOrderMutation,
   useUpdateOrderMutation,
   useDeleteOrderMutation,
+  useGetRatingsQuery,
+  useGetRatingByIdQuery,
+  useAddRatingMutation,
+  useUpdateRatingMutation,
+  useDeleteRatingMutation,
 } = api;
