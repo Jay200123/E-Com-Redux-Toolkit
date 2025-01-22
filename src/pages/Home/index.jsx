@@ -183,6 +183,9 @@ export default function () {
               <p className="text-sm md:text-sm text-medium">
                 {p?.product_name || "Unnamed Product"}
               </p>
+              <p className="text-sm md:text-sm text-medium">
+              ₱ {p?.price || "Unknown Price"}
+              </p>
               <div className="flex items-center justify-between w-full mb-1">
                 <div className="flex items-center">
                   {Array(5)
