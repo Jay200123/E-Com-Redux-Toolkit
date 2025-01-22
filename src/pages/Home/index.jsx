@@ -6,12 +6,14 @@ import { FaStar, FaCartPlus } from "react-icons/fa";
 import {
   useGetBrandsQuery,
   useGetProductsQuery,
+  useGetRatingsQuery,
 } from "../../state/api/reducer";
 import { addCart } from "../../state/slice/cart";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { setCategory } from "../../state/slice/category";
+import { useState } from "react";
 
 export default function () {
   const navigate = useNavigate();
@@ -22,6 +24,29 @@ export default function () {
   const { data: products } = useGetProductsQuery();
   const productsData = products?.details || [];
 
+  const { data: ratings } = useGetRatingsQuery();
+  const ratingData = ratings?.details || [];
+
+  const allProductsWithRatings = productsData?.map((product) => {
+    const matchingRatings = ratingData.filter(
+      (rating) => rating?.product?._id === product?._id
+    );
+
+    const count = matchingRatings?.length;
+
+    const averageRating =
+      count > 0
+        ? matchingRatings?.reduce((sum, rating) => sum + rating?.rating, 0) /
+          count
+        : 0;
+
+    return {
+      ...product,
+      averageRating: Number(averageRating.toFixed(1)),
+      reviewCount: count,
+    };
+  });
+  
   const handleCart = (product, quantity) => {
     dispatch(addCart({ product, orderQty: quantity }));
     toast.success("Product added to cart");
@@ -157,11 +182,11 @@ export default function () {
         Other Products You may Like
       </h3>
       <div className="grid grid-cols-2 gap-2 w-full max-h-[38rem] md:grid-cols-4 lg:grid-cols-5 overflow-hidden overflow-y-auto p-2">
-        {productsData?.length > 0 ? (
-          productsData.map((p) => (
+        {allProductsWithRatings?.length > 0 ? (
+          allProductsWithRatings.map((p) => (
             <div
               key={p?._id}
-              className="flex flex-col border border-gray-500 rounded-md h-[14rem] md:h-[18rem] overflow-hidden p-2"
+              className="flex flex-col border border-gray-500 rounded-md h-[16rem] md:h-[18rem] overflow-hidden p-2"
             >
               {p?.image?.length > 1 ? (
                 <img
@@ -184,7 +209,7 @@ export default function () {
                 {p?.product_name || "Unnamed Product"}
               </p>
               <p className="text-sm md:text-sm text-medium">
-              ₱ {p?.price || "Unknown Price"}
+                ₱ {p?.price || "Unknown Price"}
               </p>
               <div className="flex items-center justify-between w-full mb-1">
                 <div className="flex items-center">
@@ -193,9 +218,16 @@ export default function () {
                     .map((_, index) => (
                       <FaStar
                         key={index}
-                        className="text-lg text-yellow-400 md:text-2xl"
+                        className={`text-lg md:text-2xl ${
+                          index < Math.round(p.averageRating)
+                            ? "text-yellow-400"
+                            : "text-gray-300"
+                        }`}
                       />
                     ))}
+                  <span className="ml-2 text-sm text-gray-600">
+                    ({p.reviewCount || 0})
+                  </span>
                 </div>
                 <FaCartPlus
                   onClick={() => handleCart(p, 1)}
