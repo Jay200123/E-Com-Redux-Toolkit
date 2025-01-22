@@ -18,8 +18,8 @@ const filterSlice = createSlice({
       state.info.name = action.payload.search;
       state.info.minPrice = action.payload.minPrice;
       state.info.maxPrice = action.payload.maxPrice;
-      state.info.brands.push(action.payload.findBrand);
-      state.info.ratings.push(action.payload.selectedRatings);
+      state.info.brands = action.payload.findBrand;
+      state.info.ratings = action.payload.selectedRatings;
     },
     clearFilter: (state) => {
       state.info.name = "";
