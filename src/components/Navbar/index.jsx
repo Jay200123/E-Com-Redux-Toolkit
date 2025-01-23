@@ -24,6 +24,7 @@ export default function () {
   const handleLogout = () => {
     dispatch(logout());
     toast.success("Logged out successfully");
+    navigate("/login");
   };
 
   const randomImage = auth?.user?.image[Math.floor(Math.random() * auth?.user.image.length)]; 
@@ -36,15 +37,21 @@ export default function () {
       >
         <i className="mr-1 fa-solid fa-screwdriver-wrench"></i>Tech Fix
       </h3>
-      <ul className="flex flex-row items-center">
-        <li className="mr-1 text-xs font-medium md:font-bold md:mr-2 md:text-sm">
+      <ul className="flex flex-row items-center overflow-hidden overflow-x-auto ">  
+        <li className="mr-1 text-xs font-medium md:truncate md:font-bold md:mr-2 md:text-sm">
           Home
         </li>
-        <li className="mr-1 text-xs font-medium md:font-bold md:mr-2 md:text-sm">
+        <li className="mr-1 text-xs font-medium md:truncate md:font-bold md:mr-2 md:text-sm">
           About
         </li>
         <li className="mr-1 text-xs font-medium truncate md:font-bold md:mr-2 md:text-sm">
           Contact Us
+        </li>
+        <li className="block mr-1 text-xs font-medium md:truncate md:hidden md:font-bold md:mr-2 md:text-sm">
+          Orders
+        </li>
+        <li className="block mr-1 text-xs font-medium truncate md:hidden md:font-bold md:mr-2 md:text-sm">
+          Product Review
         </li>
       </ul>
       <ul className="flex flex-row items-center">
