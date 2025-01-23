@@ -17,12 +17,12 @@ export default function () {
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      fullname: user?.fullname,
-      contact_number: user?.contact_number,
-      address: user?.address,
-      city: user?.city,
-      email: user?.email,
-      image: user?.image,
+      fullname: user?.fullname || "", 
+      contact_number: user?.contact_number || "",
+      address: user?.address || "",
+      city: user?.city || "",
+      email: user?.email || "",
+      image: user?.image || [],
     },
 
     onSubmit: async (values) => {
