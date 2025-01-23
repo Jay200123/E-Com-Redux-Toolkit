@@ -7,7 +7,7 @@ export default function () {
   const randomImage = auth?.user?.image[Math.floor(Math.random() * auth?.user.image.length)];
     
   return (
-    <div className="flex items-center justify-center w-full h-full p-4 overflow-hidden">
+    <div className="flex items-center justify-center w-full h-full p-1 overflow-hidden md:p-4">
       <div className="flex flex-col transition-all duration-700 md:flex-row w-[75rem] border border-gray-500 shadow-lg rounded-lg h-[48rem] md:h-[24rem]">
         <div className="w-full h-full md:w-[30%]">
           <div className="flex flex-col items-center justify-center w-full h-full p-4">
