@@ -17,9 +17,9 @@ export default function () {
     navigate("/login");
   };
 
-  const myCart = ()=>{
+  const myCart = () => {
     navigate("/cart");
-  }
+  };
 
   const handleLogout = () => {
     dispatch(logout());
@@ -27,7 +27,8 @@ export default function () {
     navigate("/login");
   };
 
-  const randomImage = auth?.user?.image[Math.floor(Math.random() * auth?.user.image.length)]; 
+  const randomImage =
+    auth?.user?.image[Math.floor(Math.random() * auth?.user.image.length)];
 
   return (
     <nav className="flex items-center justify-between w-full h-16 overflow-hidden shadow-md">
@@ -38,24 +39,24 @@ export default function () {
         <i className="mr-1 fa-solid fa-screwdriver-wrench"></i>Tech Fix
       </h3>
       <div className="flex justify-center w-full overflow-hidden">
-  <ul className="flex flex-row items-center overflow-x-auto whitespace-nowrap scroll-smooth">
-    <li className="mr-2 text-xs font-medium md:font-bold md:text-sm">
-      Home
-    </li>
-    <li className="mr-2 text-xs font-medium md:font-bold md:text-sm">
-      About
-    </li>
-    <li className="mr-2 text-xs font-medium md:font-bold md:text-sm">
-      Contact Us
-    </li>
-    <li className="block mr-2 text-xs font-medium md:hidden md:font-bold md:text-sm">
-      Orders
-    </li>
-    <li className="block mr-2 text-xs font-medium md:hidden md:font-bold md:text-sm">
-      Product Review
-    </li>
-  </ul>
-</div>
+        <ul className="flex flex-row items-center overflow-x-auto whitespace-nowrap scroll-smooth">
+          <li className="mr-2 text-xs font-medium md:font-bold md:text-sm">
+            Home
+          </li>
+          <li className="mr-2 text-xs font-medium md:font-bold md:text-sm">
+            About
+          </li>
+          <li className="mr-2 text-xs font-medium md:font-bold md:text-sm">
+            Contact Us
+          </li>
+          <li className="block mr-2 text-xs font-medium md:hidden md:font-bold md:text-sm">
+            Orders
+          </li>
+          <li className="block mr-2 text-xs font-medium md:hidden md:font-bold md:text-sm">
+            Product Review
+          </li>
+        </ul>
+      </div>
       <ul className="flex flex-row items-center">
         {auth?.isAuthenticated ? (
           <>
@@ -63,16 +64,20 @@ export default function () {
               onClick={myCart}
               className="relative p-2 mr-4 text-lg font-medium md:font-bold"
             >
-               <span className="absolute top-0 right-0 flex items-center justify-center w-5 h-5 p-1 text-xs font-medium text-white bg-red-500 rounded-full cursor-pointer md:text-sm">
+              <span className="absolute top-0 right-0 flex items-center justify-center w-5 h-5 p-1 text-xs font-medium text-white bg-red-500 rounded-full cursor-pointer md:text-sm">
                 {cart?.item?.length || 0}
               </span>
               <i className="fa-solid fa-cart-shopping"></i>
             </li>
             <li
-            onClick={() => navigate("/profile")}  
+              onClick={() => navigate("/profile")}
               className="space-x-1 text-xs font-medium cursor-pointer md:font-bold md:text-sm"
             >
-              <img src={randomImage.url} alt="avatar" className="w-8 h-8 rounded-full" />  
+              <img
+                src={randomImage.url}
+                alt="avatar"
+                className="w-8 h-8 rounded-full"
+              />
             </li>
             <li
               onClick={handleLogout}
