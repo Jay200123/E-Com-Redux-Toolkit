@@ -5,7 +5,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { ProtectedRoutes } from "./components";
-import { MainLayout, CategoryLayout } from "./layout";
+import { MainLayout, CategoryLayout, ProfileLayout } from "./layout";
 
 import {
   Home,
@@ -33,25 +33,35 @@ function App() {
           <Route path="/product/:id" index element={<ProductDetails />} />
 
           <Route element={<CategoryLayout />}>
-           <Route
-            path="products/category"  
-            index
-            element={      
-                <ProductCategory />
-            }
-          />
-           </Route>
+            <Route
+              path="products/category"
+              index
+              element={<ProductCategory />}
+            />
+          </Route>
 
           {/* Protected Routes */}
-          <Route
-            path="/profile"
-            index
-            element={
-              <ProtectedRoutes userRole={["User"]}>
-                <Profile />
-              </ProtectedRoutes>
-            }
-          />
+          <Route element={<ProfileLayout />}>
+            <Route
+              path="/profile"
+              index
+              element={
+                <ProtectedRoutes userRole={["User"]}>
+                  <Profile />
+                </ProtectedRoutes>
+              }
+            />
+
+            <Route
+              path="/profile/edit"
+              index
+              element={
+                <ProtectedRoutes userRole={["User"]}>
+                  <EditProfile />
+                </ProtectedRoutes>
+              }
+            />
+          </Route>
 
           <Route
             path="/checkout"
@@ -59,16 +69,6 @@ function App() {
             element={
               <ProtectedRoutes userRole={["User"]}>
                 <Checkout />
-              </ProtectedRoutes>
-            }
-          />
-
-          <Route
-            path="/profile/edit"  
-            index
-            element={
-              <ProtectedRoutes userRole={["User"]}>
-                <EditProfile />
               </ProtectedRoutes>
             }
           />
