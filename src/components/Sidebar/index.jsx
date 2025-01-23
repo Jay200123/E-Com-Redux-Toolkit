@@ -45,10 +45,6 @@ export default function () {
     );
   };
 
-  const handleClear = () => {
-    dispatch(clearFilter());
-  };
-
   useEffect(() => {
     dispatch(
       setFilter({
@@ -134,12 +130,6 @@ export default function () {
           ))}
         </div>
       </div>
-      <button
-        onClick={handleClear}
-        className="text-xs md:text-[1rem] p-2 bg-black border transition-all duration-500 hover:opacity-75 rounded-md text-white mt-2"
-      >
-        <i className="mr-1 fa-solid fa-broom"></i> Clear Filter
-      </button>
     </div>
   );
 }
