@@ -5,8 +5,10 @@ import {
   useGetProductByIdQuery,
 } from "../../state/api/reducer";
 import { addCart } from "../../state/slice/cart";
+import { useDispatch } from "react-redux"; 
 
 export default function () {
+  const dispatch = useDispatch();
   const { id } = useParams();
   const { data } = useGetProductByIdQuery(id);
   const product = data?.details;
@@ -109,7 +111,7 @@ export default function () {
             </div>
             {product && (
               <button
-                onClick={() => addCart(product, quantity)}
+                onClick={() => dispatch(addCart(product, quantity))}
                 className="w-full p-2 mt-4 text-sm text-white transition-all duration-500 bg-black rounded-md md:text-lg hover:opacity-85"
               >
                 Add to Cart
