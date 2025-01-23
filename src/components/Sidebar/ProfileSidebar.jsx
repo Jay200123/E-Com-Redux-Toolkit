@@ -3,10 +3,10 @@ import Logo from "../../assets/web-logo.png";
 export default function () {
   return (
     <div className="flex flex-col items-center justify-between w-full h-full overflow-hidden">
-        <div className="w-full p-2 mt-2">
+        <div className="flex justify-center w-full p-2 mt-2">
             <img src={Logo} className="object-contain w-28 h-28 md:w-36 md:h-36" />
         </div>
-      <ul className="w-full">
+      <ul className="w-full p-1">
         <li className="p-2 mt-2 text-sm transition-all duration-500 rounded-md cursor-pointer md:text-lg md:font-medium hover:bg-black hover:text-white">
           <i className="mr-1 fa-solid fa-user"></i>User Profile
         </li>
@@ -21,7 +21,7 @@ export default function () {
         </li>
       </ul>
 
-      <ul className="w-full">
+      <ul className="w-full p-1">
         <li className="p-2 mt-2 text-sm transition-all duration-500 rounded-md cursor-pointer md:text-lg md:font-medium hover:bg-black hover:text-white">
           <i className="fa-solid fa-right-from-bracket"></i> Logout
         </li>
