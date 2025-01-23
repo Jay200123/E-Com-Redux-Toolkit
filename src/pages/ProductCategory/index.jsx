@@ -77,7 +77,7 @@ export default function () {
   });
 
   const filteredProducts = matchFilters?.filter(
-    (p) => p?.category?.toLowerCase() === category.toLowerCase()
+    (p) => p?.category?.toLowerCase() === category?.toLowerCase()
   );
 
   const handleCart = (product, quantity) => {
