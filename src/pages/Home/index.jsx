@@ -194,14 +194,20 @@ export default function () {
                     p?.image[Math.floor(Math.random() * p?.image.length)]?.url
                   }
                   alt={p?.product_name || "Product Image"}
-                  onClick={() => navigate(`/product/${p?._id}`)}
+                  onClick={() => {
+                    navigate(`/product/${p?._id}`);
+                    window.scrollTo(0, 0);
+                  }}
                   className="object-contain w-full h-full cursor-pointer"
                 />
               ) : (
                 <img
                   src={p?.image[0]?.url}
                   alt={p?.name || "Product Image"}
-                  onClick={() => navigate(`/product/${p?._id}`)}
+                  onClick={() => {
+                    navigate(`/product/${p?._id}`);
+                    window.scrollTo(0, 0);
+                  }}
                   className="object-contain w-full h-full cursor-pointer"
                 />
               )}
