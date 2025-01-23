@@ -21,6 +21,11 @@ export default function () {
     navigate("/cart");
   };
 
+  const handleOrders = () => {
+    navigate("/user/orders");
+  };
+
+
   const handleLogout = () => {
     dispatch(logout());
     toast.success("Logged out successfully");
@@ -40,14 +45,14 @@ export default function () {
       </h3>
       <ul className="flex flex-row items-center overflow-x-auto">
         <li className="mr-1 text-xs font-medium md:font-bold md:mr-2 md:text-sm">
-          Home
+          Shop
         </li>
         {auth?.isAuthenticated ? (
           <>
-            <li className="mr-1 text-xs font-medium md:font-bold md:mr-2 md:text-sm">
+            <li onClick={handleOrders} className="block mr-1 text-xs font-medium md:hidden md:font-bold md:mr-2 md:text-sm">
               Orders
             </li>
-            <li className="mr-1 text-xs font-medium md:font-bold md:mr-2 md:text-sm">
+            <li className="block mr-1 text-xs font-medium md:hidden md:font-bold md:mr-2 md:text-sm">
               Reviews
             </li>
           </>
@@ -81,7 +86,7 @@ export default function () {
               <img
                 src={randomImage.url}
                 alt="avatar"
-                className="w-8 h-8 rounded-full"
+                className="w-8 h-8 rounded-full md:w-10 md:h-10"
               />
             </li>
             <li
