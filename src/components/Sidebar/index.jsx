@@ -8,10 +8,15 @@ export default function () {
   const dispatch = useDispatch();
   const { data } = useGetBrandsQuery();
 
-  const category = useSelector((state) => state.category?.brand); 
+  const category = useSelector((state) => state.category?.brand);
   const brands = data?.details;
 
-  const includedBrands = brands?.filter((b) => b?.brand_name !== category);   
+  const filter = useSelector((state) => state.filter);
+  console.log(filter);
+
+  const hasCategory = category ? true : false;
+
+  const includedBrands = brands?.filter((b) => b?.brand_name !== category);
 
   const [search, setSearch] = useState("");
 
@@ -50,6 +55,14 @@ export default function () {
     );
   };
 
+  const [type, setType] = useState("");
+
+  const handleType = (type) => {
+    setType((prev) => (prev === type ? "" : type));
+  };
+
+  const variety = ["Computer", "Laptop", "Mobile"];
+
   useEffect(() => {
     dispatch(
       setFilter({
@@ -58,10 +71,11 @@ export default function () {
         maxPrice: maxPrice,
         findBrand: findBrand,
         selectedRatings: selectedRatings,
+        category: type,
       })
     );
     return () => {};
-  }, [search, minPrice, maxPrice, findBrand, selectedRatings]);
+  }, [search, minPrice, maxPrice, findBrand, selectedRatings, type]);
 
   return (
     <div className="flex flex-col justify-between w-full h-full p-2 overflow-hidden">
@@ -73,22 +87,41 @@ export default function () {
         placeholder="Search Product..."
         className="w-full p-1 text-sm border border-gray-500 rounded-md"
       />
-      <div className="mt-2">
-        <h3 className="text-sm md:text-lg">Filter by Brand</h3>
-        {includedBrands?.map((b) => (
-          <div key={b?._id} className="flex p-1">
-            <input
-              type="checkbox"
-              className="cursor-pointer"
-              checked={findBrand?.includes(b?.brand_name)}
-              onChange={() => handleSelectBrand(b?.brand_name)}
-            />
-            <span className="ml-1 text-xs text-black md:text-sm">
-              {b?.brand_name}
-            </span>
+      {hasCategory ? (
+        <>
+          <div className="mt-2">
+            <h3 className="text-sm md:text-lg">Filter by Device</h3>
+            {variety?.map((b, index) => (
+              <div key={index} className="flex p-1">
+                <input
+                  type="checkbox"
+                  className="cursor-pointer"
+                  checked={type === b}
+                  onChange={() => handleType(b)}
+                />
+                <span className="ml-1 text-xs text-black md:text-sm">{b}</span>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </>
+      ) : (
+        <div className="mt-2">
+          <h3 className="text-sm md:text-lg">Filter by Brand</h3>
+          {includedBrands?.map((b) => (
+            <div key={b?._id} className="flex p-1">
+              <input
+                type="checkbox"
+                className="cursor-pointer"
+                checked={findBrand?.includes(b?.brand_name)}
+                onChange={() => handleSelectBrand(b?.brand_name)}
+              />
+              <span className="ml-1 text-xs text-black md:text-sm">
+                {b?.brand_name}
+              </span>
+            </div>
+          ))}
+        </div>
+      )}
       <div className="w-full mt-2">
         <h3 className="text-sm md:text-lg">Filter by Price</h3>
         <div className="flex p-2">
