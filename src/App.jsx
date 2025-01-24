@@ -17,6 +17,7 @@ import {
   EditProfile,
   ProductCategory,
   ProductDetails,
+  OrderDetails,
   Orders,
 } from "./pages";
 
@@ -62,12 +63,21 @@ function App() {
                 </ProtectedRoutes>
               }
             />
-             <Route
+            <Route
               path="/user/orders"
               index
               element={
                 <ProtectedRoutes userRole={["User"]}>
                   <Orders />
+                </ProtectedRoutes>
+              }
+            />
+            <Route
+              path="/user/order/:id"
+              index
+              element={
+                <ProtectedRoutes userRole={["User"]}>
+                  <OrderDetails />
                 </ProtectedRoutes>
               }
             />
