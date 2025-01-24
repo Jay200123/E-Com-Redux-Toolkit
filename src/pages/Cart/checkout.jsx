@@ -60,7 +60,7 @@ export default function () {
     <>
       <form
         onSubmit={formik.handleSubmit}
-        className="flex flex-col items-center w-full h-full gap-4 md:h-screen md:flex-row "
+        className="flex flex-col items-center w-full h-full gap-4 md:max-h-[44rem] md:flex-row "
       >
         <div className="w-full md:w-[70%] flex flex-col h-full border border-r-4 border-gray-500 ">
           <div className="w-full h-auto md:h-[30%] flex flex-col justify-center items-center gap-2 p-4">
