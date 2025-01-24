@@ -76,8 +76,8 @@ export default function () {
     return matchName && matchPrice && matchBrand && matchRating;
   });
 
-  const filteredProducts = matchFilters?.filter(
-    (p) => p?.category?.toLowerCase() === category?.toLowerCase()
+  const filteredProducts = matchFilters?.filter((p) =>
+    p?.category?.toLowerCase()?.includes(category?.toLowerCase())
   );
 
   const handleCart = (product, quantity) => {
