@@ -91,7 +91,7 @@ export default function () {
             </li>
             <li
               onClick={handleLogout}
-              className="p-1 ml-1 font-medium md:p-2 md:font-bold"
+              className="p-1 ml-1 font-medium cursor-pointer md:p-2 md:font-bold"
             >
               <i className="text-lg fa-solid fa-right-from-bracket"></i>
             </li>
