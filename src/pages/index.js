@@ -8,6 +8,7 @@ import Checkout from "./Cart/checkout";
 import EditProfile from "./Profile/editProfile";
 import ProductCategory from "./ProductCategory"
 import Orders from "./Orders";
+import OrderDetails from "./Orders/orderDetails";
 import ProtectedPage from "./ProtectedPage";   
 
 export {
@@ -21,5 +22,6 @@ export {
      EditProfile,
      ProductCategory,
      Orders,
+     OrderDetails,
      ProtectedPage,
 }
