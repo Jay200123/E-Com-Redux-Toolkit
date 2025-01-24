@@ -4,6 +4,14 @@ import { useNavigate } from "react-router-dom";
 export default function () {
   const navigate = useNavigate();
 
+  const handleProfile = () => {
+    navigate("/profile");
+  }
+
+  const handleEditProfile = ()=>{
+    navigate("/profile/edit");  
+  }
+
   const handleOrders = () => {
     navigate("/user/orders");
   };
@@ -14,10 +22,10 @@ export default function () {
         <img src={Logo} className="object-contain w-28 h-28 md:w-36 md:h-36" />
       </div>
       <ul className="w-full p-1">
-        <li className="p-2 mt-2 text-sm transition-all duration-500 rounded-md cursor-pointer md:text-lg md:font-medium hover:bg-black hover:text-white">
+        <li onClick={handleProfile} className="p-2 mt-2 text-sm transition-all duration-500 rounded-md cursor-pointer md:text-lg md:font-medium hover:bg-black hover:text-white">
           <i className="mr-1 fa-solid fa-user"></i>User Profile
         </li>
-        <li className="p-2 mt-2 text-sm transition-all duration-500 rounded-md cursor-pointer md:text-lg md:font-medium hover:bg-black hover:text-white">
+        <li onClick={handleEditProfile} className="p-2 mt-2 text-sm transition-all duration-500 rounded-md cursor-pointer md:text-lg md:font-medium hover:bg-black hover:text-white">
           <i className="mr-1 fa-solid fa-pencil-alt"></i>Edit Profile
         </li>
         <li onClick={handleOrders} className="p-2 mt-2 text-sm transition-all duration-500 rounded-md cursor-pointer md:text-lg md:font-medium hover:bg-black hover:text-white">
