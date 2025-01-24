@@ -80,7 +80,7 @@ export default function () {
                 />
               )}
             </div>
-            <div className="flex flex-col w-[70%]">
+            <div className="flex flex-col w-full">
               <div className="flex items-center justify-between w-full p-2 mb-2">
                 <h3 className="text-sm md:text-lg">
                   {p?.product?.product_name}
