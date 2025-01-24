@@ -12,8 +12,7 @@ import { addCart } from "../../state/slice/cart";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { setCategory } from "../../state/slice/category";
-import { useState } from "react";
+import { setCategory, setBrand } from "../../state/slice/category";
 
 export default function () {
   const navigate = useNavigate();
@@ -76,6 +75,15 @@ export default function () {
     });
   };
 
+  const handleBrand = (brand) => {
+    dispatch(setBrand(brand));
+    navigate("/products/brand");
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <div className="flex flex-col w-full h-full">
       <Carousel />
@@ -87,6 +95,7 @@ export default function () {
           brands?.map((b) => (
             <div
               key={b?._id}
+              onClick={() => handleBrand(b?.brand_name)}  
               className="flex flex-col items-center justify-center w-1/2 transition-all duration-500 rounded-md cursor-pointer hover:opacity-80 hover:shadow-lg md:p-4 md:w-1/5"
             >
               {b?.image?.length > 1 ? (
