@@ -19,6 +19,7 @@ import {
   ProductDetails,
   OrderDetails,
   Orders,
+  Ratings,
 } from "./pages";
 
 function App() {
@@ -78,6 +79,15 @@ function App() {
               element={
                 <ProtectedRoutes userRole={["User"]}>
                   <OrderDetails />
+                </ProtectedRoutes>
+              }
+            />
+            <Route
+              path="/user/ratings"
+              index
+              element={
+                <ProtectedRoutes userRole={["User"]}>
+                  <Ratings />
                 </ProtectedRoutes>
               }
             />
