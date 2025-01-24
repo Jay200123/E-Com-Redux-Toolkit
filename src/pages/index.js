@@ -9,6 +9,7 @@ import EditProfile from "./Profile/editProfile";
 import ProductCategory from "./ProductCategory"
 import Orders from "./Orders";
 import OrderDetails from "./Orders/orderDetails";
+import Ratings from "./Ratings";
 import ProtectedPage from "./ProtectedPage";   
 
 export {
@@ -23,5 +24,6 @@ export {
      ProductCategory,
      Orders,
      OrderDetails,
+     Ratings,
      ProtectedPage,
 }
