@@ -51,7 +51,8 @@ export default function () {
       !filter?.info?.minPrice &&
       !filter?.info?.maxPrice &&
       !filter?.info?.brands.length &&
-      !filter?.info?.ratings.length;
+      !filter?.info?.ratings.length &&
+      !filter?.info?.category;
 
     if (noFiltersApplied) {
       return true;
@@ -77,7 +78,10 @@ export default function () {
         (rating) => Math.floor(p?.averageRating) === rating
       );
 
-    return matchName && matchPrice && matchBrand && matchRating;
+    const matchCategory =
+      !filter?.info?.category || filter?.info?.category === p?.category;
+
+    return matchName && matchPrice && matchBrand && matchRating && matchCategory;
   });
 
   const filteredProducts = matchFilters?.filter((p) =>
@@ -86,7 +90,10 @@ export default function () {
 
   const filteredBrand = brandData?.filter((b) => b?.brand_name === brand);
 
-  const randomImage = filteredBrand[0]?.image[Math.floor(Math.random() * filteredBrand[0]?.image.length)];      
+  const randomImage =
+    filteredBrand[0]?.image[
+      Math.floor(Math.random() * filteredBrand[0]?.image.length)
+    ];
 
   const handleCart = (product, quantity) => {
     dispatch(addCart({ product, orderQty: quantity }));
@@ -102,7 +109,7 @@ export default function () {
     <div className="relative w-full h-full p-2 transition-all duration-500">
       <div className="flex items-center justify-between w-full p-2 shadow-md">
         <img
-            src={randomImage?.url}
+          src={randomImage?.url}
           alt="Brand Image"
           className="w-full h-[8rem] md:h-[10rem] object-contain"
         />
