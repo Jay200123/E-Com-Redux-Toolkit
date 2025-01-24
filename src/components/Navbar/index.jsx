@@ -25,6 +25,10 @@ export default function () {
     navigate("/user/orders");
   };
 
+  const handleShop = () => { 
+    navigate("/products/category");
+  }
+
 
   const handleLogout = () => {
     dispatch(logout());
@@ -44,7 +48,7 @@ export default function () {
         <i className="mr-1 fa-solid fa-screwdriver-wrench"></i>Tech Fix
       </h3>
       <ul className="flex flex-row items-center overflow-x-auto">
-        <li className="mr-1 text-xs font-medium md:font-bold md:mr-2 md:text-sm">
+        <li onClick={handleShop} className="mr-1 text-xs font-medium cursor-pointer md:font-bold md:mr-2 md:text-sm">
           Shop
         </li>
         {auth?.isAuthenticated ? (
