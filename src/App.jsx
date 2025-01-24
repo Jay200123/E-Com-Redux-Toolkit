@@ -20,6 +20,7 @@ import {
   OrderDetails,
   Orders,
   Ratings,
+  BrandCategory,
 } from "./pages";
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
               index
               element={<ProductCategory />}
             />
+            <Route path="products/brand" index element={<BrandCategory />} />
           </Route>
 
           {/* Protected Routes */}
