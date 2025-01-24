@@ -3,12 +3,14 @@ import { useLoginMutation } from "../../state/api/reducer";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import ImageOne from "../../assets/login.jpg";
+import { useSelector } from "react-redux";
 import { useState } from "react";
 
 export default function () {
   const navigate = useNavigate();
   const [login] = useLoginMutation();
 
+  const cart = useSelector((state) => state.cart);
   const [isShow, setIsShow] = useState(false);
 
   const formik = useFormik({
@@ -20,7 +22,14 @@ export default function () {
     onSubmit: async (values) => {
       const res = await login(values);
 
-      if (res?.data?.success === true) {
+      if (
+        res?.data?.success === true &&
+        res?.data?.details?.role === "User" &&
+        cart?.item?.length > 0
+      ) {
+        toast.success(res.data.message);
+        navigate("/checkout");
+      } else if (res?.data?.success === true) {
         toast.success(res.data.message);
         navigate("/profile");
       } else if (res?.error?.data?.success === false) {
@@ -35,7 +44,7 @@ export default function () {
 
   const signUp = () => {
     navigate("/register");
-  }
+  };
 
   return (
     <form
@@ -53,7 +62,10 @@ export default function () {
         <h3 className="text-lg md:text-3xl">Sign In</h3>
         <p className="mb-4 text-xs md:text-[1rem]">
           Don't have an account yet?
-          <span onClick={signUp} className="ml-1 font-bold underline cursor-pointer">
+          <span
+            onClick={signUp}
+            className="ml-1 font-bold underline cursor-pointer"
+          >
             Sign Up
           </span>
         </p>
