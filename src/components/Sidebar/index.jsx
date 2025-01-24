@@ -2,11 +2,16 @@ import { useGetBrandsQuery } from "../../state/api/reducer";
 import { FaStar } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setFilter, clearFilter } from "../../state/slice/filter";
+import { setFilter } from "../../state/slice/filter";
 
 export default function () {
   const dispatch = useDispatch();
   const { data } = useGetBrandsQuery();
+
+  const category = useSelector((state) => state.category?.brand); 
+  const brands = data?.details;
+
+  const includedBrands = brands?.filter((b) => b?.brand_name !== category);   
 
   const [search, setSearch] = useState("");
 
@@ -70,7 +75,7 @@ export default function () {
       />
       <div className="mt-2">
         <h3 className="text-sm md:text-lg">Filter by Brand</h3>
-        {data?.details?.map((b) => (
+        {includedBrands?.map((b) => (
           <div key={b?._id} className="flex p-1">
             <input
               type="checkbox"
