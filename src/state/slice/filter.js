@@ -7,6 +7,7 @@ const initialState = {
     minPrice: 0,
     maxPrice: 0,
     ratings: [],
+    category: "",
   },
 };
 
@@ -20,6 +21,7 @@ const filterSlice = createSlice({
       state.info.maxPrice = action.payload.maxPrice;
       state.info.brands = action.payload.findBrand;
       state.info.ratings = action.payload.selectedRatings;
+      state.info.category = action.payload.category;
     },
     clearFilter: (state) => {
       state.info.name = "";
@@ -27,6 +29,7 @@ const filterSlice = createSlice({
       state.info.maxPrice = 0;
       state.info.brands = [];
       state.info.ratings = [];
+      state.info.category = "";
     },
   },
 });
