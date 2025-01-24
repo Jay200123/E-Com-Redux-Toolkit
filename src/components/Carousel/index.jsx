@@ -15,8 +15,12 @@ export default function () {
             alt="Image One"
           />
           <Carousel.Caption>
-            <h3 className="text-sm font-medium text-white md:font-bold md:text-2xl">Get the Latest Trends on Mobile Phones</h3>
-            <p  className="text-sm font-medium text-white md:font-medium md:text-lg">100% affordable Computer Sets</p>
+            <h3 className="text-sm font-medium text-white md:font-bold md:text-2xl">
+              Upgrade Your Laptop
+            </h3>
+            <p className="text-sm font-medium text-white md:font-medium md:text-lg">
+              High-Quality Parts for Peak Performance
+            </p>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item interval={5000}>
@@ -26,8 +30,12 @@ export default function () {
             alt="Image Two"
           />
           <Carousel.Caption>
-            <h3 className="text-sm font-medium text-white md:font-bold md:text-2xl">Experience the Power of Innovation</h3>
-            <p className="text-sm font-medium text-white md:font-medium md:text-lg">Designed for Performance</p>
+            <h3 className="text-sm font-medium text-white md:font-bold md:text-2xl">
+              Stay Ahead of the Curve with Computer Parts
+            </h3>
+            <p className="text-sm font-medium text-white md:font-bold md:text-lg">
+              Upgrade & Customize Your PC
+            </p>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item interval={5000}>
@@ -37,8 +45,12 @@ export default function () {
             alt="Image Three"
           />
           <Carousel.Caption>
-          <h3 className="text-sm font-medium text-white md:font-bold md:text-2xl">Get the Latest Trends on Mobile Phones</h3>
-          <p  className="text-sm font-medium text-white md:font-bold md:text-lg">100% affordable phones</p>
+            <h3 className="text-sm font-medium text-white md:font-bold md:text-2xl">
+              Find All Your Mobile Needs Here
+            </h3>
+            <p className="text-sm font-medium text-white md:font-medium md:text-lg">
+              High-Quality Parts at the Best Prices
+            </p>
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
