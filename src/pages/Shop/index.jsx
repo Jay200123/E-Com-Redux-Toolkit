@@ -47,7 +47,8 @@ export default function () {
       !filter?.info?.minPrice &&
       !filter?.info?.maxPrice &&
       !filter?.info?.brands.length &&
-      !filter?.info?.ratings.length;
+      !filter?.info?.ratings.length &&
+      !filter?.info?.category;
 
     if (noFiltersApplied) {
       return true;
@@ -73,7 +74,10 @@ export default function () {
         (rating) => Math.floor(p?.averageRating) === rating
       );
 
-    return matchName && matchPrice && matchBrand && matchRating;
+    const matchCategory =
+      !filter?.info?.category || filter?.info?.category === p?.category;
+
+    return matchName && matchPrice && matchBrand && matchRating && matchCategory;   
   });
 
   useEffect(() => {
