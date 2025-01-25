@@ -1,8 +1,12 @@
 import Logo from "../../assets/web-logo.png";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logout } from "../../state/slice/auth";
+import { toast } from "react-toastify";
 
 export default function () {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleProfile = () => {
     navigate("/profile");
@@ -18,6 +22,17 @@ export default function () {
 
   const handleRatings = () => {
     navigate("/user/ratings");
+  };
+
+  const handleLogout = () => {
+    dispatch(logout());
+    toast.success("Logged out successfully");
+    navigate("/login");
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
   };
 
   return (
@@ -45,6 +60,12 @@ export default function () {
           <i className="mr-1 fa-solid fa-box"></i> Orders
         </li>
         <li
+          onClick={() => navigate("/order/ratings")}
+          className="p-2 mt-2 text-sm transition-all duration-500 rounded-md cursor-pointer md:text-lg md:font-medium hover:bg-black hover:text-white"
+        >
+          <i className="mr-1 fa-regular fa-star"></i> Rate Products
+        </li>
+        <li
           onClick={handleRatings}
           className="p-2 mt-2 text-sm transition-all duration-500 rounded-md cursor-pointer md:text-lg md:font-medium hover:bg-black hover:text-white"
         >
@@ -53,7 +74,10 @@ export default function () {
       </ul>
 
       <ul className="w-full p-1">
-        <li className="p-2 mt-2 text-sm transition-all duration-500 rounded-md cursor-pointer md:text-lg md:font-medium hover:bg-black hover:text-white">
+        <li
+          onClick={handleLogout}
+          className="p-2 mt-2 text-sm transition-all duration-500 rounded-md cursor-pointer md:text-lg md:font-medium hover:bg-black hover:text-white"
+        >
           <i className="fa-solid fa-right-from-bracket"></i> Logout
         </li>
       </ul>
