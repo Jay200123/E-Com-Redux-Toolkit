@@ -26,7 +26,7 @@ export default function () {
   };
 
   const handleShop = () => { 
-    navigate("/products/category");
+    navigate("/shop");
   }
 
 
