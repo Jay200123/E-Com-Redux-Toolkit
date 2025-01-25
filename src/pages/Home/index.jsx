@@ -46,9 +46,10 @@ export default function () {
     };
   });
 
-  const test = useSelector((state) => state.category);
-  console.log(test);
-
+  const randomProducts = allProductsWithRatings
+    ?.sort(() => 0.5 - Math.random())
+    ?.slice(0, 10);
+    
   const handleCart = (product, quantity) => {
     dispatch(addCart({ product, orderQty: quantity }));
     toast.success("Product added to cart");
@@ -98,7 +99,7 @@ export default function () {
           brands?.map((b) => (
             <div
               key={b?._id}
-              onClick={() => handleBrand(b?.brand_name)}  
+              onClick={() => handleBrand(b?.brand_name)}
               className="flex flex-col items-center justify-center w-1/2 transition-all duration-500 rounded-md cursor-pointer hover:opacity-80 hover:shadow-lg md:p-4 md:w-1/5"
             >
               {b?.image?.length > 1 ? (
@@ -194,8 +195,8 @@ export default function () {
         Other Products You may Like
       </h3>
       <div className="grid grid-cols-2 gap-2 w-full max-h-[38rem] md:grid-cols-4 lg:grid-cols-5 overflow-hidden overflow-y-auto p-2">
-        {allProductsWithRatings?.length > 0 ? (
-          allProductsWithRatings.map((p) => (
+        {randomProducts?.length > 0 ? (
+          randomProducts.map((p) => (
             <div
               key={p?._id}
               className="flex flex-col border border-gray-500 rounded-md h-[16rem] md:h-[18rem] overflow-hidden p-2"
