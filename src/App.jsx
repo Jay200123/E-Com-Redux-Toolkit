@@ -21,6 +21,7 @@ import {
   Orders,
   Ratings,
   BrandCategory,
+  Shop,
 } from "./pages";
 
 function App() {
@@ -37,12 +38,9 @@ function App() {
           <Route path="/product/:id" index element={<ProductDetails />} />
 
           <Route element={<CategoryLayout />}>
-            <Route
-              path="products/category"
-              index
-              element={<ProductCategory />}
-            />
-            <Route path="products/brand" index element={<BrandCategory />} />
+            <Route path="products/category" element={<ProductCategory />} />
+            <Route path="products/brand" element={<BrandCategory />} />
+            <Route path="shop" element={<Shop />} />
           </Route>
 
           {/* Protected Routes */}
