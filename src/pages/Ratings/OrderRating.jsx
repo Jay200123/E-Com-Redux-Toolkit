@@ -56,7 +56,7 @@ export default function () {
                           )
                         ]?.url
                       }
-                      className="object-cover w-20 h-20 md:w-36 md:h-38"
+                      className="object-contain w-20 h-20 md:object-cover md:w-36 md:h-38"
                     />
                   </div>
                   <div className="flex flex-col w-4/5 h-full">
