@@ -11,6 +11,7 @@ import Orders from "./Orders";
 import OrderDetails from "./Orders/orderDetails";
 import Ratings from "./Ratings";
 import BrandCategory from "./BrandCategory";
+import Shop from "./Shop";  
 import ProtectedPage from "./ProtectedPage";
 
 export {
@@ -27,5 +28,6 @@ export {
   OrderDetails,
   Ratings,
   BrandCategory,
+  Shop,
   ProtectedPage,
 };
