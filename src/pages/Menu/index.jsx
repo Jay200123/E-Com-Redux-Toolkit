@@ -88,15 +88,6 @@ export default function () {
           {auth?.isAuthenticated ? (
             <>
               <li
-                onClick={myCart}
-                className="relative text-sm font-medium cursor-pointer md:text-base"
-              >
-                <span className="absolute flex items-center justify-center w-5 h-5 text-xs font-medium text-white bg-red-500 rounded-full -top-1 -right-2">
-                  {cart?.item?.length || 0}
-                </span>
-                <i className="fa-solid fa-cart-shopping"></i> My Cart
-              </li>
-              <li
                 onClick={handleLogout}
                 className="flex items-center gap-2 text-sm font-medium text-red-500 cursor-pointer md:text-base"
               >
