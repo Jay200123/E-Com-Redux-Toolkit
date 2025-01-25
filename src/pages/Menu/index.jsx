@@ -55,7 +55,7 @@ export default function () {
           <></>
         )}
 
-        <ul className="flex flex-col items-center justify-start w-full gap-4 mt-4">
+        <ul className="flex flex-col justify-start w-full gap-4 mt-4">
           <li
             onClick={handleShop}
             className="flex items-center gap-2 text-sm font-medium cursor-pointer md:text-base"
@@ -83,7 +83,7 @@ export default function () {
           </li>
         </ul>
 
-        <ul className="flex flex-col items-center justify-end w-full gap-4 mt-4">
+        <ul className="flex flex-col justify-end w-full gap-4 mt-4">
           {auth?.isAuthenticated ? (
             <>
               <li
