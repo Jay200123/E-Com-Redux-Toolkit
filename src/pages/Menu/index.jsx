@@ -7,7 +7,6 @@ export default function () {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
-  const cart = useSelector((state) => state.cart);
 
   const register = () => {
     navigate("/register");
@@ -65,6 +64,12 @@ export default function () {
           </li>
           {auth?.isAuthenticated && (
             <>
+              <li
+                onClick={()=>navigate("/profile")}
+                className="flex items-center gap-2 text-sm font-medium cursor-pointer md:text-base"
+              >
+                <i className="fa-solid fa-user"></i>User Profile
+              </li>
               <li
                 onClick={handleOrders}
                 className="flex items-center gap-2 text-sm font-medium cursor-pointer md:text-base"
