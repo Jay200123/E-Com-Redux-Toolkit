@@ -177,7 +177,7 @@ export default function () {
                     toast.success("Product added to cart");
                   }}
                   className="text-lg cursor-pointer md:text-2xl"
-                />
+                />  
               </div>
             </div>
           ))
