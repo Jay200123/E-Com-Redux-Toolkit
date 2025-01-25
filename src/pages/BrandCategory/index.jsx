@@ -4,11 +4,12 @@ import {
   useGetBrandsQuery,
 } from "../../state/api/reducer";
 import { useDispatch, useSelector } from "react-redux";
-import { clearBrand } from "../../state/slice/category";
+import { setBrand, clearBrand } from "../../state/slice/category";
 import { FaStar, FaCartPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { addCart } from "../../state/slice/cart";
 import { toast } from "react-toastify";
+import { useEffect } from "react";
 
 export default function () {
   const navigate = useNavigate();
@@ -24,6 +25,13 @@ export default function () {
 
   const brand = useSelector((state) => state.category.brand);
   const filter = useSelector((state) => state.filter);
+
+  useEffect(() => {
+    dispatch(setBrand(brand));
+    return () => {
+      dispatch(clearBrand());
+    };
+  });
 
   const allProductsWithRatings = products?.map((product) => {
     const matchingRatings = ratingData.filter(
@@ -81,7 +89,9 @@ export default function () {
     const matchCategory =
       !filter?.info?.category || filter?.info?.category === p?.category;
 
-    return matchName && matchPrice && matchBrand && matchRating && matchCategory;
+    return (
+      matchName && matchPrice && matchBrand && matchRating && matchCategory
+    );
   });
 
   const filteredProducts = matchFilters?.filter((p) =>
