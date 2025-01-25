@@ -65,7 +65,7 @@ export default function () {
           {auth?.isAuthenticated && (
             <>
               <li
-                onClick={()=>navigate("/profile")}
+                onClick={() => navigate("/profile")}
                 className="flex items-center gap-2 text-sm font-medium cursor-pointer md:text-base"
               >
                 <i className="fa-solid fa-user"></i>User Profile
@@ -87,9 +87,7 @@ export default function () {
           <li className="flex items-center gap-2 text-sm font-medium cursor-pointer md:text-base">
             <i className="fa-solid fa-phone"></i> Contact Us
           </li>
-        </ul>
 
-        <ul className="flex flex-col justify-end w-full gap-4 mt-4">
           {auth?.isAuthenticated ? (
             <>
               <li
