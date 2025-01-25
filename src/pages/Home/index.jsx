@@ -9,7 +9,7 @@ import {
   useGetRatingsQuery,
 } from "../../state/api/reducer";
 import { addCart } from "../../state/slice/cart";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { setCategory, setBrand } from "../../state/slice/category";
@@ -45,6 +45,9 @@ export default function () {
       reviewCount: count,
     };
   });
+
+  const test = useSelector((state) => state.category);
+  console.log(test);
 
   const handleCart = (product, quantity) => {
     dispatch(addCart({ product, orderQty: quantity }));
