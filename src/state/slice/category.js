@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   categories: "",
   brand: "",
+  isShop: false,
 };
 
 const categorySlice = createSlice({
@@ -23,9 +24,24 @@ const categorySlice = createSlice({
     clearBrand: (state) => {
       state.brand = "";
     },
+
+    setShop: (state) => {
+      state.isShop = true;
+    },
+
+    clearShop: (state) => {
+      state.isShop = false;
+    },
   },
 });
 
-export const { setCategory, clearCategory, setBrand, clearBrand } =
+export const { 
+  setCategory,
+  clearCategory,
+  setBrand,
+  clearBrand,
+  setShop,
+  clearShop,
+} =
   categorySlice.actions;
 export default categorySlice.reducer;
