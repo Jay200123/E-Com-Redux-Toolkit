@@ -23,6 +23,7 @@ import {
   BrandCategory,
   Shop,
   Menu,
+  OrderRating,
 } from "./pages";
 
 function App() {
@@ -90,6 +91,16 @@ function App() {
               element={
                 <ProtectedRoutes userRole={["User"]}>
                   <Ratings />
+                </ProtectedRoutes>
+              }
+            />
+
+            <Route
+              path="/order/ratings"
+              index
+              element={
+                <ProtectedRoutes userRole={["User"]}>
+                  <OrderRating />
                 </ProtectedRoutes>
               }
             />
