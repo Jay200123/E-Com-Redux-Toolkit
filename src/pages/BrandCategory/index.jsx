@@ -105,11 +105,6 @@ export default function () {
       Math.floor(Math.random() * filteredBrand[0]?.image.length)
     ];
 
-  const handleCart = (product, quantity) => {
-    dispatch(addCart({ product, orderQty: quantity }));
-    toast.success("Product added to cart");
-  };
-
   const back = () => {
     dispatch(clearBrand());
     window.history.back();
@@ -177,7 +172,10 @@ export default function () {
                     ))}
                 </div>
                 <FaCartPlus
-                  onClick={() => handleCart(p, 1)}
+                  onClick={() => {
+                    dispatch(addCart({ product: p, orderQty: 1 }));
+                    toast.success("Product added to cart");
+                  }}
                   className="text-lg cursor-pointer md:text-2xl"
                 />
               </div>
