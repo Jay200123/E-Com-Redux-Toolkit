@@ -60,6 +60,7 @@ export default function () {
     setType((prev) => (prev === type ? "" : type));
   };
 
+
   const variety = ["Computer", "Laptop", "Mobile"];
 
   useEffect(() => {
