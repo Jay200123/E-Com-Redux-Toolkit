@@ -22,6 +22,7 @@ import {
   Ratings,
   BrandCategory,
   Shop,
+  Menu,
 } from "./pages";
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
           <Route path="/login" index element={<Login />} />
           <Route path="/cart" index element={<Cart />} />
           <Route path="/product/:id" index element={<ProductDetails />} />
+          <Route path="/menu" index element={<Menu />} />
 
           <Route element={<CategoryLayout />}>
             <Route path="products/category" element={<ProductCategory />} />
