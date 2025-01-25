@@ -9,12 +9,11 @@ export default function () {
   const { data } = useGetBrandsQuery();
 
   const category = useSelector((state) => state.category?.brand);
+  const shop = useSelector((state) => state.category);
   const brands = data?.details;
 
-  const filter = useSelector((state) => state.filter);
-  console.log(filter);
-
   const hasCategory = category ? true : false;
+  const hasShop = shop?.isShop ? true : false;
 
   const includedBrands = brands?.filter((b) => b?.brand_name !== category);
 
@@ -87,7 +86,41 @@ export default function () {
         placeholder="Search Product..."
         className="w-full p-1 text-sm border border-gray-500 rounded-md"
       />
-      {hasCategory ? (
+
+      {hasShop ? (
+        <>
+          <div className="mt-2">
+            <h3 className="text-sm md:text-lg">Filter by Device</h3>
+            {variety?.map((b, index) => (
+              <div key={index} className="flex p-1">
+                <input
+                  type="checkbox"
+                  className="cursor-pointer"
+                  checked={type === b}
+                  onChange={() => handleType(b)}
+                />
+                <span className="ml-1 text-xs text-black md:text-sm">{b}</span>
+              </div>
+            ))}
+          </div>
+          <div className="mt-2">
+            <h3 className="text-sm md:text-lg">Filter by Brand</h3>
+            {includedBrands?.map((b) => (
+              <div key={b?._id} className="flex p-1">
+                <input
+                  type="checkbox"
+                  className="cursor-pointer"
+                  checked={findBrand?.includes(b?.brand_name)}
+                  onChange={() => handleSelectBrand(b?.brand_name)}
+                />
+                <span className="ml-1 text-xs text-black md:text-sm">
+                  {b?.brand_name}
+                </span>
+              </div>
+            ))}
+          </div>
+        </>
+      ) : hasCategory ? (
         <>
           <div className="mt-2">
             <h3 className="text-sm md:text-lg">Filter by Device</h3>
@@ -122,6 +155,7 @@ export default function () {
           ))}
         </div>
       )}
+      
       <div className="w-full mt-2">
         <h3 className="text-sm md:text-lg">Filter by Price</h3>
         <div className="flex p-2">
