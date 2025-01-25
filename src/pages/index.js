@@ -12,6 +12,7 @@ import OrderDetails from "./Orders/orderDetails";
 import Ratings from "./Ratings";
 import BrandCategory from "./BrandCategory";
 import Shop from "./Shop";  
+import Menu from "./Menu";
 import ProtectedPage from "./ProtectedPage";
 
 export {
@@ -29,5 +30,6 @@ export {
   Ratings,
   BrandCategory,
   Shop,
+  Menu,
   ProtectedPage,
 };
