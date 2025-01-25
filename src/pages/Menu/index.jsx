@@ -39,17 +39,21 @@ export default function () {
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center w-full h-screen bg-white">
-        <div className="p-2 mt-2 mb-2">
-          <img
-            src={randomImage?.url}
-            alt="avatar"
-            className="object-contain w-24 h-24 rounded-full"
-          />
-          <h3 className="text-sm font-medium truncate cursor-pointer md:text-2xl md:font-bold">
-            {auth?.user?.fullname}
-          </h3>
-        </div>
+      <div className="flex flex-col w-full h-screen bg-white">
+        {auth?.isAuthenticated ? (
+          <div className="p-2 mt-2 mb-2">
+            <img
+              src={randomImage?.url}
+              alt="avatar"
+              className="object-contain w-24 h-24 rounded-full"
+            />
+            <h3 className="text-sm font-medium truncate cursor-pointer md:text-2xl md:font-bold">
+              {auth?.user?.fullname}
+            </h3>
+          </div>
+        ) : (
+          <></>
+        )}
 
         <ul className="flex flex-col items-center justify-start w-full gap-4 mt-4">
           <li
