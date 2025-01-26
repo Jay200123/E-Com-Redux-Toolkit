@@ -28,7 +28,7 @@ export const Add = (builder) => {
   return builder.mutation({
     query: ({ id, payload }) => {
       return {
-        url: `/rating/order/${id}`,
+        url: `/rate/order/${id}`,
         method: API.POST,
         body: payload,
         invalidatesTags: [TAGS.RATINGS],
