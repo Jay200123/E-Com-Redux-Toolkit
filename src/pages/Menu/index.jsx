@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../state/slice/auth";
 import { toast } from "react-toastify";
+import { useEffect } from "react";
 
 export default function () {
   const navigate = useNavigate();
@@ -14,10 +15,6 @@ export default function () {
 
   const login = () => {
     navigate("/login");
-  };
-
-  const myCart = () => {
-    navigate("/cart");
   };
 
   const handleOrders = () => {
@@ -34,12 +31,35 @@ export default function () {
     navigate("/login");
   };
 
+  const back = () => {
+    window.history.back();
+  };
+
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      width > 768 ? navigate("/") : navigate("/menu");
+    };
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [navigate]);
+
   const randomImage =
     auth?.user?.image[Math.floor(Math.random() * auth?.user.image.length)];
 
   return (
     <>
-      <div className="flex flex-col w-full h-screen bg-white">
+      <div className="relative flex flex-col w-full h-screen bg-white">
+        <i
+          onClick={back}
+          className="absolute top-0 left-0 m-2 text-2xl cursor-pointer fa fa-arrow-left"
+        ></i>
         {auth?.isAuthenticated ? (
           <div className="p-2 mt-2 mb-2">
             <img
