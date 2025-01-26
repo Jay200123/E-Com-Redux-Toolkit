@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import ImageOne from "../../assets/register.jpg";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { useState } from "react";
 
 export default function () {
   const navigate = useNavigate();
