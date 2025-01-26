@@ -1,9 +1,11 @@
 import { useGetOrdersQuery } from "../../state/api/reducer";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { setRate } from "../../state/slice/rating";
 
 export default function () {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { data } = useGetOrdersQuery();
   const orders = data?.details;
 
@@ -68,30 +70,42 @@ export default function () {
                     </h3>
                     <h3 className="text-sm md:text-lg">x {item?.quantity}</h3>
                     <div className="flex justify-between mt-2">
-                      { item?.isReviewed ? (
-                         <div className="flex">
-                         {Array.from({ length: item?.rating?.rating }).map(
-                           (_, index) => (
-                             <i
-                               key={index}
-                               className="mr-1 text-yellow-500 fa-solid fa-star" // Add margin-right for spacing
-                             ></i>
-                           )
-                         )}
-                       </div>
+                      {item?.isReviewed ? (
+                        <div className="flex">
+                          {Array.from({ length: item?.rating?.rating }).map(
+                            (_, index) => (
+                              <i
+                                key={index}
+                                className="mr-1 text-yellow-500 fa-solid fa-star" // Add margin-right for spacing
+                              ></i>
+                            )
+                          )}
+                        </div>
                       ) : (
                         <div className="flex">
-                          <h3 className="text-lg md:text-sm">Product Not Reviewed Yet</h3>
-                      </div>
+                          <h3 className="text-lg md:text-sm">
+                            Product Not Reviewed Yet
+                          </h3>
+                        </div>
                       )}
-                     
+
                       <div className="flex">
                         {item?.isReviewed ? (
                           <button className="p-2 text-sm border rounded-md border-gray-50 md:text-lg">
                             ⭐Product Already Rated
                           </button>
                         ) : (
-                          <button className="p-2 text-sm border rounded-md border-gray-50 md:text-lg">
+                          <button
+                            onClick={() => {
+                              navigate(`/product/rating/${order?._id}`);
+                              dispatch(setRate(item?.product?._id));
+                              window.scrollTo({
+                                top: 0,
+                                behavior: "smooth",
+                              });
+                            }}
+                            className="p-2 text-sm border rounded-md border-gray-50 md:text-lg"
+                          >
                             ⭐Rate this Product
                           </button>
                         )}
