@@ -24,6 +24,7 @@ import {
   Shop,
   Menu,
   OrderRating,
+  CreateRating,
 } from "./pages";
 
 function App() {
@@ -112,6 +113,15 @@ function App() {
             element={
               <ProtectedRoutes userRole={["User"]}>
                 <Checkout />
+              </ProtectedRoutes>
+            }
+          />
+          <Route
+            path="/product/rating/:id"
+            index
+            element={
+              <ProtectedRoutes userRole={["User"]}>
+                <CreateRating />
               </ProtectedRoutes>
             }
           />
