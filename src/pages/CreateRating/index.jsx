@@ -29,7 +29,7 @@ export default function () {
       const formData = new FormData();
       formData.append("user", values.user);
       formData.append("product", values.product);
-      formData.append("description", values.city);
+      formData.append("description", values.description);
       formData.append("rating", values.rating);
       values.image.forEach((file) => {
         formData.append("image", file);
