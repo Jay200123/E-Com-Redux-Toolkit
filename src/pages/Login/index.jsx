@@ -46,11 +46,19 @@ export default function () {
     navigate("/register");
   };
 
+  const back = () => {
+    window.history.back();
+  };
+
   return (
     <form
-      className="flex justify-center transition-all duration-700 w-full h-[30rem] md:h-[32rem] p-3 bg-white md:p-1 mt-2"
+      className="flex relative justify-center transition-all duration-700 w-full h-[30rem] md:h-[32rem] p-3 bg-white md:p-1 mt-2"
       onSubmit={formik.handleSubmit}
     >
+      <i
+        onClick={back}
+        className="absolute top-0 left-0 m-2 text-2xl cursor-pointer fa fa-arrow-left"
+      ></i>
       <div className="hidden md:w-1/2 md:block">
         <img
           className="object-cover w-full h-full rounded-sm"
@@ -58,7 +66,7 @@ export default function () {
           alt="Image"
         />
       </div>
-      <div className="flex flex-col justify-center w-full p-4 rounded-md md:border md:border-gray-500 md:h-full md:w-1/2">
+      <div className="flex flex-col justify-center w-full p-4 rounded-md  md:border md:border-gray-500 md:h-full md:w-1/2">
         <h3 className="text-lg md:text-3xl">Sign In</h3>
         <p className="mb-4 text-xs md:text-[1rem]">
           Don't have an account yet?
