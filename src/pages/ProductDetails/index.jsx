@@ -61,7 +61,7 @@ export default function () {
                 className="object-contain w-full h-full"
                 src={
                   product?.image[
-                    Math.floor(Math.random() * product?.image.length)
+                    Math.floor(Math.random() * product?.image?.length)
                   ]?.url
                 }
                 alt="test image"
@@ -133,7 +133,7 @@ export default function () {
         </div>
         <div className="flex flex-col w-full max-h3-[16rem] mt-4 transition-all duration-500 ease-in-out border border-gray">
           <h3 className="text-lg font-medium md:font-bold md:text-2xl">
-           { productRatings.length > 0 ? "Product Reviews ⭐" : "No Reviews Yet 😞" }	  
+           { productRatings?.length > 0 ? "Product Reviews ⭐" : "No Reviews Yet 😞" }	  
           </h3>
           {productRatings?.map((r) => (
             <div key={r?._id} className="flex flex-col p-2 md:p-4">
