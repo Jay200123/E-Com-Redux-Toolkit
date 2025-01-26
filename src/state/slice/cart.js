@@ -15,7 +15,7 @@ const cartSlice = createSlice({
       );
 
       if (existingItem) {
-        existingItem.orderQty += 1;
+        existingItem.orderQty += action.payload.orderQty; 
       } else {
         state.item.push({
           ...action.payload,
