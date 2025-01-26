@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 
 export default function () {
   return (
-    <main className="flex min-w-full min-h-screen md:flex-row">
+    <main className="flex min-w-full min-h-screen transition-all duration-500 md:flex-row">
       <div className="md:w-[20%] hidden md:block transition-all duration-500 ease-in-out">  
         <ProfileSidebar />
       </div>
