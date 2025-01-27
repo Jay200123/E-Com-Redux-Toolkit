@@ -15,6 +15,7 @@ import Shop from "./Shop";
 import Menu from "./Menu";
 import OrderRating from "./Ratings/OrderRating";
 import CreateRating from "./CreateRating";  
+import Dashboard from "./Dashboard";
 import ProtectedPage from "./ProtectedPage";
 
 export {
@@ -35,5 +36,6 @@ export {
   Menu,
   OrderRating,
   CreateRating,
+  Dashboard,
   ProtectedPage,
 };
