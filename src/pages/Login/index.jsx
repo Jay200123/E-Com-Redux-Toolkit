@@ -22,17 +22,21 @@ export default function () {
     onSubmit: async (values) => {
       const res = await login(values);
 
-      if (
+      if (res?.data?.success === true && res?.data?.details?.role === "User") {
+        if (cart.item.length > 0) {
+          navigate("/checkout");
+          toast.success(res?.data?.message);
+        } else {
+          navigate("/profile");
+          toast.success(res?.data?.message);
+        }
+      } else if (
         res?.data?.success === true &&
-        res?.data?.details?.role === "User" &&
-        cart?.item?.length > 0
+        res?.data?.details?.role === "Admin"
       ) {
-        toast.success(res.data.message);
-        navigate("/checkout");
-      } else if (res?.data?.success === true) {
-        toast.success(res.data.message);
-        navigate("/profile");
-      } else if (res?.error?.data?.success === false) {
+        navigate("/admin/dashboard");
+        toast.success(res?.data?.message);
+      } else {
         toast.error(`${res?.error?.data?.error.message}`);
       }
     },
@@ -66,7 +70,7 @@ export default function () {
           alt="Image"
         />
       </div>
-      <div className="flex flex-col justify-center w-full p-4 rounded-md  md:border md:border-gray-500 md:h-full md:w-1/2">
+      <div className="flex flex-col justify-center w-full p-4 rounded-md md:border md:border-gray-500 md:h-full md:w-1/2">
         <h3 className="text-lg md:text-3xl">Sign In</h3>
         <p className="mb-4 text-xs md:text-[1rem]">
           Don't have an account yet?
