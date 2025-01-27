@@ -5,7 +5,12 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { ProtectedRoutes } from "./components";
-import { MainLayout, CategoryLayout, ProfileLayout } from "./layout";
+import {
+  MainLayout,
+  CategoryLayout,
+  ProfileLayout,
+  AdminLayout,
+} from "./layout";
 
 import {
   Home,
@@ -25,6 +30,7 @@ import {
   Menu,
   OrderRating,
   CreateRating,
+  Dashboard,
 } from "./pages";
 
 function App() {
@@ -126,6 +132,20 @@ function App() {
             }
           />
         </Route>
+
+        <Route element={<AdminLayout />} >
+        <Route
+          path="/admin/dashboard"
+          index
+          element={
+            <ProtectedRoutes
+            userRole={["Admin"]}>
+              <Dashboard />
+            </ProtectedRoutes>
+          }
+        />
+        </Route>
+
       </Route>
     )
   );
