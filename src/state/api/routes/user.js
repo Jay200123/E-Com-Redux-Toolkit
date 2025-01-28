@@ -2,16 +2,25 @@ import { TAGS } from "../../../constants";
 
 export const getAll = (builder) => {
   return builder.query({
-    query: "/users",
-    method: "GET",
-    providesTags: [TAGS.USERS],
+    query: () => {
+      return {
+        url: "/users",
+        method: "GET",
+        providesTags: [TAGS.USERS],
+      };
+    },
   });
 };
+
 export const getById = (builder) => {
   return builder.query({
-    query: (id) => `/user/${id}`,
-    method: "GET",
-    providesTags: [TAGS.USERS],
+    query: (id) => {
+      return {
+        url: `/user/${id}`,
+        method: "GET",
+        providesTags: [TAGS.USERS], 
+      };  
+    }
   });
 };
 
