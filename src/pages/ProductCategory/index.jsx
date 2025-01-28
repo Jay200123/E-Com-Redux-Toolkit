@@ -108,17 +108,17 @@ export default function () {
                   }
                   alt={p?.product_name || "Product Image"}
                   onClick={() => navigate(`/product/${p?._id}`)}
-                  className="object-contain w-full h-full cursor-pointer"
+                  className="object-contain w-40 h-40 cursor-pointer"
                 />
               ) : (
                 <img
                   src={p?.image[0]?.url}
                   alt={p?.name || "Product Image"}
                   onClick={() => navigate(`/product/${p?._id}`)}
-                  className="object-contain w-full h-full cursor-pointer"
+                  className="object-contain w-40 h-40 cursor-pointer"
                 />
               )}
-              <p className="text-sm md:text-sm text-medium">
+              <p className="text-sm truncate md:text-sm text-medium">
                 {p?.product_name || "Unnamed Product"}
               </p>
               <p className="text-sm md:text-sm text-medium">
