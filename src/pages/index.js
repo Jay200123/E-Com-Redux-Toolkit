@@ -17,6 +17,9 @@ import OrderRating from "./Ratings/OrderRating";
 import CreateRating from "./CreateRating";  
 import Dashboard from "./Dashboard";
 import BrandTable from "./BrandTable";
+import CreateBrand from "./BrandTable/createBrand";
+import GetBrandById from "./BrandTable/getBrandById"; 
+import EditBrand from "./BrandTable/editBrand";
 import ProtectedPage from "./ProtectedPage";
 
 export {
@@ -39,5 +42,8 @@ export {
   CreateRating,
   Dashboard,
   BrandTable,
+  CreateBrand,
+  GetBrandById,
+  EditBrand,
   ProtectedPage,
 };
