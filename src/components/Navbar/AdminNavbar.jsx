@@ -32,7 +32,7 @@ export default function () {
           <li onClick={()=>navigate("/admin/brands")} className="mr-2 text-xs font-medium md:font-bold md:text-sm">
           <i className="mr-1 fa-solid fa-tag"></i> Brand
           </li>
-          <li className="mr-2 text-xs font-medium md:font-bold md:text-sm">
+          <li onClick={()=>navigate("/admin/products")} className="mr-2 text-xs font-medium md:font-bold md:text-sm">
           <i className="mr-1 fa-solid fa-pencil-alt"></i>Product
           </li>
           <li className="mr-2 text-xs font-medium md:font-bold md:text-sm">
