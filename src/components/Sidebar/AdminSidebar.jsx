@@ -42,7 +42,7 @@ export default function () {
             <i className="mr-1 fa-solid fa-chart-line"></i>Dashboard
           </li>
 
-          <li className="p-2 mt-2 text-sm transition-all duration-500 rounded-md cursor-pointer md:text-lg md:font-medium hover:bg-black hover:text-white">
+          <li onClick={()=> navigate("/admin/users")} className="p-2 mt-2 text-sm transition-all duration-500 rounded-md cursor-pointer md:text-lg md:font-medium hover:bg-black hover:text-white">
             <i className="mr-1 fa-solid fa-user"></i>Users
           </li>
           <li
