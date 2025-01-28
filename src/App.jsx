@@ -10,6 +10,7 @@ import {
   CategoryLayout,
   ProfileLayout,
   AdminLayout,
+  MainAdminLayout,
 } from "./layout";
 
 import {
@@ -137,48 +138,50 @@ function App() {
           />
         </Route>
 
-        <Route element={<AdminLayout />}>
-          <Route
-            path="/admin/dashboard"
-            index
-            element={
-              <ProtectedRoutes userRole={["Admin"]}>
-                <Dashboard />
-              </ProtectedRoutes>
-            }
-          />
-          <Route
-            path="/admin/brands"
-            element={
-              <ProtectedRoutes userRole={["Admin"]}>
-                <BrandTable />
-              </ProtectedRoutes>
-            }
-          />
-          <Route
-            path="/create/brand"
-            element={
-              <ProtectedRoutes userRole={["Admin"]}>
-                <CreateBrand />
-              </ProtectedRoutes>
-            }
-          />
-           <Route
-            path="/brand/:id"
-            element={
-              <ProtectedRoutes userRole={["Admin"]}>
-                <GetBrandById />
-              </ProtectedRoutes>
-            }
-          />
-           <Route
-            path="/edit/brand/:id"
-            element={
-              <ProtectedRoutes userRole={["Admin"]}>
-                <EditBrand />
-              </ProtectedRoutes>
-            }
-          />
+        <Route element={<MainAdminLayout />}>
+          <Route element={<AdminLayout />}>
+            <Route
+              path="/admin/dashboard"
+              index
+              element={
+                <ProtectedRoutes userRole={["Admin"]}>
+                  <Dashboard />
+                </ProtectedRoutes>
+              }
+            />
+            <Route
+              path="/admin/brands"
+              element={
+                <ProtectedRoutes userRole={["Admin"]}>
+                  <BrandTable />
+                </ProtectedRoutes>
+              }
+            />
+            <Route
+              path="/create/brand"
+              element={
+                <ProtectedRoutes userRole={["Admin"]}>
+                  <CreateBrand />
+                </ProtectedRoutes>
+              }
+            />
+            <Route
+              path="/brand/:id"
+              element={
+                <ProtectedRoutes userRole={["Admin"]}>
+                  <GetBrandById />
+                </ProtectedRoutes>
+              }
+            />
+            <Route
+              path="/edit/brand/:id"
+              element={
+                <ProtectedRoutes userRole={["Admin"]}>
+                  <EditBrand />
+                </ProtectedRoutes>
+              }
+            />
+          </Route>
         </Route>
       </Route>
     )
