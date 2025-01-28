@@ -26,10 +26,11 @@ export default function () {
       <div className="flex flex-col justify-center w-full p-2 mt-2">
         <div className="flex justify-center mb-2">
           <img
+          onClick={()=> navigate("/admin/profile")} 
             src={
               auth?.image[Math.floor(Math.random() * auth?.image?.length)]?.url
             }
-            className="object-contain w-28 h-28 md:w-40 md:h-40"
+            className="object-contain cursor-pointer w-28 h-28 md:w-40 md:h-40"
           />
         </div>
 
@@ -38,7 +39,7 @@ export default function () {
         </h3>
 
         <ul className="w-full p-1">
-          <li className="p-2 mt-2 text-sm transition-all duration-500 rounded-md cursor-pointer md:text-lg md:font-medium hover:bg-black hover:text-white">
+          <li onClick={()=>navigate("/admin/dashboard")} className="p-2 mt-2 text-sm transition-all duration-500 rounded-md cursor-pointer md:text-lg md:font-medium hover:bg-black hover:text-white">
             <i className="mr-1 fa-solid fa-chart-line"></i>Dashboard
           </li>
 
@@ -59,6 +60,10 @@ export default function () {
           </li>
           <li className="p-2 mt-2 text-sm transition-all duration-500 rounded-md cursor-pointer md:text-lg md:font-medium hover:bg-black hover:text-white">
             <i className="mr-1 fa-regular fa-star"></i> Product Reviews
+          </li>
+          <li onClick={()=>navigate("/admin/profile/edit")}
+           className="p-2 mt-2 text-sm transition-all duration-500 rounded-md cursor-pointer md:text-lg md:font-medium hover:bg-black hover:text-white">
+          <i className="mr-1 fa-solid fa-gear"></i> Edit Profile
           </li>
         </ul>
       </div>
