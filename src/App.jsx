@@ -32,6 +32,9 @@ import {
   CreateRating,
   Dashboard,
   BrandTable,
+  CreateBrand,
+  GetBrandById,
+  EditBrand,
 } from "./pages";
 
 function App() {
@@ -149,6 +152,30 @@ function App() {
             element={
               <ProtectedRoutes userRole={["Admin"]}>
                 <BrandTable />
+              </ProtectedRoutes>
+            }
+          />
+          <Route
+            path="/create/brand"
+            element={
+              <ProtectedRoutes userRole={["Admin"]}>
+                <CreateBrand />
+              </ProtectedRoutes>
+            }
+          />
+           <Route
+            path="/brand/:id"
+            element={
+              <ProtectedRoutes userRole={["Admin"]}>
+                <GetBrandById />
+              </ProtectedRoutes>
+            }
+          />
+           <Route
+            path="/edit/brand/:id"
+            element={
+              <ProtectedRoutes userRole={["Admin"]}>
+                <EditBrand />
               </ProtectedRoutes>
             }
           />
