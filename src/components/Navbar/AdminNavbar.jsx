@@ -19,14 +19,13 @@ export default function () {
 
   return (
     <nav className="flex items-center justify-between w-full h-16 overflow-hidden shadow-md md:hidden">
-      {/* Admin Info Management */}
       <div className="block md:hidden overflow-x-auto w-[75%]">
         <ul className="flex items-center overflow-x-auto justify-evenly">
           <li className="mr-2 text-xs font-medium cursor-pointer md:font-bold md:mr-2 md:text-sm">
           <i className="mr-1 fa-solid fa-chart-line"></i> Dashboard
           </li>
 
-          <li className="mr-2 text-xs font-medium cursor-pointer md:font-bold md:mr-2 md:text-sm">
+          <li onClick={()=> navigate("/admin/users")} className="mr-2 text-xs font-medium cursor-pointer md:font-bold md:mr-2 md:text-sm">
           <i className="mr-1 fa-solid fa-user"></i> Users
           </li>
 
@@ -45,7 +44,6 @@ export default function () {
         </ul>
       </div>
 
-      {/* For Admin User Management */}
       <div className="block md:hidden w-[25%]"> 
         <ul className="flex flex-row items-center">
           <li
