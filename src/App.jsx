@@ -36,6 +36,8 @@ import {
   CreateBrand,
   GetBrandById,
   EditBrand,
+  UserTable,
+  GetUserById,
 } from "./pages";
 
 function App() {
@@ -178,6 +180,22 @@ function App() {
               element={
                 <ProtectedRoutes userRole={["Admin"]}>
                   <EditBrand />
+                </ProtectedRoutes>
+              }
+            />
+            <Route
+              path="/admin/users"
+              element={
+                <ProtectedRoutes userRole={["Admin"]}>
+                  <UserTable />
+                </ProtectedRoutes>
+              }
+            />
+            <Route
+              path="/user/:id"
+              element={
+                <ProtectedRoutes userRole={["Admin"]}>
+                  <GetUserById />
                 </ProtectedRoutes>
               }
             />
