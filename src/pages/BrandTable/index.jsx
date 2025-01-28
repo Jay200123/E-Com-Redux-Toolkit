@@ -61,17 +61,17 @@ export default function () {
             onClick={() =>
               navigate(`/brand/${row?._id}`)               
             }
-            className="mr-2 text-lg text-green-500 cursor-pointer md:text-2xl"
+            className="mr-2 text-lg text-green-500 cursor-pointer"
           />
           <FaPencilAlt
             onClick={() =>
               navigate(`/edit/brand/${row?._id}`)
             }
-            className="mr-2 text-lg text-blue-500 cursor-pointer md:text-2xl"
+            className="mr-2 text-lg text-blue-500 cursor-pointer"
           />
           <FaTrash
             onClick={() => handleDelete(row?._id)}
-            className="mr-2 text-lg text-red-500 cursor-pointer md:text-2xl"
+            className="mr-2 text-lg text-red-500 cursor-pointer"
           />
         </div>
       ),
