@@ -37,7 +37,11 @@ import {
   GetBrandById,
   EditBrand,
   UserTable,
+  ProductTable,
   GetUserById,
+  CreateProduct,
+  EditProduct,
+  GetProductById,
 } from "./pages";
 
 function App() {
@@ -215,6 +219,42 @@ function App() {
               element={
                 <ProtectedRoutes userRole={["Admin"]}>
                   <EditProfile />
+                </ProtectedRoutes>
+              }
+            />
+            <Route
+              path="/admin/products"
+              index
+              element={
+                <ProtectedRoutes userRole={["Admin"]}>
+                  <ProductTable />
+                </ProtectedRoutes>
+              }
+            />
+            <Route
+              path="/create/product"
+              index
+              element={
+                <ProtectedRoutes userRole={["Admin"]}>
+                  <CreateProduct />
+                </ProtectedRoutes>
+              }
+            />
+            <Route
+              path="/product/edit/:id"
+              index
+              element={
+                <ProtectedRoutes userRole={["Admin"]}>
+                  <EditProduct />
+                </ProtectedRoutes>
+              }
+            />
+             <Route
+              path="/product/view/:id"
+              index
+              element={
+                <ProtectedRoutes userRole={["Admin"]}>
+                  <GetProductById />
                 </ProtectedRoutes>
               }
             />
