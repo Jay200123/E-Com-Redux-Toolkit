@@ -31,6 +31,7 @@ import {
   OrderRating,
   CreateRating,
   Dashboard,
+  BrandTable,
 } from "./pages";
 
 function App() {
@@ -133,19 +134,25 @@ function App() {
           />
         </Route>
 
-        <Route element={<AdminLayout />} >
-        <Route
-          path="/admin/dashboard"
-          index
-          element={
-            <ProtectedRoutes
-            userRole={["Admin"]}>
-              <Dashboard />
-            </ProtectedRoutes>
-          }
-        />
+        <Route element={<AdminLayout />}>
+          <Route
+            path="/admin/dashboard"
+            index
+            element={
+              <ProtectedRoutes userRole={["Admin"]}>
+                <Dashboard />
+              </ProtectedRoutes>
+            }
+          />
+          <Route
+            path="/admin/brands"
+            element={
+              <ProtectedRoutes userRole={["Admin"]}>
+                <BrandTable />
+              </ProtectedRoutes>
+            }
+          />
         </Route>
-
       </Route>
     )
   );
