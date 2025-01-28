@@ -221,10 +221,10 @@ export default function () {
                     navigate(`/product/${p?._id}`);
                     window.scrollTo(0, 0);
                   }}
-                  className="object-contain w-full h-full cursor-pointer"
+                  className="object-contain w-40 h-40 cursor-pointer"
                 />
               )}
-              <p className="text-sm md:text-sm text-medium">
+              <p className="text-sm truncate md:text-sm text-medium">
                 {p?.product_name || "Unnamed Product"}
               </p>
               <p className="text-sm md:text-sm text-medium">
