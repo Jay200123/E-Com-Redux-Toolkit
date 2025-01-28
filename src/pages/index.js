@@ -22,6 +22,10 @@ import GetBrandById from "./BrandTable/getBrandById";
 import EditBrand from "./BrandTable/editBrand";
 import UserTable from "./UserTable";
 import GetUserById from "./UserTable/getById";
+import ProductTable from "./ProductTable";
+import CreateProduct from "./ProductTable/createProduct"; 
+import EditProduct from "./ProductTable/editProduct"; 
+import GetProductById from "./ProductTable/getProductById"
 import ProtectedPage from "./ProtectedPage";
 
 export {
@@ -49,5 +53,9 @@ export {
   EditBrand,
   UserTable,
   GetUserById,
+  ProductTable,
+  CreateProduct,
+  EditProduct,
+  GetProductById,
   ProtectedPage,
 };
