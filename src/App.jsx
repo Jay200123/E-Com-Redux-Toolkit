@@ -152,6 +152,15 @@ function App() {
               }
             />
             <Route
+              path="/admin/profile"
+              index
+              element={
+                <ProtectedRoutes userRole={["Admin"]}>
+                  <Profile />
+                </ProtectedRoutes>
+              }
+            />
+            <Route
               path="/admin/brands"
               element={
                 <ProtectedRoutes userRole={["Admin"]}>
@@ -196,6 +205,16 @@ function App() {
               element={
                 <ProtectedRoutes userRole={["Admin"]}>
                   <GetUserById />
+                </ProtectedRoutes>
+              }
+            />
+
+            <Route
+              path="/admin/profile/edit"
+              index
+              element={
+                <ProtectedRoutes userRole={["Admin"]}>
+                  <EditProfile />
                 </ProtectedRoutes>
               }
             />
