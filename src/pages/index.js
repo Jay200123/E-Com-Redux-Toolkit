@@ -20,6 +20,8 @@ import BrandTable from "./BrandTable";
 import CreateBrand from "./BrandTable/createBrand";
 import GetBrandById from "./BrandTable/getBrandById"; 
 import EditBrand from "./BrandTable/editBrand";
+import UserTable from "./UserTable";
+import GetUserById from "./UserTable/getById";
 import ProtectedPage from "./ProtectedPage";
 
 export {
@@ -45,5 +47,7 @@ export {
   CreateBrand,
   GetBrandById,
   EditBrand,
+  UserTable,
+  GetUserById,
   ProtectedPage,
 };
