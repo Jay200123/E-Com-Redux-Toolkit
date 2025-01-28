@@ -7,7 +7,7 @@ export default function () {
       <div className="md:w-[20%] border border-gray-500 hidden md:block transition-all duration-500 ease-in-out">
         <AdminSidebar />
       </div>
-      <div className="w-full md:w-[80%] transition-all duration-500 ease-in-out">
+      <div className="w-full p-2 md:w-[80%] transition-all duration-500 ease-in-out">
         <Outlet />
       </div>
     </main>
