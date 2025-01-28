@@ -10,8 +10,7 @@ export default function () {
   const back = () => {
     window.history.back();
   };
-
-  console.log(data);  
+ 
   return (
     <>
       {isLoading ? (
@@ -31,7 +30,7 @@ export default function () {
             <img
               src={ImageOne}
               alt="Image"
-              className="object-cover w-full  h-[56rem]"
+              className="object-cover w-full  h-[42rem] overflow-hidden"
             />
           </div>
 
