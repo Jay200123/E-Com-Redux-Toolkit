@@ -85,7 +85,9 @@ export default function () {
           <FadeLoader color="#808080" loading={true} height={15} width={5} />
         </div>
       ) : (
-        <div className="max-w-3xl m-4 rounded-md shadow-md md:max-w-5xl">
+        <div
+         className="max-w-3xl m-4 rounded-md shadow-md md:max-w-5xl"
+         >
           <div className="flex flex-col items-center md:flex-row md:justify-between">
             <button
             onClick={() => navigate("/create/brand")}  
