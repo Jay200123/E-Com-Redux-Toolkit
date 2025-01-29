@@ -48,17 +48,17 @@ export default function () {
 
   return (
     <>
-      <div className="flex flex-col">
-        <div className="flex flex-col items-center w-full max-h-[56rem] mt-3 md:flex-row">
-          <div className="relative w-full h-full transition-all duration-500 ease-in-out md:w-1/2 ">
-            <i
-              onClick={back}
-              className="absolute m-2 text-2xl cursor-pointer fa fa-arrow-left"
-            ></i>
+      <div className="relative flex flex-col">
+        <i
+          onClick={back}
+          className="absolute m-2 text-2xl cursor-pointer fa fa-arrow-left"
+        ></i>
 
+        <div className="flex flex-col items-center w-full max-h-62rem md:max-h-[56rem] mt-3 md:flex-row">
+          <div className="flex justify-center w-full h-full transition-all duration-500 ease-in-out md:w-1/2">
             {product?.image && product?.image?.length > 1 ? (
               <img
-                className="object-contain w-full h-full"
+                className="object-contain w-16rem h-[32rem] overflow-hidden"
                 src={
                   product?.image[
                     Math.floor(Math.random() * product?.image?.length)
@@ -68,7 +68,7 @@ export default function () {
               />
             ) : (
               <img
-                className="object-contain w-full h-full"
+                className="object-contain w-16rem h-[32rem] overflow-hidden"
                 src={product?.image[0]?.url || ""}
                 alt="image"
               />
@@ -133,7 +133,9 @@ export default function () {
         </div>
         <div className="flex flex-col w-full max-h3-[16rem] mt-4 transition-all duration-500 ease-in-out border border-gray">
           <h3 className="text-lg font-medium md:font-bold md:text-2xl">
-           { productRatings?.length > 0 ? "Product Reviews ⭐" : "No Reviews Yet 😞" }	  
+            {productRatings?.length > 0
+              ? "Product Reviews ⭐"
+              : "No Reviews Yet 😞"}
           </h3>
           {productRatings?.map((r) => (
             <div key={r?._id} className="flex flex-col p-2 md:p-4">
