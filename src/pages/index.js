@@ -25,7 +25,8 @@ import GetUserById from "./UserTable/getById";
 import ProductTable from "./ProductTable";
 import CreateProduct from "./ProductTable/createProduct"; 
 import EditProduct from "./ProductTable/editProduct"; 
-import GetProductById from "./ProductTable/getProductById"
+import GetProductById from "./ProductTable/getProductById";
+import OrderTable from "./OrderTable";
 import ProtectedPage from "./ProtectedPage";
 
 export {
@@ -57,5 +58,6 @@ export {
   CreateProduct,
   EditProduct,
   GetProductById,
+  OrderTable,
   ProtectedPage,
 };
