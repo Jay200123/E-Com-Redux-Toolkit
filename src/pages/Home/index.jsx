@@ -49,7 +49,7 @@ export default function () {
   const randomProducts = allProductsWithRatings
     ?.sort(() => 0.5 - Math.random())
     ?.slice(0, 10);
-    
+
   const handleCart = (product, quantity) => {
     dispatch(addCart({ product, orderQty: quantity }));
     toast.success("Product added to cart");
@@ -199,31 +199,34 @@ export default function () {
           randomProducts.map((p) => (
             <div
               key={p?._id}
-              className="flex flex-col border border-gray-500 rounded-md h-[16rem] md:h-[18rem] overflow-hidden p-2"
+              className="flex flex-col border border-gray-500 rounded-md h-[18rem] md:h-[19rem] overflow-hidden p-2"
             >
-              {p?.image?.length > 1 ? (
-                <img
-                  src={
-                    p?.image[Math.floor(Math.random() * p?.image.length)]?.url
-                  }
-                  alt={p?.product_name || "Product Image"}
-                  onClick={() => {
-                    navigate(`/product/${p?._id}`);
-                    window.scrollTo(0, 0);
-                  }}
-                  className="object-contain w-full h-full cursor-pointer"
-                />
-              ) : (
-                <img
-                  src={p?.image[0]?.url}
-                  alt={p?.name || "Product Image"}
-                  onClick={() => {
-                    navigate(`/product/${p?._id}`);
-                    window.scrollTo(0, 0);
-                  }}
-                  className="object-contain w-40 h-40 cursor-pointer"
-                />
-              )}
+              <div className="flex justify-center">
+                {p?.image?.length > 1 ? (
+                  <img
+                    src={
+                      p?.image[Math.floor(Math.random() * p?.image.length)]?.url
+                    }
+                    alt={p?.product_name || "Product Image"}
+                    onClick={() => {
+                      navigate(`/product/${p?._id}`);
+                      window.scrollTo(0, 0);
+                    }}
+                    className="object-contain w-full h-full cursor-pointer"
+                  />
+                ) : (
+                  <img
+                    src={p?.image[0]?.url}
+                    alt={p?.name || "Product Image"}
+                    onClick={() => {
+                      navigate(`/product/${p?._id}`);
+                      window.scrollTo(0, 0);
+                    }}
+                    className="object-contain w-40 h-40 cursor-pointer"
+                  />
+                )}
+              </div>
+
               <p className="text-sm truncate md:text-sm text-medium">
                 {p?.product_name || "Unnamed Product"}
               </p>
