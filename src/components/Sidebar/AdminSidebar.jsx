@@ -55,7 +55,7 @@ export default function () {
           <li onClick={()=>navigate("/admin/products")} className="p-2 mt-2 text-sm transition-all duration-500 rounded-md cursor-pointer md:text-lg md:font-medium hover:bg-black hover:text-white">
             <i className="mr-1 fa-solid fa-pencil-alt"></i>Products
           </li>
-          <li className="p-2 mt-2 text-sm transition-all duration-500 rounded-md cursor-pointer md:text-lg md:font-medium hover:bg-black hover:text-white">
+          <li onClick={()=>navigate("/admin/orders")} className="p-2 mt-2 text-sm transition-all duration-500 rounded-md cursor-pointer md:text-lg md:font-medium hover:bg-black hover:text-white">
             <i className="mr-1 fa-solid fa-box"></i> Orders
           </li>
           <li className="p-2 mt-2 text-sm transition-all duration-500 rounded-md cursor-pointer md:text-lg md:font-medium hover:bg-black hover:text-white">
