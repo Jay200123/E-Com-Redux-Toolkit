@@ -20,13 +20,34 @@ export default function () {
 
   const [packedOrder] = usePackedOrderMutation();
   const [shippedOrder] = useShippedOrderMutation();
-  const [deliveeredOrder] = useDeliveredOrderMutation();
+  const [deliveredOrder] = useDeliveredOrderMutation();
   const [deleteOrder] = useDeleteOrderMutation();
 
-  const handlePackedOrder = async (id) => { 
-    if(window.confirm("Order packed?")) { 
+  const handlePackedOrder = async (id) => {
+    if (window.confirm("Order packed?")) {
       await packedOrder(id);
-      toast.success("Order packed successfully"); 
+      toast.success("Order packed successfully");
+    }
+  };
+
+  const handleShippedOrder = async (id) => {
+    if (window.confirm("Order Shipped?")) {
+      await shippedOrder(id);
+      toast.success("Order shipped successfully");
+    }
+  };
+
+  const handleDeliverOrder = async (id) => {
+    if (window.confirm("Order Shipped?")) {
+      await deliveredOrder(id);
+      toast.success("Order delivered successfully");
+    }
+  };
+
+  const handleDelete = async (id) => { 
+    if(window.confirm("Delete Order Record?")) { 
+      await deleteOrder(id);
+      toast.success("Order deleted successfully"); 
     }
   }
 
@@ -93,20 +114,25 @@ export default function () {
       cell: (row) => (
         <div className="flex items-center text-center">
           <FaBox
+          onClick={() => handlePackedOrder(row?._id)} 
             title="Packed Order"
             className="mr-2 text-xl text-yellow-500"
           />
           <FaShip
+            onClick={() => handleShippedOrder(row?._id)}
             title="Shipped Order"
             className="mr-2 text-xl text-blue-500"
           />
           <FaTruckMoving
+            onClick={() => handleDeliverOrder(row?._id)}
             title="Deliver Order"
             className="mr-1 text-xl text-green-500"
           />
           <FaEye title="View Order" className="mr-1 text-xl text-gray-500" />
 
-          <FaTrash title="Delete Order" className="mr-1 text-xl text-red-500" />
+          <FaTrash
+          onClick={() => handleDelete(row?._id)}
+           title="Delete Order" className="mr-1 text-xl text-red-500" />
         </div>
       ),
     },
