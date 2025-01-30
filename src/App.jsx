@@ -43,8 +43,9 @@ import {
   EditProduct,
   GetProductById,
   OrderTable,
-  RatingTable,
   GetOrderById,
+  RatingTable,
+  GetRatingById,
 } from "./pages";
 
 function App() {
@@ -285,6 +286,15 @@ function App() {
               element={
                 <ProtectedRoutes userRole={["Admin"]}>
                   <RatingTable />
+                </ProtectedRoutes>
+              }
+            />
+             <Route
+              path="/admin/rating/:id"
+              index
+              element={
+                <ProtectedRoutes userRole={["Admin"]}>
+                  <GetRatingById />
                 </ProtectedRoutes>
               }
             />
