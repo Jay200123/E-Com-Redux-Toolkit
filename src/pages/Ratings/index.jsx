@@ -3,7 +3,7 @@ import { useGetRatingsQuery } from "../../state/api/reducer";
 import { FadeLoader } from "react-spinners";
 
 export default function () {
-  const { data, error, isLoading } = useGetRatingsQuery();
+  const { data, isLoading } = useGetRatingsQuery();
   const ratings = data?.details;
 
   const auth = useSelector((state) => state.auth.user);
