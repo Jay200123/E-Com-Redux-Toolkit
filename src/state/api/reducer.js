@@ -54,6 +54,9 @@ export const api = createApi({
     addRating: RatingApi.Add(builder),
     updateRating: RatingApi.updateById(builder),
     deleteRating: RatingApi.deleteById(builder),
+    packedOrder: OrderApi.packedById(builder),
+    shippedOrder: OrderApi.shippedById(builder),
+    deliveredOrder: OrderApi.deliveryById(builder), 
   }),
 });
 
@@ -84,4 +87,7 @@ export const {
   useAddRatingMutation,
   useUpdateRatingMutation,
   useDeleteRatingMutation,
+  usePackedOrderMutation, 
+  useShippedOrderMutation,
+  useDeliverOrderMutation,
 } = api;
