@@ -3,7 +3,7 @@ import {
   useDeleteOrderMutation,
   usePackedOrderMutation,
   useShippedOrderMutation,
-  useDeliveredOrderMutation,
+  useDeliverOrderMutation,
 } from "../../state/api/reducer";
 import DataTable from "react-data-table-component";
 import { FadeLoader } from "react-spinners";
@@ -20,7 +20,7 @@ export default function () {
 
   const [packedOrder] = usePackedOrderMutation();
   const [shippedOrder] = useShippedOrderMutation();
-  const [deliveredOrder] = useDeliveredOrderMutation();
+  const [deliverOrder] = useDeliverOrderMutation();
   const [deleteOrder] = useDeleteOrderMutation();
 
   const handlePackedOrder = async (id) => {
@@ -39,7 +39,7 @@ export default function () {
 
   const handleDeliverOrder = async (id) => {
     if (window.confirm("Order Shipped?")) {
-      await deliveredOrder(id);
+      await deliverOrder(id);
       toast.success("Order delivered successfully");
     }
   };
@@ -128,7 +128,9 @@ export default function () {
             title="Deliver Order"
             className="mr-1 text-xl text-green-500"
           />
-          <FaEye title="View Order" className="mr-1 text-xl text-gray-500" />
+          <FaEye
+          onClick={() => navigate(`/order/${row?._id}`)}  
+           title="View Order" className="mr-1 text-xl text-gray-500" />
 
           <FaTrash
           onClick={() => handleDelete(row?._id)}
