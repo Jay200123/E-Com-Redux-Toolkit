@@ -77,7 +77,9 @@ export default function () {
     const matchCategory =
       !filter?.info?.category || filter?.info?.category === p?.category;
 
-    return matchName && matchPrice && matchBrand && matchRating && matchCategory;   
+    return (
+      matchName && matchPrice && matchBrand && matchRating && matchCategory
+    );
   });
 
   useEffect(() => {
@@ -106,25 +108,28 @@ export default function () {
           matchFilters.map((p) => (
             <div
               key={p?._id}
-              className="flex mt-2 flex-col  border border-gray-500 rounded-md h-[16rem] md:h-[18rem] overflow-hidden p-2"
+              className="flex mt-2 flex-col  border border-gray-500 rounded-md h-[18rem] overflow-hidden p-2"
             >
-              {p?.image?.length > 1 ? (
-                <img
-                  src={
-                    p?.image[Math.floor(Math.random() * p?.image.length)]?.url
-                  }
-                  alt={p?.product_name || "Product Image"}
-                  onClick={() => navigate(`/product/${p?._id}`)}
-                  className="object-contain w-40 h-40 cursor-pointer"
-                />
-              ) : (
-                <img
-                  src={p?.image[0]?.url}
-                  alt={p?.name || "Product Image"}
-                  onClick={() => navigate(`/product/${p?._id}`)}
-                  className="object-contain w-40 h-40 cursor-pointer"
-                />
-              )}
+              <div className="flex justify-center">
+                {p?.image?.length > 1 ? (
+                  <img
+                    src={
+                      p?.image[Math.floor(Math.random() * p?.image.length)]?.url
+                    }
+                    alt={p?.product_name || "Product Image"}
+                    onClick={() => navigate(`/product/${p?._id}`)}
+                    className="object-contain w-40 h-40 cursor-pointer"
+                  />
+                ) : (
+                  <img
+                    src={p?.image[0]?.url}
+                    alt={p?.name || "Product Image"}
+                    onClick={() => navigate(`/product/${p?._id}`)}
+                    className="object-contain w-40 h-40 cursor-pointer"
+                  />
+                )}
+              </div>
+
               <p className="text-sm truncate md:text-sm text-medium">
                 {p?.product_name || "Unnamed Product"}
               </p>
