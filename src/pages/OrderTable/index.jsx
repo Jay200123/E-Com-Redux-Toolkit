@@ -19,7 +19,7 @@ export default function () {
   const isFocused = useRef(true);
 
   const { data, isLoading, refetch } = useGetOrdersQuery();
-  const orders = data?.details || [];
+  const orders = data?.details;
 
   useEffect(() => {
     const handleFocus = () => {
@@ -132,21 +132,50 @@ export default function () {
       name: "Actions",
       cell: (row) => (
         <div className="flex items-center text-center">
-          <FaBox
-            onClick={() => handlePackedOrder(row?._id)}
-            title="Packed Order"
-            className="mr-2 text-xl text-yellow-500"
-          />
-          <FaShip
-            onClick={() => handleShippedOrder(row?._id)}
-            title="Shipped Order"
-            className="mr-2 text-xl text-blue-500"
-          />
-          <FaTruckMoving
-            onClick={() => handleDeliverOrder(row?._id)}
-            title="Deliver Order"
-            className="mr-1 text-xl text-green-500"
-          />
+          {row?.status === "Packed" ||
+          row?.status === "Shipped" ||
+          row?.status === "Delivered" ? (
+            <FaBox
+              onClick={() => toast.error("Order already packed")}
+              title="Packed Order"
+              className="mr-2 text-xl text-gray-500"
+            />
+          ) : (
+            <FaBox
+              onClick={() => handlePackedOrder(row?._id)}
+              title="Packed Order"
+              className="mr-2 text-xl text-yellow-500"
+            />
+          )}
+
+          {row?.status === "Shipped" || row?.status === "Delivered" ? (
+            <FaShip
+              onClick={() => toast.error(" Order already shipped")}
+              title="Shipped Order"
+              className="mr-2 text-xl text-gray-500"
+            />
+          ) : (
+            <FaShip
+              onClick={() => handleShippedOrder(row?._id)}
+              title="Shipped Order"
+              className="mr-2 text-xl text-blue-500"
+            />
+          )}
+
+          {row?.status === "Delivered" ? (
+            <FaTruckMoving
+              onClick={() => toast.error("Order already delivered")}
+              title="Deliver Order"
+              className="mr-2 text-xl text-gray-500"
+            />
+          ) : (
+            <FaTruckMoving
+              onClick={() => handleDeliverOrder(row?._id)}
+              title="Deliver Order"
+              className="mr-2 text-xl text-green-500"
+            />
+          )}
+
           <FaEye
             onClick={() => navigate(`/order/${row?._id}`)}
             title="View Order"
