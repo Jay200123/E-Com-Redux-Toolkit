@@ -1,19 +1,40 @@
-import { useGetOrdersQuery } from "../../state/api/reducer";
+import {
+  useGetOrdersQuery,
+  useDeleteOrderMutation,
+  usePackedOrderMutation,
+  useShippedOrderMutation,
+  useDeliveredOrderMutation,
+} from "../../state/api/reducer";
 import DataTable from "react-data-table-component";
 import { FadeLoader } from "react-spinners";
 import { tableCustomStyles } from "../../utils/tableCustomStyle";
 import { useNavigate } from "react-router-dom";
 import { FaBox, FaShip, FaTruckMoving, FaTrash, FaEye } from "react-icons/fa";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 export default function () {
   const navigate = useNavigate();
   const { data, isLoading } = useGetOrdersQuery();
   const orders = data?.details || [];
 
+  const [packedOrder] = usePackedOrderMutation();
+  const [shippedOrder] = useShippedOrderMutation();
+  const [deliveeredOrder] = useDeliveredOrderMutation();
+  const [deleteOrder] = useDeleteOrderMutation();
+
+  const handlePackedOrder = async (id) => { 
+    if(window.confirm("Order packed?")) { 
+      await packedOrder(id);
+      toast.success("Order packed successfully"); 
+    }
+  }
+
   const [order, setOrder] = useState("");
 
-  const filteredOrders = orders?.filter((o) => o?.orderNumber?.toLowerCase()?.includes(order?.toLowerCase()));  
+  const filteredOrders = orders?.filter((o) =>
+    o?.orderNumber?.toLowerCase()?.includes(order?.toLowerCase())
+  );
 
   const columns = [
     {
@@ -53,13 +74,18 @@ export default function () {
     },
     {
       name: "Date Placed",
-      selector: (row) => new Date(row?.date_placed.toLocaleString()).toISOString().split("T")[0],    
+      selector: (row) =>
+        new Date(row?.date_placed.toLocaleString()).toISOString().split("T")[0],
       sortable: true,
     },
     {
       name: "Date delivered",
       selector: (row) =>
-        row?.date_delivered ? new Date(row?.date_delivered.toLocaleString()).toISOString().split("T")[0] : "Not yet delivered",
+        row?.date_delivered
+          ? new Date(row?.date_delivered.toLocaleString())
+              .toISOString()
+              .split("T")[0]
+          : "Not yet delivered",
       sortable: true,
     },
     {
@@ -105,7 +131,7 @@ export default function () {
           <DataTable
             title="Orders"
             columns={columns}
-            data={filteredOrders || []} 
+            data={filteredOrders || []}
             pagination
             highlightOnHover
             pointerOnHover
