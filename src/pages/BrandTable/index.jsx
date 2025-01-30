@@ -8,7 +8,7 @@ import { FaEye, FaPencilAlt, FaTrash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { tableCustomStyles } from "../../utils/tableCustomStyle";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function () {
   const navigate = useNavigate();
@@ -16,6 +16,19 @@ export default function () {
   const brands = data?.details || [];
   const [deleteBrand] = useDeleteBrandMutation();
   const [findBrand, setFindBrand] = useState("");
+
+  useEffect(() => {
+      const handleFocus = () => {
+        isFocused.current = true;
+        refetch();
+      };
+  
+      window.addEventListener("focus", handleFocus);
+  
+      return () => {
+        window.removeEventListener("focus", handleFocus);
+      };
+    }, [refetch]);
 
   const filteredBrands = brands?.filter((b) =>
     b.brand_name.toLowerCase().includes(findBrand.toLowerCase())
