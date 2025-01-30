@@ -51,7 +51,7 @@ export default function () {
             className="space-x-1 text-xs font-medium cursor-pointer md:font-bold md:text-sm"
           >
             <img
-              src={randomImage.url}
+              src={randomImage?.url}
               alt="avatar"
               className="w-8 h-8 rounded-full md:w-10 md:h-10"
             />
