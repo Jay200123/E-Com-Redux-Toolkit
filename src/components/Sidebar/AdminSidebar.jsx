@@ -53,10 +53,10 @@ export default function () {
             <i className="mr-1 fa-solid fa-tag"></i>Brands
           </li>
           <li onClick={()=>navigate("/admin/products")} className="p-2 mt-2 text-sm transition-all duration-500 rounded-md cursor-pointer md:text-lg md:font-medium hover:bg-black hover:text-white">
-            <i className="mr-1 fa-solid fa-pencil-alt"></i>Products
+          <i className="mr-1 fa-solid fa-boxes-stacked"></i>Products
           </li>
           <li onClick={()=>navigate("/admin/orders")} className="p-2 mt-2 text-sm transition-all duration-500 rounded-md cursor-pointer md:text-lg md:font-medium hover:bg-black hover:text-white">
-            <i className="mr-1 fa-solid fa-box"></i> Orders
+          <i className="mr-1 fa-solid fa-receipt"></i> Orders
           </li>
           <li className="p-2 mt-2 text-sm transition-all duration-500 rounded-md cursor-pointer md:text-lg md:font-medium hover:bg-black hover:text-white">
             <i className="mr-1 fa-regular fa-star"></i> Product Reviews
