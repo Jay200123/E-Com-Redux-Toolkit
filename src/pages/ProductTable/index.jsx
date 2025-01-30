@@ -8,7 +8,7 @@ import { FaEye, FaEdit, FaTrash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { tableCustomStyles } from "../../utils/tableCustomStyle";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function () {
   const navigate = useNavigate();
@@ -16,6 +16,19 @@ export default function () {
   const products = data?.details || [];
   const [deleteProduct] = useDeleteProductMutation();
   const [findProduct, setProduct] = useState("");
+
+  useEffect(() => {
+      const handleFocus = () => {
+        isFocused.current = true;
+        refetch();
+      };
+  
+      window.addEventListener("focus", handleFocus);
+  
+      return () => {
+        window.removeEventListener("focus", handleFocus);
+      };
+    }, [refetch]);
 
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this product?")) {
