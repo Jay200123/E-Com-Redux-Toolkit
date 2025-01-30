@@ -1,4 +1,7 @@
-import { useGetRatingsQuery, useDeleteRatingMutation } from "../../state/api/reducer";
+import {
+  useGetRatingsQuery,
+  useDeleteRatingMutation,
+} from "../../state/api/reducer";
 import DataTable from "react-data-table-component";
 import { FadeLoader } from "react-spinners";
 import { FaEye, FaTrash } from "react-icons/fa";
@@ -13,11 +16,19 @@ export default function () {
 
   const { data, isLoading, refetch } = useGetRatingsQuery();
   const ratings = data?.details;
+  const [deleteRating] = useDeleteRatingMutation();
   const [orderNumber, setOrderNumber] = useState("");
 
   const filteredRatings = ratings?.filter((r) =>
     r?.order?.orderNumber.toLowerCase()?.includes(orderNumber.toLowerCase())
   );
+
+  const handleDelete = async (id) => {
+    if (window.confirm("Are you sure you want to delete this rating?")) {
+      await deleteRating(id);
+      refetch();
+    }
+  };
 
   useEffect(() => {
     const handleFocus = () => {
@@ -106,7 +117,10 @@ export default function () {
       cell: (row) => (
         <div className="flex items-center">
           <FaEye className="mr-1 text-lg text-green-500 cursor-pointer" />
-          <FaTrash className="mr-1 text-lg text-red-500 cursor-pointer" />
+          <FaTrash
+            onClick={() => handleDelete(row?._id)}
+            className="mr-1 text-lg text-red-500 cursor-pointer"
+          />
         </div>
       ),
     },
