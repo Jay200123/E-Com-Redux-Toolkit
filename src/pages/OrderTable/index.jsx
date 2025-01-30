@@ -12,11 +12,27 @@ import { useNavigate } from "react-router-dom";
 import { FaBox, FaShip, FaTruckMoving, FaTrash, FaEye } from "react-icons/fa";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { useEffect, useRef } from "react";
 
 export default function () {
   const navigate = useNavigate();
-  const { data, isLoading } = useGetOrdersQuery();
+  const isFocused = useRef(true);
+
+  const { data, isLoading, refetch } = useGetOrdersQuery();
   const orders = data?.details || [];
+
+  useEffect(() => {
+    const handleFocus = () => {
+      isFocused.current = true;
+      refetch();
+    };
+
+    window.addEventListener("focus", handleFocus);
+
+    return () => {
+      window.removeEventListener("focus", handleFocus);
+    };
+  }, [refetch]);
 
   const [packedOrder] = usePackedOrderMutation();
   const [shippedOrder] = useShippedOrderMutation();
@@ -33,6 +49,7 @@ export default function () {
   const handleShippedOrder = async (id) => {
     if (window.confirm("Order Shipped?")) {
       await shippedOrder(id);
+      refetch();
       toast.success("Order shipped successfully");
     }
   };
@@ -40,16 +57,18 @@ export default function () {
   const handleDeliverOrder = async (id) => {
     if (window.confirm("Order Shipped?")) {
       await deliverOrder(id);
+      refetch();
       toast.success("Order delivered successfully");
     }
   };
 
-  const handleDelete = async (id) => { 
-    if(window.confirm("Delete Order Record?")) { 
+  const handleDelete = async (id) => {
+    if (window.confirm("Delete Order Record?")) {
       await deleteOrder(id);
-      toast.success("Order deleted successfully"); 
+      refetch();
+      toast.success("Order deleted successfully");
     }
-  }
+  };
 
   const [order, setOrder] = useState("");
 
@@ -114,7 +133,7 @@ export default function () {
       cell: (row) => (
         <div className="flex items-center text-center">
           <FaBox
-          onClick={() => handlePackedOrder(row?._id)} 
+            onClick={() => handlePackedOrder(row?._id)}
             title="Packed Order"
             className="mr-2 text-xl text-yellow-500"
           />
@@ -129,12 +148,16 @@ export default function () {
             className="mr-1 text-xl text-green-500"
           />
           <FaEye
-          onClick={() => navigate(`/order/${row?._id}`)}  
-           title="View Order" className="mr-1 text-xl text-gray-500" />
+            onClick={() => navigate(`/order/${row?._id}`)}
+            title="View Order"
+            className="mr-1 text-xl text-gray-500"
+          />
 
           <FaTrash
-          onClick={() => handleDelete(row?._id)}
-           title="Delete Order" className="mr-1 text-xl text-red-500" />
+            onClick={() => handleDelete(row?._id)}
+            title="Delete Order"
+            className="mr-1 text-xl text-red-500"
+          />
         </div>
       ),
     },
