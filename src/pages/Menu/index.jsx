@@ -96,9 +96,19 @@ export default function () {
               >
                 <i className="fa-solid fa-box"></i> Orders
               </li>
-              <li className="flex items-center gap-2 text-sm font-medium cursor-pointer md:text-base">
-                <i className="fa-solid fa-star"></i> Reviews
+              <li
+                onClick={() => navigate("/order/ratings")}
+                className="flex items-center gap-2 text-sm font-medium cursor-pointer md:text-base"
+              >
+                <i className=" fa-regular fa-star"></i> Rate Products
               </li>
+              <li
+               onClick={()=>navigate("/user/ratings")} 
+                className="flex items-center gap-2 text-sm font-medium cursor-pointer md:text-base"
+              >
+                <i className="mr-1 fa-solid fa-star"></i> Product Reviews
+              </li>
+              
             </>
           )}
           <li className="flex items-center gap-2 text-sm font-medium cursor-pointer md:text-base">
