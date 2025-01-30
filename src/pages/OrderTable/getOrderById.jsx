@@ -1,6 +1,7 @@
 import { useGetOrderByIdQuery } from "../../state/api/reducer";
 import { useParams } from "react-router-dom";
 import ImageOne from "../../assets/register.jpg";
+import { FadeLoader } from "react-spinners";
 
 export default function () {
   const { id } = useParams();
