@@ -116,7 +116,9 @@ export default function () {
       name: "Actions",
       cell: (row) => (
         <div className="flex items-center">
-          <FaEye className="mr-1 text-lg text-green-500 cursor-pointer" />
+          <FaEye 
+          onClick={() => navigate(`/admin/rating/${row?._id}`)} 
+          className="mr-1 text-lg text-green-500 cursor-pointer" />
           <FaTrash
             onClick={() => handleDelete(row?._id)}
             className="mr-1 text-lg text-red-500 cursor-pointer"
