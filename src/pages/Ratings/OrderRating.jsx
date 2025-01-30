@@ -2,6 +2,7 @@ import { useGetOrdersQuery } from "../../state/api/reducer";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setRate } from "../../state/slice/rating";
+import { toast } from "react-toastify"; 
 
 export default function () {
   const navigate = useNavigate();
@@ -58,7 +59,7 @@ export default function () {
                           )
                         ]?.url
                       }
-                      className="object-contain w-20 h-20 md:object-cover md:w-36 md:h-38"
+                      className="object-contain w-20 h-20 md:w-36 md:h-38"
                     />
                   </div>
                   <div className="flex flex-col w-4/5 h-full">
@@ -91,7 +92,7 @@ export default function () {
 
                       <div className="flex">
                         {item?.isReviewed ? (
-                          <button className="p-2 text-sm border rounded-md border-gray-50 md:text-lg">
+                          <button onClick={()=>toast.error("Product Already Rated")} className="p-2 text-sm border rounded-md border-gray-50 md:text-lg">
                             ⭐Product Already Rated
                           </button>
                         ) : (
