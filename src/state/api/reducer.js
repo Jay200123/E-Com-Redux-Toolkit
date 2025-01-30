@@ -56,7 +56,7 @@ export const api = createApi({
     deleteRating: RatingApi.deleteById(builder),
     packedOrder: OrderApi.packedById(builder),
     shippedOrder: OrderApi.shippedById(builder),
-    deliveredOrder: OrderApi.deliveryById(builder), 
+    deliverOrder: OrderApi.deliveryById(builder), 
   }),
 });
 
@@ -89,5 +89,5 @@ export const {
   useDeleteRatingMutation,
   usePackedOrderMutation, 
   useShippedOrderMutation,
-  useDeliverOrderMutation,
+  useDeliverOrderMutation,  
 } = api;
