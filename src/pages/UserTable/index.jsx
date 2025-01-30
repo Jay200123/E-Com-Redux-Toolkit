@@ -8,15 +8,28 @@ import { toast } from "react-toastify";
 import { FadeLoader } from "react-spinners";
 import { FaEye, FaTrash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 
 export default function () {
   const navigate = useNavigate();
-  const { data, isLoading } = useGetUsersQuery();
+  const { data, isLoading, refetch } = useGetUsersQuery();
   const users = data?.details;
   const [deleteUser] = useDeleteUserMutation();
   const [findUser, setFindUser] = useState("");
+
+  useEffect(() => {
+    const handleFocus = () => {
+      isFocused.current = true;
+      refetch();
+    };
+
+    window.addEventListener("focus", handleFocus);
+
+    return () => {
+      window.removeEventListener("focus", handleFocus);
+    };
+  }, [refetch]);
 
   const auth = useSelector((state) => state.auth.user);
   const excludedUser = users?.filter((u) => u?._id !== auth?._id);
