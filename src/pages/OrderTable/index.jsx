@@ -196,8 +196,8 @@ export default function () {
     <div className="w-full overflow-x-auto">
       {isLoading ? (
         <div className="flex items-center justify-center">
-          <FadeLoader color="#10B981" loading={isLoading} size={15} />
-        </div>
+          <FadeLoader color="#808080" loading={true} height={15} width={5} />
+          </div>
       ) : (
         <div className="max-w-3xl m-4 rounded-md shadow-md md:max-w-5xl">
           <div className="w-full m-2">
