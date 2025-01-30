@@ -47,7 +47,7 @@ export default function () {
       <div className="block md:hidden w-[25%]"> 
         <ul className="flex flex-row items-center">
           <li
-            onClick={() => navigate("/profile")}
+            onClick={() => navigate("/admin/profile")}
             className="space-x-1 text-xs font-medium cursor-pointer md:font-bold md:text-sm"
           >
             <img
