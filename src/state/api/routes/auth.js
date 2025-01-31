@@ -12,6 +12,18 @@ export const login = (builder) => {
   });
 };
 
+export const logout = () => {
+  builder.mutation({
+    query: () => {
+      return {
+        url: "/logout",
+        method: "GET",
+      };
+    },
+  });
+};
+
 export default {
   login,
+  logout,
 };
