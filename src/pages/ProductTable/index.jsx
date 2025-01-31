@@ -12,6 +12,8 @@ import { useState, useEffect, useRef } from "react";
 
 export default function () {
   const navigate = useNavigate();
+  const isFocused = useRef(true);
+
   const { data, isLoading, refetch } = useGetProductsQuery();
   const products = data?.details || [];
   const [deleteProduct] = useDeleteProductMutation();
