@@ -1,13 +1,17 @@
-import { useDispatch } from "react-redux";
-import { logout } from "../../state/slice/auth";
-import { toast } from "react-toastify";
+import CardInfo from "./CardInfo";
+import OrderInfo from "./OrderInfo";
+import ProductInfo from "./ProductInfo";  
 
 export default function () {
-  const dispatch = useDispatch();
-
-  const handleLogout = () => {
-    dispatch(logout());
-    toast.success("Logout successfully");
-  };
-  return <h3 onClick={handleLogout}>this is admin dashboard!</h3>;
+  
+ 
+  return (
+    <div className="flex flex-col items-center justify-start w-full h-full"> 
+      <CardInfo />
+      <OrderInfo/>
+      <div className="flex flex-col w-full mt-2 md:flex-row">
+        <ProductInfo />
+      </div>
+    </div>
+  );
 }
