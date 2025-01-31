@@ -1,4 +1,8 @@
+import { useSelector } from "react-redux";
+
 export default function () {
+  const auth = useSelector((state) => state.auth);
+
   return (
     <>
       <footer className="flex flex-col w-full text-white bg-gray-700">
@@ -36,7 +40,15 @@ export default function () {
               Important Information
             </li>
             <li className="flex items-center mb-2 text-sm">
-              <i className="mr-2 fa-solid fa-house"></i>Home
+              {auth?.user?.role === "User" ? (
+                <>
+                  <i className="mr-2 fa-solid fa-house"></i>Home
+                </>
+              ) : (
+                <>
+                  <i className="mr-2 fa-solid fa-house"></i>Dashboard
+                </>
+              )}
             </li>
             <li className="flex items-center mb-2 text-sm">
               <i className="mr-2 fa-solid fa-circle-info"></i>About
