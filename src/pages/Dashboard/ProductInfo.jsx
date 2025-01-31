@@ -40,7 +40,7 @@ export default function () {
     labels: Object.keys(category),
     datasets: [
       {
-        label: "Product Category",
+        label: "Number of Products",
         data: Object.values(category),
         backgroundColor: ["#4caf50", "#2196f3", "#f44336", "#ff9800"],
         borderColor: ["#4caf50", "#2196f3", "#f44336", "#ff9800"],
@@ -50,7 +50,7 @@ export default function () {
   };
 
   return (
-    <div className="w-1/2 m-4 flex items-center justify-center max-h-[250px] md:h-[350px]">
+    <div className="w-full md:w-1/2 m-4 flex items-center justify-center max-h-[250px] md:h-[350px]">
       {isLoading ? (
         <div className="flex items-center justify-center">
           <FadeLoader color="#808080" loading={true} height={15} width={5} />
