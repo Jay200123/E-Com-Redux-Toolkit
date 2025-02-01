@@ -36,7 +36,7 @@ export default function () {
           </div>
 
           <div className="flex flex-col justify-center w-full h-full p-4 md:w-1/2">
-            <h3 className="mb-1 text-2xl font-semibold">Brand Detail</h3>
+            <h3 className="mb-1 text-2xl font-semibold">Rating Detail</h3>
 
             <div className="flex justify-center mb-1">
               <img
