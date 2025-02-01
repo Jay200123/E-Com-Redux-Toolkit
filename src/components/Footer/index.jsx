@@ -40,13 +40,13 @@ export default function () {
               Important Information
             </li>
             <li className="flex items-center mb-2 text-sm">
-              {auth?.user?.role === "User" ? (
+              {auth?.user?.role === "Admin" ? (
                 <>
-                  <i className="mr-2 fa-solid fa-house"></i>Home
+                <i className="mr-2 fa-solid fa-house"></i>Dashboard
                 </>
               ) : (
                 <>
-                  <i className="mr-2 fa-solid fa-house"></i>Dashboard
+                    <i className="mr-2 fa-solid fa-house"></i>Home
                 </>
               )}
             </li>
