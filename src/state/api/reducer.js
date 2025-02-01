@@ -29,7 +29,6 @@ export const api = createApi({
   keepUnusedDataFor: 0,
   endpoints: (builder) => ({
     login: AuthApi.login(builder),
-    logout: AuthApi.logout(builder),  
     getProducts: ProductApi.getAll(builder),
     getProductById: ProductApi.getById(builder),
     addProduct: ProductApi.Add(builder),
@@ -58,12 +57,12 @@ export const api = createApi({
     packedOrder: OrderApi.packedById(builder),
     shippedOrder: OrderApi.shippedById(builder),
     deliverOrder: OrderApi.deliveryById(builder), 
+    logout: AuthApi.logout(builder),  
   }),
 });
 
 export const {
   useLoginMutation,
-  useLogoutMutation,
   useGetProductsQuery,
   useGetProductByIdQuery,
   useAddProductMutation,
@@ -92,4 +91,5 @@ export const {
   usePackedOrderMutation, 
   useShippedOrderMutation,
   useDeliverOrderMutation,  
+  useLogoutMutation,  
 } = api;
