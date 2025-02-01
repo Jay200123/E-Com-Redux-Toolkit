@@ -1,4 +1,4 @@
-import { TAGS } from "../../../constants";
+import { TAGS } from "../../../constants/index";
 
 export const login = (builder) => {
   return builder.mutation({
@@ -12,12 +12,12 @@ export const login = (builder) => {
   });
 };
 
-export const logout = () => {
-  builder.mutation({
+export const logout = (builder) => {
+  return builder.mutation({
     query: () => {
       return {
         url: "/logout",
-        method: "GET",
+        method: "POST",
       };
     },
   });
