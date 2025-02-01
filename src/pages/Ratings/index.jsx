@@ -1,8 +1,10 @@
 import { useSelector } from "react-redux";
 import { useGetRatingsQuery } from "../../state/api/reducer";
 import { FadeLoader } from "react-spinners";
+import { useNavigate } from "react-router-dom";
 
 export default function () {
+  const navigate = useNavigate();
   const { data, isLoading } = useGetRatingsQuery();
   const ratings = data?.details;
 
@@ -59,7 +61,7 @@ export default function () {
                 </div>
               </div>
               <div className="flex justify-end w-full">
-                <button className="p-1 mt-2 text-xs text-white bg-blue-500 rounded-md md:text-sm">
+                <button onClick={()=>navigate(`/rating/edit/${rating?._id}`)} className="p-1 mt-2 text-xs text-white bg-blue-500 rounded-md md:text-sm">
                   ⭐Edit Rating
                 </button>
               </div>
