@@ -59,7 +59,7 @@ export default function () {
       ) : (
         <form
           onSubmit={formik.handleSubmit}
-          className="relative flex flex-col w-full h-screen md:flex-row"
+          className="relative flex flex-col w-full h-full md:flex-row"
         >
           <h3
             onClick={back}
@@ -157,7 +157,9 @@ export default function () {
               <textarea
                 name="description"
                 id="description"
-                values={formik?.values?.description}
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+                value={formik.values.description}
                 className="p-2 text-sm border border-gray-300 rounded-md md:text-base placeholder:text-black placeholder:italic focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 rows={5}
               />
@@ -174,6 +176,12 @@ export default function () {
                 }}
               />
             </div>
+            <button
+              className="text-[1rem] p-2 bg-black transition-all duration-500 hover:opacity-75 rounded-md text-white mt-4"
+              type="submit"
+            >
+              Review Product
+            </button>
           </div>
         </form>
       )}
