@@ -45,6 +45,7 @@ import {
   OrderTable,
   GetOrderById,
   RatingTable,
+  EditRating,
   GetRatingById,
 } from "./pages";
 
@@ -143,6 +144,15 @@ function App() {
             element={
               <ProtectedRoutes userRole={["User"]}>
                 <CreateRating />
+              </ProtectedRoutes>
+            }
+          />
+            <Route
+            path="/rating/edit/:id"
+            index
+            element={
+              <ProtectedRoutes userRole={["User"]}>
+                <EditRating />
               </ProtectedRoutes>
             }
           />
