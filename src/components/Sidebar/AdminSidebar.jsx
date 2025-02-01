@@ -1,17 +1,16 @@
-import Logo from "../../assets/web-logo.png";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../state/slice/auth";
+import { useSelector } from "react-redux";
+import { useLogoutMutation } from "../../state/api/reducer";
 import { toast } from "react-toastify";
 
 export default function () {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-
   const auth = useSelector((state) => state?.auth?.user);
 
-  const handleLogout = () => {
-    dispatch(logout());
+  const [logout] = useLogoutMutation();
+
+  const handleLogout = async () => {
+    await logout().unwrap();
     toast.success("Logged out successfully");
     navigate("/login");
     window.scroll({
@@ -26,7 +25,7 @@ export default function () {
       <div className="flex flex-col justify-center w-full p-2 mt-2">
         <div className="flex justify-center mb-2">
           <img
-          onClick={()=> navigate("/admin/profile")} 
+            onClick={() => navigate("/admin/profile")}
             src={
               auth?.image[Math.floor(Math.random() * auth?.image?.length)]?.url
             }
@@ -39,11 +38,17 @@ export default function () {
         </h3>
 
         <ul className="w-full p-1">
-          <li onClick={()=>navigate("/admin/dashboard")} className="p-2 mt-2 text-sm transition-all duration-500 rounded-md cursor-pointer md:text-lg md:font-medium hover:bg-black hover:text-white">
+          <li
+            onClick={() => navigate("/admin/dashboard")}
+            className="p-2 mt-2 text-sm transition-all duration-500 rounded-md cursor-pointer md:text-lg md:font-medium hover:bg-black hover:text-white"
+          >
             <i className="mr-1 fa-solid fa-chart-line"></i>Dashboard
           </li>
 
-          <li onClick={()=> navigate("/admin/users")} className="p-2 mt-2 text-sm transition-all duration-500 rounded-md cursor-pointer md:text-lg md:font-medium hover:bg-black hover:text-white">
+          <li
+            onClick={() => navigate("/admin/users")}
+            className="p-2 mt-2 text-sm transition-all duration-500 rounded-md cursor-pointer md:text-lg md:font-medium hover:bg-black hover:text-white"
+          >
             <i className="mr-1 fa-solid fa-user"></i>Users
           </li>
           <li
@@ -52,18 +57,29 @@ export default function () {
           >
             <i className="mr-1 fa-solid fa-tag"></i>Brands
           </li>
-          <li onClick={()=>navigate("/admin/products")} className="p-2 mt-2 text-sm transition-all duration-500 rounded-md cursor-pointer md:text-lg md:font-medium hover:bg-black hover:text-white">
-          <i className="mr-1 fa-solid fa-boxes-stacked"></i>Products
+          <li
+            onClick={() => navigate("/admin/products")}
+            className="p-2 mt-2 text-sm transition-all duration-500 rounded-md cursor-pointer md:text-lg md:font-medium hover:bg-black hover:text-white"
+          >
+            <i className="mr-1 fa-solid fa-boxes-stacked"></i>Products
           </li>
-          <li onClick={()=>navigate("/admin/orders")} className="p-2 mt-2 text-sm transition-all duration-500 rounded-md cursor-pointer md:text-lg md:font-medium hover:bg-black hover:text-white">
-          <i className="mr-1 fa-solid fa-receipt"></i> Orders
+          <li
+            onClick={() => navigate("/admin/orders")}
+            className="p-2 mt-2 text-sm transition-all duration-500 rounded-md cursor-pointer md:text-lg md:font-medium hover:bg-black hover:text-white"
+          >
+            <i className="mr-1 fa-solid fa-receipt"></i> Orders
           </li>
-          <li onClick={()=>navigate("/admin/ratings")} className="p-2 mt-2 text-sm transition-all duration-500 rounded-md cursor-pointer md:text-lg md:font-medium hover:bg-black hover:text-white">
+          <li
+            onClick={() => navigate("/admin/ratings")}
+            className="p-2 mt-2 text-sm transition-all duration-500 rounded-md cursor-pointer md:text-lg md:font-medium hover:bg-black hover:text-white"
+          >
             <i className="mr-1 fa-regular fa-star"></i> Product Reviews
           </li>
-          <li onClick={()=>navigate("/admin/profile/edit")}
-           className="p-2 mt-2 text-sm transition-all duration-500 rounded-md cursor-pointer md:text-lg md:font-medium hover:bg-black hover:text-white">
-          <i className="mr-1 fa-solid fa-gear"></i> Edit Profile
+          <li
+            onClick={() => navigate("/admin/profile/edit")}
+            className="p-2 mt-2 text-sm transition-all duration-500 rounded-md cursor-pointer md:text-lg md:font-medium hover:bg-black hover:text-white"
+          >
+            <i className="mr-1 fa-solid fa-gear"></i> Edit Profile
           </li>
         </ul>
       </div>
