@@ -1,13 +1,11 @@
 import Logo from "../../assets/web-logo.png";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { logout } from "../../state/slice/auth";
+import { useLogoutMutation } from "../../state/api/reducer";
 import { toast } from "react-toastify";
 
 export default function () {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-
+  const [logout] = useLogoutMutation();
   const handleProfile = () => {
     navigate("/profile");
   };
@@ -24,8 +22,8 @@ export default function () {
     navigate("/user/ratings");
   };
 
-  const handleLogout = () => {
-    dispatch(logout());
+  const handleLogout = async () => {
+    await logout();
     toast.success("Logged out successfully");
     navigate("/login");
     window.scroll({
