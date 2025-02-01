@@ -4,11 +4,13 @@ import {
 } from "../../state/api/reducer";
 import { useParams } from "react-router-dom";
 import { FadeLoader } from "react-spinners";
-import { FaStar } from "react-icons/fa";
 import ImageOne from "../../assets/register.jpg";
 import { useFormik } from "formik";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function () {
+  const navigate = useNavigate();
   const { id } = useParams();
   const { data, isLoading } = useGetRatingByIdQuery(id);
   const rating = data?.details;
@@ -39,7 +41,7 @@ export default function () {
       const res = await updateRating({ id: rating?._id, payload: formData });
       if (res?.data?.success === true) {
         toast.success("Rating updated successfully");
-        Navigate("/user/ratings");
+        navigate("/user/ratings");
       } else {
         toast.error(res?.data?.message);
       }
