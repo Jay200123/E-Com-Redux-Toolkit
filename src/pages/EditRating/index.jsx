@@ -27,7 +27,7 @@ export default function () {
       image: rating?.image || [],
     },
 
-    onSumbit: async (values) => {
+    onSubmit: async (values) => {
       const formData = new FormData();
       formData.append("user", values.user);
       formData.append("product", values.product);
