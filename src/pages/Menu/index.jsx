@@ -1,13 +1,15 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { logout } from "../../state/slice/auth";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
+import { useLogoutMutation } from "../../state/api/reducer";
 
 export default function () {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
+
+  const [logout] = useLogoutMutation(); 
 
   const register = () => {
     navigate("/register");
@@ -25,8 +27,8 @@ export default function () {
     navigate("/shop");
   };
 
-  const handleLogout = () => {
-    dispatch(logout());
+  const handleLogout = async() => {
+    await logout().unwrap();
     toast.success("Logged out successfully");
     navigate("/login");
   };
