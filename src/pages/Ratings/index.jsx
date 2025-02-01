@@ -37,7 +37,7 @@ export default function () {
                     }
                     className="object-contain w-16 h-16 md:w-20 md:h-20"
                   />
-                  <div className="p-4 ml-2 md:p-0">
+                  <div className="w-1/2 p-4 ml-2 md:p-0">
                     <h1 className="text-xs font-medium md:text-sm">
                       {rating?.product?.product_name}
                     </h1>
@@ -51,7 +51,7 @@ export default function () {
                     </p>
                   </div>
                 </div>
-                <div className="flex items-center">
+                <div className="flex items-center w-1/2">
                   {Array.from({ length: rating?.rating }).map((_, index) => (
                     <i
                       key={index}
