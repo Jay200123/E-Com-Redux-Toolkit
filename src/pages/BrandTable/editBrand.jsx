@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import ImageOne from "../../assets/register.jpg";
 import { useParams } from "react-router-dom";
+import { editBrandValidationSchema } from "../../validations"
 
 export default function () {
   const navigate = useNavigate();
@@ -23,6 +24,7 @@ export default function () {
       brand_name: brand?.brand_name || "",
       image: brand?.image || [],
     },
+    validationSchema: editBrandValidationSchema,
     onSubmit: async (values) => {
       const formData = new FormData();
       formData.append("brand_name", values.brand_name);
