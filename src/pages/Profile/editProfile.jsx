@@ -6,6 +6,7 @@ import {
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { editProfileValidationSchema } from "../../validations";
 
 export default function () {
   const navigate = useNavigate();
@@ -17,14 +18,14 @@ export default function () {
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      fullname: user?.fullname || "", 
+      fullname: user?.fullname || "",
       contact_number: user?.contact_number || "",
       address: user?.address || "",
       city: user?.city || "",
       email: user?.email || "",
       image: user?.image || [],
     },
-
+    validationSchema: editProfileValidationSchema,
     onSubmit: async (values) => {
       const formData = new FormData();
       formData.append("fullname", values.fullname);
@@ -48,20 +49,20 @@ export default function () {
 
   const randomImage =
     auth?.user?.image[Math.floor(Math.random() * auth?.user.image.length)];
-  
-    const back = () => {
-      window.history.back();
-    }
+
+  const back = () => {
+    window.history.back();
+  };
   return (
     <form
       onSubmit={formik.handleSubmit}
       className="flex items-center justify-center w-full h-full p-4 overflow-hidden"
     >
       <div className="relative flex flex-col transition-all duration-700 md:flex-row w-[75rem] border border-gray-500 shadow-lg rounded-lg h-[48rem] md:h-[24rem]">
-      <i
-        onClick={back}
-        className="absolute m-2 text-2xl cursor-pointer fa fa-arrow-left"
-      ></i>
+        <i
+          onClick={back}
+          className="absolute m-2 text-2xl cursor-pointer fa fa-arrow-left"
+        ></i>
         <div className="w-full h-full md:w-[30%]">
           <div className="flex flex-col items-center justify-center w-full h-full p-4">
             <img
@@ -95,6 +96,11 @@ export default function () {
                 onChange={formik.handleChange}
                 value={formik.values.fullname}
               />
+              {formik.touched.fullname && formik.errors.fullname && (
+                <p className="mt-1 text-sm text-red-500">
+                  {formik.errors.fullname}
+                </p>
+              )}
             </div>
             <div className="w-full p-2 md:w-1/2">
               <label className="font-semibold">Contact Number</label>
@@ -107,6 +113,12 @@ export default function () {
                 onChange={formik.handleChange}
                 value={formik.values.contact_number}
               />
+              {formik.touched.contact_number &&
+                formik.errors.contact_number && (
+                  <p className="mt-1 text-sm text-red-500">
+                    {formik.errors.contact_number}
+                  </p>
+                )}
             </div>
           </div>
           <div className="flex flex-col w-full md:flex-row ">
@@ -121,6 +133,11 @@ export default function () {
                 onChange={formik.handleChange}
                 value={formik.values.address}
               />
+              {formik.touched.address && formik.errors.address && (
+                <p className="mt-1 text-sm text-red-500">
+                  {formik.errors.address}
+                </p>
+              )}
             </div>
             <div className="w-full p-2 md:w-1/2">
               <label className="font-semibold">City</label>
@@ -133,6 +150,11 @@ export default function () {
                 onChange={formik.handleChange}
                 value={formik.values.city}
               />
+              {formik.touched.city && formik.errors.city && (
+                <p className="mt-1 text-sm text-red-500">
+                  {formik.errors.city}
+                </p>
+              )}
             </div>
           </div>
           <div className="flex flex-col w-full md:flex-row">
@@ -147,6 +169,11 @@ export default function () {
                 onChange={formik.handleChange}
                 value={formik.values.email}
               />
+              {formik.touched.email && formik.errors.email && (
+                <p className="mt-1 text-sm text-red-500">
+                  {formik.errors.email}
+                </p>
+              )}
             </div>
             <div className="w-full p-2 md:w-1/2">
               <button
