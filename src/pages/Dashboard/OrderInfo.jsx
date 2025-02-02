@@ -8,10 +8,11 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import { FadeLoader } from "react-spinners";
 
 export default function () {
   ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
-  const { data } = useGetOrdersQuery();
+  const { data, isLoading } = useGetOrdersQuery();
   const orders = data?.details;
 
   const monthlyOrders = orders?.reduce((acc, order) => {
@@ -37,7 +38,7 @@ export default function () {
   ];
 
   const chartData = months?.map((month) => monthlyOrders?.[month] || 0);
-  
+
   const finalData = {
     labels: months,
     datasets: [
@@ -74,8 +75,18 @@ export default function () {
 
   return (
     <div className="w-full mt-2">
-      <h3 className="mb-4 text-lg font-bold text-center">Orders Per Month</h3>
-      <Bar data={finalData} options={barOptions} />
+      {isLoading ? (
+        <div className="flex items-center justify-center">
+          <FadeLoader color="#808080" loading={true} height={15} width={5} />
+        </div>
+      ) : (
+        <>
+          <h3 className="mb-4 text-lg font-bold text-center">
+            Orders Per Month
+          </h3>
+          <Bar data={finalData} options={barOptions} />
+        </>
+      )}
     </div>
   );
 }
