@@ -3,6 +3,7 @@ import { useAddUserMutation } from "../../state/api/reducer";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import ImageOne from "../../assets/register.jpg";
+import { SignUpValidationSchema } from "../../validations";
 import { useState } from "react";
 
 export default function () {
@@ -26,7 +27,7 @@ export default function () {
       role: "User",
       image: [],
     },
-
+    validationSchema: SignUpValidationSchema,
     onSubmit: async (values) => {
       const formData = new FormData();
       formData.append("fullname", values.fullname);
@@ -49,7 +50,7 @@ export default function () {
       }
     },
   });
-  
+
   const signIn = () => {
     navigate("/login");
   };
@@ -63,10 +64,10 @@ export default function () {
       className="flex relative justify-center transition-all duration-700 w-full h-[36rem] md:h-[45rem] p-3 bg-white md:p-1 mt-2"
       onSubmit={formik.handleSubmit}
     >
-       <i
-          onClick={back}
-          className="absolute top-0 left-0 m-2 text-2xl cursor-pointer fa fa-arrow-left"
-        ></i>
+      <i
+        onClick={back}
+        className="absolute top-0 left-0 m-2 text-2xl cursor-pointer fa fa-arrow-left"
+      ></i>
       <div className="hidden md:w-1/2 md:block">
         <img
           className="object-cover w-full h-full rounded-sm"
@@ -96,6 +97,11 @@ export default function () {
             value={formik.values.fullname}
             type="text"
           />
+          {formik.touched.fullname && formik.errors.fullname && (
+            <p className="mt-1 text-sm text-red-500">
+              {formik.errors.fullname}
+            </p>
+          )}
         </div>
         <div className="flex flex-col mt-2">
           <label className="text-sm font-medium md:text-lg">
@@ -110,6 +116,11 @@ export default function () {
             value={formik.values.contact_number}
             type="text"
           />
+          {formik.touched.contact_number && formik.errors.contact_number && (
+            <p className="mt-1 text-sm text-red-500">
+              {formik.errors.contact_number}
+            </p>
+          )}
         </div>
         <div className="flex flex-col mt-2">
           <label className="text-sm font-medium md:text-lg">Address</label>
@@ -122,6 +133,9 @@ export default function () {
             value={formik.values.address}
             type="text"
           />
+          {formik.touched.address && formik.errors.address && (
+            <p className="mt-1 text-sm text-red-500">{formik.errors.address}</p>
+          )}
         </div>
         <div className="flex flex-col mt-2">
           <label className="text-sm font-medium md:text-lg">City</label>
@@ -134,6 +148,9 @@ export default function () {
             value={formik.values.city}
             type="text"
           />
+          {formik.touched.city && formik.errors.city && (
+            <p className="mt-1 text-sm text-red-500">{formik.errors.city}</p>
+          )}
         </div>
         <div className="flex flex-col mt-2">
           <label className="text-sm font-medium md:text-lg">Email</label>
@@ -146,6 +163,9 @@ export default function () {
             value={formik.values.email}
             type="text"
           />
+          {formik.touched.email && formik.errors.email && (
+            <p className="mt-1 text-sm text-red-500">{formik.errors.email}</p>
+          )}
         </div>
 
         <div className="flex flex-col mt-2">
@@ -159,6 +179,11 @@ export default function () {
             value={formik.values.password}
             type={isShow ? "text" : "password"}
           />
+          {formik.touched.password && formik.errors.password && (
+            <p className="mt-1 text-sm text-red-500">
+              {formik.errors.password}
+            </p>
+          )}
         </div>
 
         <div className="flex flex-col mt-2">
