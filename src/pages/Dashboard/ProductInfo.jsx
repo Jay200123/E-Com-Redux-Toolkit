@@ -49,6 +49,28 @@ export default function () {
     ],
   };
 
+  const barOptions = {  
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top",
+      },
+      title: {
+        display: true,  
+        text: "Number of Products Per Category",  
+      },
+      tooltip: {
+        callbacks: {
+          label: function (tooltipItem) {
+            const category = tooltipItem.label;
+            const count = tooltipItem.raw;
+            return `${category}: ${count} products`;
+          },
+        },
+      },
+    },
+  }
+
   return (
     <div className="w-full md:w-1/2 m-4 flex items-center justify-center max-h-[250px] md:h-[350px]">
       {isLoading ? (
@@ -58,14 +80,7 @@ export default function () {
       ) : (
         <Bar
           data={chartData}
-          options={{
-            responsive: true,
-            plugins: {
-              legend: {
-                position: "top",
-              },
-            },
-          }}
+          options={barOptions}  
         />
       )}
     </div>
