@@ -8,6 +8,8 @@ import { useFormik } from "formik";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 import { HexColorPicker } from "react-colorful";
+import { editProductValidationSchema } from "../../validations";
+
 
 export default function () {
   const { id } = useParams();
@@ -33,6 +35,7 @@ export default function () {
       isNewlyCreated: product?.isNewlyCreated || "",
       image: [],
     },
+    validationSchema: editProductValidationSchema,
     onSubmit: async (values) => {
       const formData = new FormData();
       formData.append("brand", values.brand);
