@@ -2,6 +2,7 @@ import { useGetProductsQuery } from "../../state/api/reducer";
 import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { FadeLoader } from "react-spinners";
+import generateRandomColors from "../../utils/randomColors"; 
 
 export default function () {
   ChartJS.register(ArcElement, Tooltip, Legend);
@@ -14,16 +15,6 @@ export default function () {
     acc[brand] = acc[brand] ? acc[brand] + 1 : 1;
     return acc;
   }, {});
-
-  const generateRandomColors = (colors) => {
-    return Array.from(
-      { length: colors },
-      () =>
-        `hsl(${Math.floor(Math.random() * 360)}, ${50 + Math.random() * 30}%, ${
-          40 + Math.random() * 20
-        }%)`
-    );
-  };
 
   const chartData = {
     labels: Object.keys(productBrands),
