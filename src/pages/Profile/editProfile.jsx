@@ -85,7 +85,7 @@ export default function () {
           <h3 className="font-bold md:text-3xl">Edit Profile Information</h3>
           <div className="flex flex-col w-full md:flex-row">
             <div className="w-full p-2 md:w-1/2">
-              <label className="font-semibold">First Name</label>
+              <label className="font-semibold">Full Name</label>
               <input
                 type="text"
                 id="fullname"
