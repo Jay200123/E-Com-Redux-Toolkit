@@ -33,7 +33,7 @@ export default function () {
           <h3 className="font-bold md:text-3xl">Profile Information</h3>
           <div className="flex flex-col w-full md:flex-row">
             <div className="w-full p-2 md:w-1/2">
-              <p className="font-semibold">First Name</p>
+              <p className="font-semibold">Full Name</p>
               <p>{auth?.user?.fullname}</p>
             </div>
             <div className="w-full p-2 md:w-1/2">
