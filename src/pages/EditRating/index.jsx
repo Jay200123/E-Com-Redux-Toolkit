@@ -8,6 +8,7 @@ import ImageOne from "../../assets/register.jpg";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { editRatingValidationSchema } from "../../validations";
 
 export default function () {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ export default function () {
       rating: rating?.rating || 0,
       image: rating?.image || [],
     },
-
+    validationSchema: editRatingValidationSchema,
     onSubmit: async (values) => {
       const formData = new FormData();
       formData.append("user", values.user);
@@ -147,6 +148,11 @@ export default function () {
                   ></i>
                 ))}
               </div>
+              {formik.touched.rating && formik.errors.rating && (
+                <p className="mt-1 text-sm text-red-500">
+                  {formik.errors.rating}
+                </p>
+              )}
             </div>
 
             <div className="flex flex-col mb-1">
@@ -165,6 +171,11 @@ export default function () {
                 className="p-2 text-sm border border-gray-300 rounded-md md:text-base placeholder:text-black placeholder:italic focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 rows={5}
               />
+              {formik.touched.description && formik.errors.description && (
+                <p className="mt-1 text-sm text-red-500">
+                  {formik.errors.description}
+                </p>
+              )}
             </div>
             <div className="flex flex-col mt-2">
               <input
