@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import ImageOne from "../../assets/login.jpg";
 import { useSelector } from "react-redux";
 import { useState } from "react";
+import { signInValidationSchema } from "../../validations";
 
 export default function () {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ export default function () {
       email: "",
       password: "",
     },
-
+    validationSchema: signInValidationSchema,
     onSubmit: async (values) => {
       const res = await login(values);
 
@@ -92,6 +93,9 @@ export default function () {
             value={formik.values.email}
             type="text"
           />
+          {formik.touched.email && formik.errors.email && (
+            <p className="mt-1 text-sm text-red-500">{formik.errors.email}</p>
+          )}
         </div>
 
         <div className="flex flex-col mt-4">
@@ -105,6 +109,11 @@ export default function () {
             value={formik.values.password}
             type={isShow ? "text" : "password"}
           />
+          {formik.touched.password && formik.errors.password && (
+            <p className="mt-1 text-sm text-red-500">
+              {formik.errors.password}
+            </p>
+          )}
         </div>
         <div className="flex items-center justify-between w-full mt-4">
           <div className="flex items-center">
