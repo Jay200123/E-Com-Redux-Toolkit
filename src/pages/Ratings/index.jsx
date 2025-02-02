@@ -22,50 +22,47 @@ export default function () {
       ) : (
         <div className="flex flex-col overflow-x-auto p-2 max-h-[28rem] md:max-h-[36rem] border-b border-gray-300">
           {userRatings?.map((rating) => (
-            <div key={rating?._id} className="flex flex-col w-full p-2 overflow-hidden border border-gray-400 rounded-md">
-              <div
-                className="flex flex-col items-center justify-between p-2 mt-2 md:flex-row "
-              >
-                <div className="flex flex-col items-center md:flex-row">
+              <div key={rating?._id} className="flex flex-col h-[14rem] md:h-[10rem] items-center justify-between mt-2 md:flex-row ">
+                <div className="flex items-center justify-center w-1/5 h-full">
                   <img
                     src={
                       rating?.product?.image[
                         Math.floor(
                           Math.random() * rating?.product?.image?.length
                         )
-                      ].url
+                      ]?.url
                     }
-                    className="object-contain w-16 h-16 md:w-20 md:h-20"
+                    className="object-contain w-16 h-16 rounded-sm md:w-20 md:h-20"
+                    alt="Product"
                   />
-                  <div className="w-1/2 p-4 ml-2 md:p-0">
-                    <h1 className="text-xs font-medium md:text-sm">
-                      {rating?.product?.product_name}
-                    </h1>
-
-                    <h3 className="text-xs font-medium md:text-sm">
-                      ₱{rating?.product?.price}
-                    </h3>
-
-                    <p className="text-xs text-gray-500 truncate md:text-sm">
-                      {rating?.description}
-                    </p>
+                </div>
+                <div className="flex flex-col w-4/5 h-full">
+                  <h3 className="text-sm md:text-lg">
+                    {rating?.product?.product_name}
+                  </h3>
+                  <p className="text-xs md:text-sm">{rating?.description}</p>
+                  <div className="flex justify-between w-full">
+                    <div className="mt-1">
+                      {Array.from({ length: rating?.rating }).map(
+                        (_, index) => (
+                          <i
+                            key={index}
+                            className="text-yellow-500 fa-solid fa-star"
+                          ></i>
+                        )
+                      )}
+                    </div>
+                    <div className="mt-1">
+                      <button
+                        onClick={() => navigate(`/rating/edit/${rating?._id}`)}
+                        className="p-1 mt-2 text-xs text-white bg-blue-500 rounded-md md:text-sm"
+                      >
+                        ⭐Edit Rating
+                      </button>
+                    </div>
                   </div>
                 </div>
-                <div className="flex items-center w-1/2">
-                  {Array.from({ length: rating?.rating }).map((_, index) => (
-                    <i
-                      key={index}
-                      className="text-yellow-500 fa-solid fa-star"
-                    ></i>
-                  ))}
-                </div>
-              </div>
-              <div className="flex justify-end w-full">
-                <button onClick={()=>navigate(`/rating/edit/${rating?._id}`)} className="p-1 mt-2 text-xs text-white bg-blue-500 rounded-md md:text-sm">
-                  ⭐Edit Rating
-                </button>
-              </div>
-            </div>
+              </div>     
           ))}
         </div>
       )}
