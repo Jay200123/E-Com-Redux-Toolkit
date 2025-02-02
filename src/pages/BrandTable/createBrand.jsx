@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import ImageOne from "../../assets/register.jpg";
+import { createBrandValidationSchema } from "../../validations"
 
 export default function () {
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ export default function () {
       brand_name: "",
       image: [],
     },
+    validationSchema: createBrandValidationSchema,  
     onSubmit: async (values) => {
       const formData = new FormData();
       formData.append("brand_name", values.brand_name);
