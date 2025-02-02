@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import ImageOne from "../../assets/register.jpg";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { createRatingValidationSchema } from "../../validations";
 
 export default function () {
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ export default function () {
       rating: 0,
       image: [],
     },
-
+    validationSchema: createRatingValidationSchema,
     onSubmit: async (values) => {
       const formData = new FormData();
       formData.append("user", values.user);
@@ -89,6 +90,9 @@ export default function () {
               ></i>
             ))}
           </div>
+          {formik.touched.rating && formik.errors.rating && (
+            <p className="mt-1 text-sm text-red-500">{formik.errors.rating}</p>
+          )}
         </div>
 
         <div className="flex flex-col mt-2">
@@ -103,6 +107,11 @@ export default function () {
             rows={5}
             placeholder="Tell us what you think about this product"
           />
+          {formik.touched.description && formik.errors.description && (
+            <p className="mt-1 text-sm text-red-500">
+              {formik.errors.description}
+            </p>
+          )}
         </div>
         <div className="flex flex-col mt-2">
           <input
