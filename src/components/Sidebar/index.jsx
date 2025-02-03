@@ -3,6 +3,7 @@ import { FaStar } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setFilter } from "../../state/slice/filter";
+import { variety } from "../../utils/data";
 
 export default function () {
   const dispatch = useDispatch();
@@ -59,9 +60,6 @@ export default function () {
   const handleType = (type) => {
     setType((prev) => (prev === type ? "" : type));
   };
-
-
-  const variety = ["Computer", "Laptop", "Mobile"];
 
   useEffect(() => {
     dispatch(
