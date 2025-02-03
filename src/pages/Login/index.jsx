@@ -125,7 +125,10 @@ export default function () {
           </div>
         </div>
         <button
-          className="text-[1rem] p-2 bg-black border transition-all duration-500 hover:opacity-75 rounded-md text-white mt-4"
+          disabled={!formik.isValid || formik.isSubmitting}
+          className={`text-[1rem] p-2 bg-black  transition-all duration-500 hover:opacity-75 rounded-md text-white mt-4 ${
+            !formik?.isValid && "cursor-not-allowed opacity-50"
+          }`}
           type="submit"
         >
           login
