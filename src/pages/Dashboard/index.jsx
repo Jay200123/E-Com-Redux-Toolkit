@@ -7,7 +7,7 @@ import OrderStatus from "./OrderStatus";
 
 export default function () {
   return (
-    <div className="flex flex-col items-center justify-start w-full max-h-[54rem]  md:max-h-[36rem] overflow-y-auto">
+    <div className="flex flex-col items-center justify-start w-full overflow-y-auto">
       <CardInfo />
       <OrderInfo />
       <div className="flex flex-col w-full mt-4 md:flex-row">
