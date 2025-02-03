@@ -1,11 +1,11 @@
-import { TAGS } from "../../../constants";
+import { TAGS, API, PATH } from "../../../constants";
 
 export const getAll = (builder) => {
   return builder.query({
     query: () => {
       return {
-        url: "/users",
-        method: "GET",
+        url: `${PATH.USERS_ROUTE}`,
+        method: API.GET,
         providesTags: [TAGS.USERS],
       };
     },
@@ -16,19 +16,19 @@ export const getById = (builder) => {
   return builder.query({
     query: (id) => {
       return {
-        url: `/user/${id}`,
-        method: "GET",
-        providesTags: [TAGS.USERS], 
-      };  
-    }
+        url: `${PATH.USER_ID_ROUTE.replace(":id", id)}`,
+        method: API.GET,
+        providesTags: [TAGS.USERS],
+      };
+    },
   });
 };
 
 export const Add = (builder) => {
   return builder.mutation({
     query: (payload) => ({
-      url: "/users",
-      method: "POST",
+      url: `${PATH.USERS_ROUTE}`,
+      method: API.POST,
       body: payload,
     }),
     invalidatesTags: [TAGS.USERS],
@@ -38,7 +38,7 @@ export const Add = (builder) => {
 export const updateById = (builder) => {
   return builder.mutation({
     query: ({ id, payload }) => ({
-      url: `/user/edit/${id}`,
+      url: `${PATH.EDIT_USER_ID_ROUTE.replace(":id", id)}`,
       method: "PATCH",
       body: payload,
     }),
@@ -48,8 +48,8 @@ export const updateById = (builder) => {
 export const deleteById = (builder) => {
   return builder.mutation({
     query: (id) => ({
-      url: `/user/${id}`,
-      method: "DELETE",
+      url: `${PATH.USER_ID_ROUTE.replace(":id", id)}`,
+      method: API.DELETE,
     }),
     invalidatesTags: [TAGS.USERS],
   });
