@@ -18,7 +18,11 @@ export default function () {
   const { data: orderDetails } = useGetOrdersQuery();
   const orders = orderDetails?.details;
 
-  const revenue = orders?.reduce((acc, order) => {
+  const filteredOrders = orders?.filter(
+    (order) => order.status.toLowerCase() === "delivered"
+  );
+
+  const revenue = filteredOrders?.reduce((acc, order) => {
     return acc?.price + order.price;
   });
 
