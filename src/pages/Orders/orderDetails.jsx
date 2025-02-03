@@ -29,10 +29,6 @@ export default function () {
                 <i className="mr-1 fa-solid fa-file-invoice"></i>
                 Generate Invoice
               </button>
-              <button className="p-1 mr-2 text-sm transition-all duration-500 bg-blue-500 border border-gray-500 rounded-md md:p-2 md:font-medium md:text-lg hover:bg-white hover:text-blue-500">
-                <i className="mr-1 fa-solid fa-circle-dot"></i>
-                Track Order
-              </button>
             </div>
           </div>
           <div className="w-full h-[4rem] items-center flex justify-between px-4 md:px-8">
