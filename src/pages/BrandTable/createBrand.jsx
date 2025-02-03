@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import ImageOne from "../../assets/register.jpg";
-import { createBrandValidationSchema } from "../../validations"
+import { createBrandValidationSchema } from "../../validations";
 
 export default function () {
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ export default function () {
       brand_name: "",
       image: [],
     },
-    validationSchema: createBrandValidationSchema,  
+    validationSchema: createBrandValidationSchema,
     onSubmit: async (values) => {
       const formData = new FormData();
       formData.append("brand_name", values.brand_name);
@@ -32,9 +32,9 @@ export default function () {
     },
   });
 
-  const back = () => {  
+  const back = () => {
     window.history.back();
-  }
+  };
   return (
     <form
       onSubmit={formik.handleSubmit}
@@ -102,8 +102,11 @@ export default function () {
         </div>
 
         <button
+          disabled={!formik.isValid || formik.isSubmitting}
+          className={`text-[1rem] p-2 bg-black  transition-all duration-500 hover:opacity-75 rounded-md text-white mt-4 ${
+            !formik?.isValid && "cursor-not-allowed opacity-50"
+          }`}
           type="submit"
-          className="px-4 py-2 text-white bg-black rounded-md hover:bg-blue-600"
         >
           Create Brand
         </button>
