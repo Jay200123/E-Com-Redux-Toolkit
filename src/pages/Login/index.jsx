@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import ImageOne from "../../assets/login.jpg";
 import { useSelector } from "react-redux";
 import { useState } from "react";
-import { signInValidationSchema } from "../../validations";
+import { SignInValidationSchema } from "../../validations";
 
 export default function () {
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ export default function () {
       email: "",
       password: "",
     },
-    validationSchema: signInValidationSchema,
+    validationSchema: SignInValidationSchema,
     onSubmit: async (values) => {
       const res = await login(values);
 
