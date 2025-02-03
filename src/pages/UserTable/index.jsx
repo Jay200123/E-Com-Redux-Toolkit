@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 
 export default function () {
   const navigate = useNavigate();
+  const isFocused = useRef(true);
   const { data, isLoading, refetch } = useGetUsersQuery();
   const users = data?.details;
   const [deleteUser] = useDeleteUserMutation();
