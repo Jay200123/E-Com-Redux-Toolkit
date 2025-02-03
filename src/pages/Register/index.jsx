@@ -75,7 +75,7 @@ export default function () {
           alt="Image"
         />
       </div>
-      <div className="flex flex-col justify-center w-full p-4 rounded-md md:border md:border-gray-500 md:h-full md:w-1/2">
+      <div className="flex flex-col justify-center w-full p-4 overflow-y-auto rounded-md md:border md:border-gray-500 md:h-full md:w-1/2">
         <h3 className="text-lg md:text-3xl">Sign Up</h3>
         <p className="mb-4 text-xs md:text-[1rem]">
           Already have an account?
@@ -200,7 +200,8 @@ export default function () {
         </div>
 
         <button
-          className="text-[1rem] p-2 bg-black  transition-all duration-500 hover:opacity-75 rounded-md text-white mt-4"
+          disabled={!formik.isValid || formik.isSubmitting}
+          className={`text-[1rem] p-2 bg-black  transition-all duration-500 hover:opacity-75 rounded-md text-white mt-4 ${!formik?.isValid && "cursor-not-allowed opacity-50"}`}
           type="submit"
         >
           Sign Up
