@@ -1,11 +1,11 @@
-import { TAGS } from "../../../constants/index";
+import { API, PATH } from "../../../constants";
 
 export const login = (builder) => {
   return builder.mutation({
     query: (payload) => {
       return {
-        url: "/login",
-        method: "POST",
+        url:  PATH.LOGIN_ROUTE,
+        method: API.POST,
         body: payload,
       };
     },
@@ -16,8 +16,8 @@ export const logout = (builder) => {
   return builder.mutation({
     query: () => {
       return {
-        url: "/logout",
-        method: "POST",
+        url: PATH.LOGOUT_ROUTE,
+        method: API.POST,
       };
     },
   });
