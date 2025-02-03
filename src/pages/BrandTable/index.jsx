@@ -92,7 +92,7 @@ export default function () {
   ];
 
   return (
-    <div className="w-full  rounded-sm md:h-[36rem] overflow-x-auto">
+    <div className="w-full overflow-x-auto rounded-sm">
       {isLoading ? (
         <div className="flex items-center justify-center">
           <FadeLoader color="#808080" loading={true} height={15} width={5} />
