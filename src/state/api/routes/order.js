@@ -1,10 +1,10 @@
-import { TAGS, API } from "../../../constants";
+import { TAGS, API, PATH } from "../../../constants";
 
 export const getAll = (builder) => {
   return builder.query({
     query: () => {
       return {
-        url: "/orders",
+        url: PATH.ORDERS_ROUTE,
         method: API.GET,
         providesTags: TAGS.ORDERS,
       };
@@ -16,7 +16,7 @@ export const getById = (builder) => {
   return builder.query({
     query: (id) => {
       return {
-        url: `/order/${id}`,
+        url: `${PATH.ORDER_ID_ROUTE.replace(":id", id)}`,
         method: API.GET,
         providesTags: TAGS.ORDERS,
       };
@@ -28,7 +28,7 @@ export const Add = (builder) => {
   return builder.mutation({
     query: (payload) => {
       return {
-        url: "/orders",
+        url: PATH.ORDERS_ROUTE,
         method: API.POST,
         body: payload,
         invalidatesTags: [TAGS.ORDERS],
@@ -41,7 +41,7 @@ export const updateById = (builder) => {
   return builder.mutation({
     query: ({ id, payload }) => {
       return {
-        url: `/order/edit/${id}`,
+        url: `${PATH.EDIT_ORDER_ID_ROUTE.replace(":id", id)}`,
         method: API.PATCH,
         body: payload,
         invalidatesTags: [TAGS.ORDERS],
@@ -54,7 +54,7 @@ export const deleteById = (builder) => {
   return builder.mutation({
     query: (id) => {
       return {
-        url: `/order/${id}`,
+        url: `${PATH.ORDER_ID_ROUTE.replace(":id", id)}`,
         method: API.DELETE,
         invalidatesTags: [TAGS.ORDERS],
       };
@@ -62,41 +62,41 @@ export const deleteById = (builder) => {
   });
 };
 
-export const packedById = (builder)=>{
+export const packedById = (builder) => {
   return builder.mutation({
-    query: (id)=>{
+    query: (id) => {
       return {
-        url: `/order/packed/${id}`,
+        url: `${PATH.PACKED_ORDER_ID_ROUTE.replace(":id", id)}`,
         method: API.PATCH,
         invalidatesTags: [TAGS.ORDERS],
-      }
-    }
-  })
-}
+      };
+    },
+  });
+};
 
-export const shippedById = (builder)=>{
+export const shippedById = (builder) => {
   return builder.mutation({
-    query: (id)=>{
+    query: (id) => {
       return {
-        url: `/order/shipped/${id}`,
+        url: `${PATH.SHIPPED_ORDER_ID_ROUTE.replace(":id", id)}`,
         method: API.PATCH,
         invalidatesTags: [TAGS.ORDERS],
-      }
-    }
-  })
-}
+      };
+    },
+  });
+};
 
-export const deliveryById = (builder)=>{
+export const deliveryById = (builder) => {
   return builder.mutation({
-    query: (id)=>{
+    query: (id) => {
       return {
-        url: `/order/delivered/${id}`,
+        url: `${PATH.DELIVERED_ORDER_ID_ROUTE.replace(":id", id)}`,
         method: API.PATCH,
         invalidatesTags: [TAGS.ORDERS],
-      }
-    }
-  })
-}
+      };
+    },
+  });
+};
 
 export default {
   getAll,
@@ -104,7 +104,7 @@ export default {
   Add,
   updateById,
   deleteById,
-  packedById, 
+  packedById,
   shippedById,
-  deliveryById
+  deliveryById,
 };
