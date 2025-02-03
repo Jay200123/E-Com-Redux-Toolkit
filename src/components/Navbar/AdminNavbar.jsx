@@ -22,7 +22,7 @@ export default function () {
     <nav className="flex items-center justify-between w-full h-16 overflow-hidden shadow-md md:hidden">
       <div className="block md:hidden overflow-x-auto w-[75%]">
         <ul className="flex items-center overflow-x-auto justify-evenly">
-          <li className="mr-2 text-xs font-medium cursor-pointer md:font-bold md:mr-2 md:text-sm">
+          <li onClick={()=>navigate("/admin/dashboard")} className="mr-2 text-xs font-medium cursor-pointer md:font-bold md:mr-2 md:text-sm">
             <i className="mr-1 fa-solid fa-chart-line"></i> Dashboard
           </li>
 
