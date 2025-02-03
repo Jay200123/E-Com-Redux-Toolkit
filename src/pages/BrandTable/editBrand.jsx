@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import ImageOne from "../../assets/register.jpg";
 import { useParams } from "react-router-dom";
-import { editBrandValidationSchema } from "../../validations"
+import { editBrandValidationSchema } from "../../validations";
 
 export default function () {
   const navigate = useNavigate();
@@ -125,8 +125,11 @@ export default function () {
         </div>
 
         <button
+          disabled={!formik.isValid || formik.isSubmitting}
+          className={`text-[1rem] p-2 bg-black  transition-all duration-500 hover:opacity-75 rounded-md text-white mt-4 ${
+            !formik?.isValid && "cursor-not-allowed opacity-50"
+          }`}
           type="submit"
-          className="px-4 py-2 text-white bg-black rounded-md hover:bg-blue-600"
         >
           Update Brand
         </button>
