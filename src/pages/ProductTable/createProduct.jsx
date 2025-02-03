@@ -271,8 +271,11 @@ export default function () {
         </div>
 
         <button
+          disabled={!formik.isValid || formik.isSubmitting}
+          className={`text-[1rem] p-2 bg-black  transition-all duration-500 hover:opacity-75 rounded-md text-white mt-4 ${
+            !formik?.isValid && "cursor-not-allowed opacity-50"
+          }`}
           type="submit"
-          className="px-4 py-2 text-white bg-black rounded-md hover:bg-blue-600"
         >
           Create Product
         </button>
