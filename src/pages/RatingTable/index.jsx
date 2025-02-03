@@ -106,8 +106,7 @@ export default function () {
             src={
               row?.image[Math.floor(Math.random() * row?.image?.length)]?.url
             }
-            class
-            Name="object-contain w-16 h-16 md:w-20 md:h-20"
+            className="object-contain w-16 h-16 md:w-20 md:h-20"
           />
         );
       },
