@@ -5,6 +5,7 @@ export default {
   POST: "POST",
   PATCH: "PATCH",
   PUT: "PUT",
+  PATCH: "PATCH",	  
   DELETE: "DELETE",
   TAGS: [
     TAGS.API,
