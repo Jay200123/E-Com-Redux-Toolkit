@@ -98,6 +98,20 @@ export const deliveryById = (builder) => {
   });
 };
 
+export const cancelById = (builder) => {
+  return builder.mutation({
+    query: ({ id, payload }) => {
+      return {
+        url: `${PATH.CANCEL_ORDER_ROUTE.replace(":id", id)}`,
+        method: API.PATCH,
+        body: payload,
+      };
+    },
+  });
+};
+
+
+
 export default {
   getAll,
   getById,
@@ -107,4 +121,5 @@ export default {
   packedById,
   shippedById,
   deliveryById,
+  cancelById,
 };
