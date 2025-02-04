@@ -58,6 +58,7 @@ export const api = createApi({
     shippedOrder: OrderApi.shippedById(builder),
     deliverOrder: OrderApi.deliveryById(builder), 
     logout: AuthApi.logout(builder),  
+    cancelOrder: OrderApi.cancelById(builder),  
   }),
 });
 
@@ -92,4 +93,5 @@ export const {
   useShippedOrderMutation,
   useDeliverOrderMutation,  
   useLogoutMutation,  
+  useCancelOrderMutation,
 } = api;
