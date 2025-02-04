@@ -1,5 +1,15 @@
 import { useParams } from "react-router-dom";
+import {
+  Page,
+  Text,
+  View,
+  Document,
+  PDFDownloadLink,
+} from "@react-pdf/renderer";
+import { Table, TD, TH, TR } from "@ag-media/react-pdf-table";
+import { styles } from "../../utils/styles";
 import { useGetOrderByIdQuery } from "../../state/api/reducer";
+
 export default function () {
   const { id } = useParams();
   const { data } = useGetOrderByIdQuery(id);
@@ -8,6 +18,45 @@ export default function () {
   const back = () => {
     window.history.back();
   };
+
+  const OrderInvoice = ({ order }) => (
+    <Document>
+      <Page size="A4" style={styles.page}>
+        <View style={styles.header}>
+          <Text style={[styles.title, styles.textBold]}>INVOICE</Text>
+          <Text>Invoice #{order?.orderNumber}</Text>
+        </View>
+        <View style={styles.spaceY}>
+          <Text style={styles.textBold}>Bill To:</Text>
+          <Text>{order?.user.fullname}</Text>
+          <Text>{order?.user.address}</Text>
+          <Text>{order?.user.contact_number}</Text>
+          <Text>{order?.user.email}</Text>
+        </View>
+        <Table style={styles.table}>
+          <TH style={[styles.tableHeader, styles.textBold]}>
+            <TD>Description</TD>
+            <TD>Quantity</TD>
+            <TD>Unit Price</TD>
+            <TD>Total</TD>
+          </TH>
+          {order?.products?.map((item, index) => (
+            <TR key={index}>
+              <TD>{item?.product?.product_name}</TD>
+              <TD>{item?.quantity}</TD>
+              <TD>₱{(item?.product?.price)?.toFixed(2)}</TD>
+              <TD>₱{item?.quantity * item?.product?.price}</TD>
+            </TR>
+          ))}
+        </Table>
+        <View style={styles.totals}>
+          <Text style={styles.textBold}>
+            Total: ₱{(order?.price)?.toFixed(2)}
+          </Text>
+        </View>
+      </Page>
+    </Document>
+  );
 
   return (
     <>
@@ -25,10 +74,17 @@ export default function () {
               Order ID: <span className="ml-1">{order?.orderNumber}</span>
             </h3>
             <div className="flex items-center p-2 m-1 text-white">
-              <button className="p-1 mr-2 text-sm transition-all duration-500 bg-blue-500 border border-gray-500 rounded-md md:p-2 md:font-medium md:text-lg hover:bg-white hover:text-blue-500">
-                <i className="mr-1 fa-solid fa-file-invoice"></i>
-                Generate Invoice
-              </button>
+              <PDFDownloadLink
+                document={<OrderInvoice order={order} />}
+                fileName={`Invoice_${order?.orderNumber}.pdf`}
+              >
+                {({ loading }) => (
+                  <button className="p-1 mr-2 text-sm text-white transition-all duration-500 bg-blue-500 border border-gray-500 rounded-md md:p-2 md:font-medium md:text-lg hover:opacity-60">
+                    <i className="mr-1 fa-solid fa-file-invoice"></i>
+                    Generate Invoice
+                  </button>
+                )}
+              </PDFDownloadLink>
             </div>
           </div>
           <div className="w-full h-[4rem] items-center flex justify-between px-4 md:px-8">
