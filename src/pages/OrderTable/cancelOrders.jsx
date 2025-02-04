@@ -5,14 +5,12 @@ import {
 import DataTable from "react-data-table-component";
 import { FadeLoader } from "react-spinners";
 import { tableCustomStyles } from "../../utils/tableCustomStyle";
-import { useNavigate } from "react-router-dom";
 import { FaCheck } from "react-icons/fa";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { useEffect, useRef } from "react";
 
 export default function () {
-  const navigate = useNavigate();
   const isFocused = useRef(true);
 
   const { data, isLoading, refetch } = useGetOrdersQuery();
