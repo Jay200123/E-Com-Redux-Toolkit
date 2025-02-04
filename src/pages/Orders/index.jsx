@@ -32,7 +32,7 @@ export default function () {
 
   return (
     <>
-      <div className="w-full h-full">
+      <div className="w-full md:max-h-[36rem] overflow-y-auto">
         <div className="w-full mt-2 mb-2">
           <ul className="flex justify-around mt-1 overflow-x-auto">
             <li
@@ -79,12 +79,11 @@ export default function () {
           </ul>
         </div>
         <h3 className="text-sm md:text-3xl">My Orders</h3>
-        <div className="flex flex-col items-center overflow-y-auto h-[44rem] md:h-[28rem]">
+        <div className="flex flex-col items-center overflow-y-auto h-[44rem] md:h-full">
           {orderedStatus?.map((order) => (
             <div
               key={order?._id}
-              onClick={() => navigate(`/user/order/${order?._id}`)}
-              className="w-full p-2 mt-2 mb-2 transition-all duration-500 border-2 rounded-md cursor-pointer hover:bg-gray-400 hover:text-white"
+              className="w-full p-2 mt-2 mb-2 transition-all duration-500 border-2 rounded-md"
             >
               <div className="flex justify-between">
                 <div>
@@ -127,22 +126,31 @@ export default function () {
                           alt="product"
                         />
                         <div>
-                          <h4 className="text-sm md:text-lg">
+                          <h4 className="text-xs md:text-lg">
                             {item?.product?.product_name}
                           </h4>
-                          <h4 className="text-sm md:text-lg">
+                          <h4 className="text-xs md:text-lg">
                             ₱{item?.product?.price}
                           </h4>
                         </div>
                       </div>
 
-                      <h4 className="text-sm md:text-lg">x {item?.quantity}</h4>
+                      <h4 className="text-xs md:text-lg">x{item?.quantity}</h4>
                     </li>
                   ))}
                 </ul>
               </div>
+              <div className="flex justify-end mt-2">
+              <button
+                onClick={() => navigate(`/user/order/${order?._id}`)}
+                className="p-2 text-sm text-white bg-black border rounded-md border-gray-50 md:text-lg"
+              >
+                View Order Details
+              </button>
+            </div>
             </div>
           ))}
+          
         </div>
       </div>
     </>
