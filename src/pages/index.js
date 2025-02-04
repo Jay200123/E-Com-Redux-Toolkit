@@ -11,26 +11,28 @@ import Orders from "./Orders";
 import OrderDetails from "./Orders/orderDetails";
 import Ratings from "./Ratings";
 import BrandCategory from "./BrandCategory";
-import Shop from "./Shop";  
+import Shop from "./Shop";
 import Menu from "./Menu";
 import OrderRating from "./Ratings/OrderRating";
-import CreateRating from "./CreateRating";  
+import CreateRating from "./CreateRating";
 import Dashboard from "./Dashboard";
 import BrandTable from "./BrandTable";
 import CreateBrand from "./BrandTable/createBrand";
-import GetBrandById from "./BrandTable/getBrandById"; 
+import GetBrandById from "./BrandTable/getBrandById";
 import EditBrand from "./BrandTable/editBrand";
 import UserTable from "./UserTable";
 import GetUserById from "./UserTable/getById";
 import ProductTable from "./ProductTable";
-import CreateProduct from "./ProductTable/createProduct"; 
-import EditProduct from "./ProductTable/editProduct"; 
+import CreateProduct from "./ProductTable/createProduct";
+import EditProduct from "./ProductTable/editProduct";
 import GetProductById from "./ProductTable/getProductById";
 import OrderTable from "./OrderTable";
 import GetOrderById from "./OrderTable/getOrderById";
 import RatingTable from "./RatingTable";
 import GetRatingById from "./RatingTable/getById";
 import EditRating from "./EditRating";
+import CancelOrder from "./Orders/cancelOrder";
+import CancelOrderTable from "./OrderTable/cancelOrders";
 import ProtectedPage from "./ProtectedPage";
 
 export {
@@ -66,6 +68,8 @@ export {
   GetOrderById,
   RatingTable,
   GetRatingById,
-  EditRating, 
+  EditRating,
   ProtectedPage,
+  CancelOrder,
+  CancelOrderTable,
 };
