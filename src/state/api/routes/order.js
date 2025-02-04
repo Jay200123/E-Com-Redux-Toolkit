@@ -107,9 +107,21 @@ export const cancelById = (builder) => {
         body: payload,
       };
     },
+    invalidatesTags: [TAGS.ORDERS], 
   });
 };
 
+const approvedCancelById = (builder)=>{
+  return builder.mutation({
+    query: (id)=>{
+      return {
+        url:``,
+        method: API.PATCH,
+      }
+    },
+    invalidatesTags: [TAGS.ORDERS], 
+  })
+}
 
 
 export default {
@@ -122,4 +134,5 @@ export default {
   shippedById,
   deliveryById,
   cancelById,
+  approvedCancelById
 };
