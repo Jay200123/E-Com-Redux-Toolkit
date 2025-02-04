@@ -19,4 +19,7 @@ export default {
     RATINGS_ROUTE:"/ratings",
     RATING_ID_ROUTE:"/rating/:id",
     EDIT_RATING_ID_ROUTE:"/rating/edit/:id",
+    CANCEL_ORDER_ROUTE: "/order/cancel/:id",
+    APPROVE_CANCEL_ROUTE: "/order/cancel/approve/:id",  
+
 }
