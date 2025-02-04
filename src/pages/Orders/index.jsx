@@ -141,16 +141,25 @@ export default function () {
                 </ul>
               </div>
               <div className="flex justify-end mt-2">
-              <button
-                onClick={() => navigate(`/user/order/${order?._id}`)}
-                className="p-2 text-sm text-white bg-black border rounded-md border-gray-50 md:text-lg"
-              >
-                View Order Details
-              </button>
-            </div>
+                {order?.status === "Processing" ? (
+                  <button
+                    onClick={() => navigate(`/order/cancel/${order?._id}`)}
+                    className="p-2 mr-1 text-sm text-white bg-red-500 border rounded-md md:text-lg"
+                  >
+                    <i className="mr-1 fa-solid fa-trash"></i>Cancel Order
+                  </button>
+                ) : (
+                  <> </>
+                )}
+                <button
+                  onClick={() => navigate(`/user/order/${order?._id}`)}
+                  className="p-2 text-sm text-white bg-black border rounded-md border-gray-50 md:text-lg"
+                >
+                  <i className="mr-1 fa-solid fa-circle-info"></i>Order Details
+                </button>
+              </div>
             </div>
           ))}
-          
         </div>
       </div>
     </>
