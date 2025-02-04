@@ -19,7 +19,7 @@ export default function () {
 
   return (
     <>
-      <div className="w-full max-h-full overflow-y-auto">
+      <div className="w-full max-h-full md:max-h-[36rem] overflow-y-auto">
         {completedOrders?.map((order) => (
           <div
             key={order?._id}
