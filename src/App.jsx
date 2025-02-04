@@ -47,6 +47,8 @@ import {
   RatingTable,
   EditRating,
   GetRatingById,
+  CancelOrder,
+  CancelOrderTable,
 } from "./pages";
 
 function App() {
@@ -147,12 +149,21 @@ function App() {
               </ProtectedRoutes>
             }
           />
-            <Route
+          <Route
             path="/rating/edit/:id"
             index
             element={
               <ProtectedRoutes userRole={["User"]}>
                 <EditRating />
+              </ProtectedRoutes>
+            }
+          />
+          <Route
+            path="/order/cancel/:id"
+            index
+            element={
+              <ProtectedRoutes userRole={["User"]}>
+                <CancelOrder />
               </ProtectedRoutes>
             }
           />
@@ -290,7 +301,7 @@ function App() {
                 </ProtectedRoutes>
               }
             />
-             <Route
+            <Route
               path="/admin/ratings"
               index
               element={
@@ -299,7 +310,7 @@ function App() {
                 </ProtectedRoutes>
               }
             />
-             <Route
+            <Route
               path="/admin/rating/:id"
               index
               element={
@@ -308,6 +319,15 @@ function App() {
                 </ProtectedRoutes>
               }
             />
+            <Route
+            path="/orders/cancel"
+            index
+            element={
+              <ProtectedRoutes userRole={["Admin"]}>
+                <CancelOrderTable />
+              </ProtectedRoutes>
+            }
+          />
           </Route>
         </Route>
       </Route>
