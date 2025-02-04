@@ -21,6 +21,8 @@ export default function () {
   const { data, isLoading, refetch } = useGetOrdersQuery();
   const orders = data?.details;
 
+  const processedOrders = orders?.filter((o) => o?.isCancelled === false && o?.isCancelApproved === false); 
+
   useEffect(() => {
     const handleFocus = () => {
       isFocused.current = true;
@@ -72,7 +74,7 @@ export default function () {
 
   const [order, setOrder] = useState("");
 
-  const filteredOrders = orders?.filter((o) =>
+  const filteredOrders = processedOrders?.filter((o) =>
     o?.orderNumber?.toLowerCase()?.includes(order?.toLowerCase())
   );
 
