@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { setCategory, setBrand } from "../../state/slice/category";
+import { motion } from "framer-motion";
 
 export default function () {
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ export default function () {
   const ratingData = ratings?.details || [];
 
   const allProductsWithRatings = productsData?.map((product) => {
-    const matchingRatings = ratingData.filter(
+    const matchingRatings = ratingData?.filter(
       (rating) => rating?.product?._id === product?._id
     );
 
@@ -97,7 +98,11 @@ export default function () {
       <div className="flex flex-row flex-wrap items-center w-full overflow-hidden">
         {brands?.length > 0 ? (
           brands?.map((b) => (
-            <div
+            <motion.div
+              initial={{ opacity: 0, y: 100 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              viewport={{ amount: 0.5, once: false }}
               key={b?._id}
               onClick={() => handleBrand(b?.brand_name)}
               className="flex flex-col items-center justify-center w-1/2 transition-all duration-500 rounded-md cursor-pointer hover:opacity-80 hover:shadow-lg md:p-4 md:w-1/5"
@@ -121,7 +126,7 @@ export default function () {
               <p className="text-sm font-medium md:font-bold md:text-lg">
                 {b?.brand_name}
               </p>
-            </div>
+            </motion.div>
           ))
         ) : (
           <p className="text-sm text-center text-gray-600 md:text-2xl">
@@ -133,7 +138,13 @@ export default function () {
         Product Category
       </h3>
       <div className="flex w-full h-[22rem] md:h-[24rem] overflow-hidden">
-        <div className="relative w-1/2 mr-1">
+        <motion.div
+          initial={{ opacity: 0, x: -100 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          viewport={{ amount: 0.5, once: false }}
+          className="relative w-1/2 mr-1"
+        >
           <div className="absolute p-2">
             <h3 className="text-lg font-medium text-white md:text-2xl md:font-bold">
               Computer Parts
@@ -150,8 +161,14 @@ export default function () {
             alt="Computer"
             className="object-cover w-full h-full "
           />
-        </div>
-        <div className="flex flex-col w-1/2">
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, x: 100 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          viewport={{ amount: 0.5, once: false }}
+          className="flex flex-col w-1/2"
+        >
           <div className="relative w-full mb-1 h-1/2">
             <div className="absolute p-2">
               <h3 className="text-lg font-medium text-white md:text-2xl md:font-bold">
@@ -188,15 +205,20 @@ export default function () {
               className="object-cover w-full h-full"
             />
           </div>
-        </div>
+        </motion.div>
       </div>
 
       <h3 className="p-2 mt-2 text-lg font-medium md:text-3xl md:font-bold">
         Other Products You may Like
       </h3>
-      <div className="grid grid-cols-2 gap-2 w-full max-h-[38rem] md:grid-cols-4 lg:grid-cols-5 overflow-hidden overflow-y-auto p-2">
+      <motion.div 
+      initial={{ y: 100, opacity: 0 }}
+      whileInView={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      viewport={{ amount: 0.5, once: false }}
+      className="grid grid-cols-2 gap-2 w-full max-h-[38rem] md:grid-cols-4 lg:grid-cols-5 overflow-hidden overflow-y-auto p-2">
         {randomProducts?.length > 0 ? (
-          randomProducts.map((p) => (
+          randomProducts?.map((p) => (
             <div
               key={p?._id}
               className="flex flex-col border border-gray-500 rounded-md h-[18rem] md:h-[19rem] overflow-hidden p-2"
@@ -205,7 +227,8 @@ export default function () {
                 {p?.image?.length > 1 ? (
                   <img
                     src={
-                      p?.image[Math.floor(Math.random() * p?.image.length)]?.url
+                      p?.image[Math.floor(Math.random() * p?.image?.length)]
+                        ?.url
                     }
                     alt={p?.product_name || "Product Image"}
                     onClick={() => {
@@ -241,14 +264,14 @@ export default function () {
                       <FaStar
                         key={index}
                         className={`text-sm md:text-lg ${
-                          index < Math.floor(p.averageRating)
+                          index < Math.floor(p?.averageRating)
                             ? "text-yellow-400"
                             : "text-gray-300"
                         }`}
                       />
                     ))}
                   <span className="ml-2 text-xs text-gray-600 truncate md:text-sm">
-                    ({p.reviewCount || 0}) Reviews
+                    ({p?.reviewCount || 0}) Reviews
                   </span>
                 </div>
                 <FaCartPlus
@@ -263,7 +286,7 @@ export default function () {
             No Products Found
           </p>
         )}
-      </div>
+      </motion.div>
       <div className="w-full overflow-hidden">
         <div className="grid items-center grid-cols-2 gap-2 mt-3 md:gap-4 md:grid-cols-4">
           <div className="flex flex-col m-2 overflow-hidden text-center p-2 h-[10rem] w-[8rem] md:h-[11.7rem] rounded-md  md:w-[11.7rem] border border-black">
