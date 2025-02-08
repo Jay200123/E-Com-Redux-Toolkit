@@ -9,6 +9,7 @@ import { FaCheck } from "react-icons/fa";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 
 export default function () {
   const isFocused = useRef(true);
@@ -123,7 +124,13 @@ export default function () {
   ];
 
   return (
-    <div className="w-full h-full overflow-x-auto">
+    <motion.div
+      initial={{ y: 100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
+      viewport={{ visible: 0.8, once: false }}
+      className="w-full h-full overflow-x-auto"
+    >
       {isLoading ? (
         <div className="flex items-center justify-center">
           <FadeLoader color="#808080" loading={true} height={15} width={5} />
@@ -151,6 +158,6 @@ export default function () {
           />
         </div>
       )}
-    </div>
+    </motion.div>
   );
 }
