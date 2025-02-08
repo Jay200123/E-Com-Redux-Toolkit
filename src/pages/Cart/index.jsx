@@ -8,6 +8,7 @@ import {
 } from "../../state/slice/cart";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 export default function () {
   const navigate = useNavigate();
@@ -42,7 +43,13 @@ export default function () {
 
   return (
     <>
-      <div className="flex flex-col md:flex-row w-full max-h-[82rem] md:h-[32rem]">
+      <motion.div
+      initial={{ y: 100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      viewport={{visible: 0.5}}
+      exit={{ y: 100, opacity: 0 }}
+       className="flex flex-col md:flex-row w-full max-h-[82rem] md:h-[32rem]">
         <div className="relative w-full h-[70%] overflow-y-auto md:h-full md:w-3/4 transition-all duration-700 ease-out">
           <div className="absolute flex justify-between w-full p-2">
             <h3 className="text-sm font-medium md:text-2xl md:font-bold">
@@ -185,7 +192,7 @@ export default function () {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 }
