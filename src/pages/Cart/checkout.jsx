@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useFormik } from "formik";
 import { toast } from "react-toastify";
 import { useAddOrderMutation } from "../../state/api/reducer";
+import { motion } from "framer-motion";
 
 export default function () {
   const navigate = useNavigate();
@@ -45,7 +46,7 @@ export default function () {
 
       if (res?.data?.success === true) {
         toast.success(res.data.message);
-        navigate("/user/orders"); 
+        navigate("/user/orders");
       } else if (res?.error?.data?.success === false) {
         toast.error(`${res?.error?.data?.error.message}`);
       }
@@ -57,7 +58,12 @@ export default function () {
   };
 
   return (
-    <>
+    <motion.div
+      initial={{ y: 100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      viewport={{ visible: 0.5, once: false }}
+    >
       <form
         onSubmit={formik.handleSubmit}
         className="flex flex-col items-center w-full h-full gap-4 md:max-h-[44rem] md:flex-row "
@@ -91,8 +97,11 @@ export default function () {
                 <i className="mr-1 fa-solid fa-credit-card"></i> Credit Card
               </div>
 
-              <div onClick={()=>toast.error("feature not implemented")} className="w-full md:w-[10rem] p-2 text-sm overflow-hidden rounded-md border border-black cursor-pointer">
-                <i  className="mr-1 fa-solid fa-wallet"></i> Online Payment
+              <div
+                onClick={() => toast.error("feature not implemented")}
+                className="w-full md:w-[10rem] p-2 text-sm overflow-hidden rounded-md border border-black cursor-pointer"
+              >
+                <i className="mr-1 fa-solid fa-wallet"></i> Online Payment
               </div>
             </div>
           </div>
@@ -297,6 +306,6 @@ export default function () {
           </div>
         </div>
       </form>
-    </>
+    </motion.div>
   );
 }
