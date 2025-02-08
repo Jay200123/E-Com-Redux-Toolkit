@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 export default function () {
   const navigate = useNavigate();
@@ -8,7 +9,14 @@ export default function () {
     auth?.user?.image[Math.floor(Math.random() * auth?.user.image.length)];
 
   return (
-    <div className="flex items-center justify-center w-full h-full p-1 overflow-hidden md:p-4">
+    <motion.div
+      initial={{ x: 100, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      viewport={{ visible: 0.5 }}
+      exit={{ y: 100, opacity: 0 }}
+      className="flex items-center justify-center w-full h-full p-1 overflow-hidden md:p-4"
+    >
       <div className="flex flex-col transition-all duration-700 md:flex-row w-[75rem] border border-gray-500 shadow-lg rounded-lg h-[48rem] md:h-[24rem]">
         <div className="w-full h-full md:w-[30%]">
           <div className="flex flex-col items-center justify-center w-full h-full p-4">
@@ -59,6 +67,6 @@ export default function () {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
