@@ -95,7 +95,7 @@ export default function () {
         initial={{ x: -100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        viewport={{ amount: 0.5, once: false }}
+        viewport={{ amount: 0.5, }}
       >
         <Carousel />
       </motion.div>
@@ -109,7 +109,7 @@ export default function () {
               initial={{ opacity: 0, y: 100 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              viewport={{ amount: 0.5, once: false }}
+              viewport={{ amount: 0.5,  }}
               key={b?._id}
               onClick={() => handleBrand(b?.brand_name)}
               className="flex flex-col items-center justify-center w-1/2 transition-all duration-500 rounded-md cursor-pointer hover:opacity-80 hover:shadow-lg md:p-4 md:w-1/5"
@@ -149,7 +149,7 @@ export default function () {
           initial={{ opacity: 0, x: -100 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ amount: 0.5, once: false }}
+          viewport={{ amount: 0.5, }}
           className="relative w-1/2 mr-1"
         >
           <div className="absolute p-2">
@@ -173,7 +173,7 @@ export default function () {
           initial={{ opacity: 0, x: 100 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ amount: 0.5, once: false }}
+          viewport={{ amount: 0.5, }}
           className="flex flex-col w-1/2"
         >
           <div className="relative w-full mb-1 h-1/2">
@@ -222,7 +222,7 @@ export default function () {
         initial={{ y: 100, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        viewport={{ amount: 0.5, once: false }}
+        viewport={{ amount: 0.5, }}
         className="grid grid-cols-2 gap-2 w-full max-h-[38rem] md:grid-cols-4 lg:grid-cols-5 overflow-hidden overflow-y-auto p-2"
       >
         {randomProducts?.length > 0 ? (
@@ -295,7 +295,12 @@ export default function () {
           </p>
         )}
       </motion.div>
-      <div className="w-full overflow-hidden">
+      <motion.div
+        initial={{ y: 100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        viewport={{ visible: 0.5 }}
+       className="w-full overflow-hidden">
         <div className="grid items-center grid-cols-2 gap-2 mt-3 md:gap-4 md:grid-cols-4">
           <div className="flex flex-col m-2 overflow-hidden text-center p-2 h-[10rem] w-[8rem] md:h-[11.7rem] rounded-md  md:w-[11.7rem] border border-black">
             <i className="text-sm md:text-3xl fa-solid fa-truck-fast"></i>
@@ -333,7 +338,7 @@ export default function () {
             </p>
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }
