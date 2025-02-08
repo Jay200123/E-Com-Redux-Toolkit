@@ -2,6 +2,7 @@ import Logo from "../../assets/web-logo.png";
 import { useNavigate } from "react-router-dom";
 import { useLogoutMutation } from "../../state/api/reducer";
 import { toast } from "react-toastify";
+import { motion } from "framer-motion";
 
 export default function () {
   const navigate = useNavigate();
@@ -34,7 +35,13 @@ export default function () {
   };
 
   return (
-    <div className="flex flex-col items-center justify-between w-full h-full overflow-hidden">
+    <motion.div
+      initial={{ x: -100, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
+      viewport={{ visible: 0.8, once: false }}
+      className="flex flex-col items-center justify-between w-full h-full overflow-hidden"
+    >
       <div className="flex justify-center w-full p-2 mt-2">
         <img src={Logo} className="object-contain w-28 h-28 md:w-36 md:h-36" />
       </div>
@@ -79,6 +86,6 @@ export default function () {
           <i className="fa-solid fa-right-from-bracket"></i> Logout
         </li>
       </ul>
-    </div>
+    </motion.div>
   );
 }
