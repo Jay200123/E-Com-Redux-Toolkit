@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { tableCustomStyles } from "../../utils/tableCustomStyle";
 import { useState, useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 
 export default function () {
   const navigate = useNavigate();
@@ -18,17 +19,17 @@ export default function () {
   const [findBrand, setFindBrand] = useState("");
 
   useEffect(() => {
-      const handleFocus = () => {
-        isFocused.current = true;
-        refetch();
-      };
-  
-      window.addEventListener("focus", handleFocus);
-  
-      return () => {
-        window.removeEventListener("focus", handleFocus);
-      };
-    }, [refetch]);
+    const handleFocus = () => {
+      isFocused.current = true;
+      refetch();
+    };
+
+    window.addEventListener("focus", handleFocus);
+
+    return () => {
+      window.removeEventListener("focus", handleFocus);
+    };
+  }, [refetch]);
 
   const filteredBrands = brands?.filter((b) =>
     b.brand_name.toLowerCase().includes(findBrand.toLowerCase())
@@ -71,15 +72,11 @@ export default function () {
       cell: (row) => (
         <div className="flex items-center text-center">
           <FaEye
-            onClick={() =>
-              navigate(`/brand/${row?._id}`)               
-            }
+            onClick={() => navigate(`/brand/${row?._id}`)}
             className="mr-2 text-lg text-green-500 cursor-pointer"
           />
           <FaPencilAlt
-            onClick={() =>
-              navigate(`/edit/brand/${row?._id}`)
-            }
+            onClick={() => navigate(`/edit/brand/${row?._id}`)}
             className="mr-2 text-lg text-blue-500 cursor-pointer"
           />
           <FaTrash
@@ -92,19 +89,24 @@ export default function () {
   ];
 
   return (
-    <div className="w-full overflow-x-auto rounded-sm">
+    <motion.div
+      initial={{ y: 100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
+      viewport={{ visible: 0.8, once: false }}
+      className="w-full overflow-x-auto rounded-sm"
+    >
       {isLoading ? (
         <div className="flex items-center justify-center">
           <FadeLoader color="#808080" loading={true} height={15} width={5} />
         </div>
       ) : (
-        <div
-         className="max-w-3xl m-4 rounded-md shadow-md md:max-w-5xl"
-         >
+        <div className="max-w-3xl m-4 rounded-md shadow-md md:max-w-5xl">
           <div className="flex flex-col items-center md:flex-row md:justify-between">
             <button
-            onClick={() => navigate("/create/brand")}  
-            className="text-[1rem] mb-2 p-2 bg-black border transition-all duration-500 hover:opacity-75 rounded-md text-white mt-4">
+              onClick={() => navigate("/create/brand")}
+              className="text-[1rem] mb-2 p-2 bg-black border transition-all duration-500 hover:opacity-75 rounded-md text-white mt-4"
+            >
               <i className="mr-1 fa-solid fa-plus"></i> Create Brand
             </button>
             <input
@@ -127,6 +129,6 @@ export default function () {
           />
         </div>
       )}
-    </div>
+    </motion.div>
   );
 }
