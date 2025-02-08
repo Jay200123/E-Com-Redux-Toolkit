@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { tableCustomStyles } from "../../utils/tableCustomStyle";
 import { useState, useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 
 export default function () {
   const navigate = useNavigate();
@@ -20,17 +21,17 @@ export default function () {
   const [findProduct, setProduct] = useState("");
 
   useEffect(() => {
-      const handleFocus = () => {
-        isFocused.current = true;
-        refetch();
-      };
-  
-      window.addEventListener("focus", handleFocus);
-  
-      return () => {
-        window.removeEventListener("focus", handleFocus);
-      };
-    }, [refetch]);
+    const handleFocus = () => {
+      isFocused.current = true;
+      refetch();
+    };
+
+    window.addEventListener("focus", handleFocus);
+
+    return () => {
+      window.removeEventListener("focus", handleFocus);
+    };
+  }, [refetch]);
 
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this product?")) {
@@ -109,9 +110,10 @@ export default function () {
       cell: (row) => {
         return (
           <div className="flex items-center text-center">
-            <FaEye 
-            onClick={() => navigate(`/product/view/${row?._id}`)} 
-            className="mr-2 text-lg text-green-500 cursor-pointer" />
+            <FaEye
+              onClick={() => navigate(`/product/view/${row?._id}`)}
+              className="mr-2 text-lg text-green-500 cursor-pointer"
+            />
             <FaEdit
               onClick={() => navigate(`/product/edit/${row?._id}`)}
               className="mr-2 text-lg text-blue-500 cursor-pointer"
@@ -127,7 +129,13 @@ export default function () {
   ];
 
   return (
-    <div className="w-full overflow-x-auto rounded-sm">
+    <motion.div
+      initial={{ y: 100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
+      viewport={{ visible: 0.8, once: false }}
+      className="w-full overflow-x-auto rounded-sm"
+    >
       {isLoading ? (
         <div className="flex items-center justify-center">
           <FadeLoader color="#808080" loading={true} height={15} width={5} />
@@ -160,6 +168,6 @@ export default function () {
           />
         </div>
       )}
-    </div>
+    </motion.div>
   );
 }
