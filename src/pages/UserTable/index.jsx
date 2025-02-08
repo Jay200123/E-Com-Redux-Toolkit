@@ -10,6 +10,7 @@ import { FaEye, FaTrash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
+import { motion } from "framer-motion";
 
 export default function () {
   const navigate = useNavigate();
@@ -100,9 +101,10 @@ export default function () {
       name: "Actions",
       cell: (row) => (
         <div className="flex items-center">
-          <FaEye 
-          onClick={() => navigate(`/user/${row?._id}`)} 
-          className="mr-1 text-lg text-green-500 cursor-pointer" />
+          <FaEye
+            onClick={() => navigate(`/user/${row?._id}`)}
+            className="mr-1 text-lg text-green-500 cursor-pointer"
+          />
           <FaTrash
             onClick={() => handleDelete(row?._id)}
             className="mr-1 text-lg text-red-500 cursor-pointer"
@@ -112,7 +114,13 @@ export default function () {
     },
   ];
   return (
-    <div className="w-full md:h-[36rem]  rounded-sm overflow-x-auto">
+    <motion.div
+      initial={{ y: 100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
+      viewport={{ visible: 1, once: false }}
+      className="w-full md:h-[36rem]  rounded-sm overflow-x-auto"
+    >
       {isLoading ? (
         <div className="flex items-center justify-center">
           <FadeLoader color="#808080" loading={true} height={15} width={5} />
@@ -128,7 +136,7 @@ export default function () {
             />
           </div>
           <DataTable
-          title="User Records"
+            title="User Records"
             columns={columns}
             data={filteredUsers || []}
             pagination
@@ -140,6 +148,6 @@ export default function () {
           />
         </div>
       )}
-    </div>
+    </motion.div>
   );
 }
