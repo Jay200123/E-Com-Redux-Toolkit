@@ -8,6 +8,7 @@ import { FaStar, FaCartPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { addCart } from "../../state/slice/cart";
 import { toast } from "react-toastify";
+import { motion } from "framer-motion"; 
 
 export default function () {
   const navigate = useNavigate();
@@ -86,7 +87,14 @@ export default function () {
   };
 
   return (
-    <div className="relative w-full h-full p-2 transition-all duration-500">
+    <motion.div
+      initial={{ y: 100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      viewport={{ visible: 0.5 }}
+      exit={{ y: 100, opacity: 0 }}
+      className="relative w-full h-full p-2 transition-all duration-500"
+    >
       <p className="absolute top-0 right-0"></p>
       <span>
         <i
@@ -158,6 +166,6 @@ export default function () {
           </p>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 }
