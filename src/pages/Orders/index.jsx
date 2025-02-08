@@ -2,6 +2,7 @@ import { useGetOrdersQuery } from "../../state/api/reducer";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 export default function () {
   const navigate = useNavigate();
@@ -30,13 +31,15 @@ export default function () {
     (order) => order?.status?.toLowerCase() === status?.toLowerCase()
   );
 
-
-
-
-
   return (
     <>
-      <div className="w-full md:max-h-[36rem] overflow-y-auto">
+      <motion.div
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        viewport={{ visible: 0.5,  once: false}}
+        className="w-full md:max-h-[36rem] overflow-y-auto"
+      >
         <div className="w-full mt-2 mb-2">
           <ul className="flex justify-around mt-1 overflow-x-auto">
             <li
@@ -165,7 +168,7 @@ export default function () {
             </div>
           ))}
         </div>
-      </div>
+      </motion.div>
     </>
   );
 }
