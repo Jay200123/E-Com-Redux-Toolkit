@@ -13,6 +13,7 @@ import { FaBox, FaShip, FaTruckMoving, FaTrash, FaEye } from "react-icons/fa";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 
 export default function () {
   const navigate = useNavigate();
@@ -21,7 +22,9 @@ export default function () {
   const { data, isLoading, refetch } = useGetOrdersQuery();
   const orders = data?.details;
 
-  const processedOrders = orders?.filter((o) => o?.isCancelled === false && o?.isCancelApproved === false); 
+  const processedOrders = orders?.filter(
+    (o) => o?.isCancelled === false && o?.isCancelApproved === false
+  );
 
   useEffect(() => {
     const handleFocus = () => {
@@ -195,11 +198,17 @@ export default function () {
   ];
 
   return (
-    <div className="w-full h-full overflow-x-auto">
+    <motion.div
+      initial={{ y: 100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
+      viewport={{ visible: 0.8, once: false }}
+      className="w-full h-full overflow-x-auto"
+    >
       {isLoading ? (
         <div className="flex items-center justify-center">
           <FadeLoader color="#808080" loading={true} height={15} width={5} />
-          </div>
+        </div>
       ) : (
         <div className="max-w-3xl m-4 rounded-md shadow-md md:max-w-5xl">
           <div className="w-full m-2">
@@ -223,6 +232,6 @@ export default function () {
           />
         </div>
       )}
-    </div>
+    </motion.div>
   );
 }
