@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setFilter } from "../../state/slice/filter";
 import { variety } from "../../utils/data";
+import { motion } from "framer-motion";
 
 export default function () {
   const dispatch = useDispatch();
@@ -76,7 +77,13 @@ export default function () {
   }, [search, minPrice, maxPrice, findBrand, selectedRatings, type]);
 
   return (
-    <div className="flex flex-col justify-between w-full h-full p-2 overflow-hidden">
+    <motion.div
+      initial={{ x: -100, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
+      viewport={{ visible: 0.8, once: false }}
+      className="flex flex-col justify-between w-full h-full p-2 overflow-hidden"
+    >
       <input
         type="text"
         id="search"
@@ -154,7 +161,7 @@ export default function () {
           ))}
         </div>
       )}
-      
+
       <div className="w-full mt-2">
         <h3 className="text-sm md:text-lg">Filter by Price</h3>
         <div className="flex p-2">
@@ -201,6 +208,6 @@ export default function () {
           ))}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
