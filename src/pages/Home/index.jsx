@@ -91,7 +91,14 @@ export default function () {
 
   return (
     <div className="flex flex-col w-full h-full">
-      <Carousel />
+      <motion.div
+        initial={{ x: -100, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        viewport={{ amount: 0.5, once: false }}
+      >
+        <Carousel />
+      </motion.div>
       <h3 className="mt-2 text-lg font-medium md:text-3xl md:font-bold">
         Our Top Brands
       </h3>
@@ -211,12 +218,13 @@ export default function () {
       <h3 className="p-2 mt-2 text-lg font-medium md:text-3xl md:font-bold">
         Other Products You may Like
       </h3>
-      <motion.div 
-      initial={{ y: 100, opacity: 0 }}
-      whileInView={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
-      viewport={{ amount: 0.5, once: false }}
-      className="grid grid-cols-2 gap-2 w-full max-h-[38rem] md:grid-cols-4 lg:grid-cols-5 overflow-hidden overflow-y-auto p-2">
+      <motion.div
+        initial={{ y: 100, opacity: 0 }}
+        whileInView={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        viewport={{ amount: 0.5, once: false }}
+        className="grid grid-cols-2 gap-2 w-full max-h-[38rem] md:grid-cols-4 lg:grid-cols-5 overflow-hidden overflow-y-auto p-2"
+      >
         {randomProducts?.length > 0 ? (
           randomProducts?.map((p) => (
             <div
