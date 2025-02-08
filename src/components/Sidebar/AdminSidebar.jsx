@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useLogoutMutation } from "../../state/api/reducer";
 import { toast } from "react-toastify";
+import { motion } from "framer-motion";
 
 export default function () {
   const navigate = useNavigate();
@@ -21,7 +22,13 @@ export default function () {
   };
 
   return (
-    <div className="flex flex-col items-center justify-between w-full h-full overflow-hidden">
+    <motion.div
+      initial={{ x: -100, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
+      viewport={{ visible: 0.8, once: false }}
+      className="flex flex-col items-center justify-between w-full h-full overflow-hidden"
+    >
       <div className="flex flex-col justify-center w-full p-2 mt-2">
         <div className="flex justify-center mb-2">
           <img
@@ -73,7 +80,7 @@ export default function () {
             onClick={() => navigate("/orders/cancel")}
             className="p-2 mt-2 text-sm transition-all duration-500 rounded-md cursor-pointer md:text-lg md:font-medium hover:bg-black hover:text-white"
           >
-            <i className="mr-1 fa-solid fa-xmark"></i> Cancelled Orders 
+            <i className="mr-1 fa-solid fa-xmark"></i> Cancelled Orders
           </li>
           <li
             onClick={() => navigate("/admin/ratings")}
@@ -98,6 +105,6 @@ export default function () {
           <i className="fa-solid fa-right-from-bracket"></i> Logout
         </li>
       </ul>
-    </div>
+    </motion.div>
   );
 }
