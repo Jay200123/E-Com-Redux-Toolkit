@@ -292,14 +292,14 @@ export default function () {
           </p>
         )}
       </motion.div>
-      <motion.div
-        initial={{ y: 100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        viewport={{ visible: 0.5, once: false }}
-        className="w-full overflow-hidden"
-      >
-        <div className="grid items-center grid-cols-2 gap-2 mt-3 md:gap-4 md:grid-cols-4">
+      <div className="w-full overflow-hidden">
+        <motion.div
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          exit={{ opacity: 0, scale: 0 }}
+          className="grid items-center grid-cols-2 gap-2 mt-3 md:gap-4 md:grid-cols-4"
+        >
           <div className="flex flex-col m-2 overflow-hidden text-center p-2 h-[10rem] w-[8rem] md:h-[11.7rem] rounded-md  md:w-[11.7rem] border border-black">
             <i className="text-sm md:text-3xl fa-solid fa-truck-fast"></i>
             <h3 className="text-sm md:text-lg">Free Shipping</h3>
@@ -335,8 +335,8 @@ export default function () {
               assistance with any inquiries or concerns about your order.
             </p>
           </div>
-        </div>
-      </motion.div>
+        </motion.div>
+      </div>
     </div>
   );
 }
