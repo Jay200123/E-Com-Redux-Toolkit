@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
 import { useLogoutMutation } from "../../state/api/reducer";
+import { motion } from "framer-motion";
 
 export default function () {
   const navigate = useNavigate();
@@ -57,7 +58,12 @@ export default function () {
 
   return (
     <>
-      <div className="relative flex flex-col w-full h-screen bg-white">
+      <motion.div
+      initial={{ x: -100, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}  
+      transition={{ duration: 0.8, ease: "easeInOut" }} 
+      exit={{ x: -100, opacity: 0 }}
+       className="relative flex flex-col w-full h-screen bg-white">
         <i
           onClick={back}
           className="absolute top-0 left-0 m-2 text-2xl cursor-pointer fa fa-arrow-left"
@@ -146,7 +152,7 @@ export default function () {
             </>
           )}
         </ul>
-      </div>
+      </motion.div>
     </>
   );
 }
