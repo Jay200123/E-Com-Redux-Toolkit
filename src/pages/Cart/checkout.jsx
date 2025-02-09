@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useFormik } from "formik";
 import { toast } from "react-toastify";
 import { useAddOrderMutation } from "../../state/api/reducer";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function () {
   const navigate = useNavigate();
@@ -105,122 +105,138 @@ export default function () {
               </div>
             </div>
           </div>
-
-          {paymentMethod === "credit card" ? (
-            <div className="flex flex-col w-full h-auto p-4">
-              <h3 className="mb-4 text-lg font-medium">
-                Credit Card Information
-              </h3>
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                <div className="flex flex-col">
-                  <label className="mb-1 text-sm font-medium md:text-base">
-                    Cardholder Name:
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="John Doe"
-                    onBlur={formik.handleBlur}
-                    onChange={formik.handleChange}
-                    value={user?.fullname}
-                    className="p-2 border border-gray-300 rounded-md"
-                  />
+          <AnimatePresence>
+            {paymentMethod === "credit card" ? (
+              <AnimatePresence>
+              <motion.div
+                initial={{ x: 100, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                exit={{ x: 100, opacity: 0 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                className="flex flex-col w-full h-[32rem] p-4"
+              >
+                <h3 className="mb-4 text-lg font-medium">
+                  Credit Card Information
+                </h3>
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  <div className="flex flex-col">
+                    <label className="mb-1 text-sm font-medium md:text-base">
+                      Cardholder Name:
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="John Doe"
+                      onBlur={formik.handleBlur}
+                      onChange={formik.handleChange}
+                      value={user?.fullname}
+                      className="p-2 border border-gray-300 rounded-md"
+                    />
+                  </div>
+                  <div className="flex flex-col">
+                    <label className="mb-1 text-sm font-medium md:text-base">
+                      Card Number:
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="1234 5678 9101 1121"
+                      className="p-2 border border-gray-300 rounded-md"
+                    />
+                  </div>
+                  <div className="flex flex-col">
+                    <label className="mb-1 text-sm font-medium md:text-base">
+                      Expiry Date (MM/YY):
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="MM/YY"
+                      className="p-2 border border-gray-300 rounded-md"
+                    />
+                  </div>
+                  <div className="flex flex-col">
+                    <label className="mb-1 text-sm font-medium md:text-base">
+                      CVV:
+                    </label>
+                    <input
+                      type="password"
+                      placeholder="123"
+                      className="p-2 border border-gray-300 rounded-md"
+                    />
+                  </div>
                 </div>
-                <div className="flex flex-col">
-                  <label className="mb-1 text-sm font-medium md:text-base">
-                    Card Number:
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="1234 5678 9101 1121"
-                    className="p-2 border border-gray-300 rounded-md"
-                  />
+              </motion.div>
+              </AnimatePresence>
+            ) : (
+              
+              <motion.div
+                initial={{ x: 100, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                exit={{ x: 100, opacity: 0 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                className="flex flex-col w-full h-[32rem] p-4"
+              >
+                <h3 className="mb-4 text-lg font-medium">
+                  Shipping Address Information
+                </h3>
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  <div className="flex flex-col">
+                    <label className="mb-1 text-sm font-medium md:text-base">
+                      Full Name:
+                    </label>
+                    <input
+                      type="text"
+                      readOnly
+                      placeholder={user?.fullname}
+                      className="p-2 border border-gray-300 rounded-md placeholder:text-black"
+                    />
+                  </div>
+                  <div className="flex flex-col">
+                    <label className="mb-1 text-sm font-medium md:text-base">
+                      Contact Number:
+                    </label>
+                    <input
+                      type="text"
+                      readOnly
+                      placeholder={user?.contact_number}
+                      className="p-2 border border-gray-300 rounded-md placeholder:text-black"
+                    />
+                  </div>
+                  <div className="flex flex-col">
+                    <label className="mb-1 text-sm font-medium md:text-base">
+                      Address:
+                    </label>
+                    <input
+                      type="text"
+                      readOnly
+                      placeholder={user?.address}
+                      className="p-2 border border-gray-300 rounded-md placeholder:text-black"
+                    />
+                  </div>
+                  <div className="flex flex-col">
+                    <label className="mb-1 text-sm font-medium md:text-base">
+                      City:
+                    </label>
+                    <input
+                      type="text"
+                      readOnly
+                      value={user?.city}
+                      className="p-2 border border-gray-300 rounded-md placeholder:text-black"
+                    />
+                  </div>
+                  <div className="flex flex-col">
+                    <label className="mb-1 text-sm font-medium md:text-base">
+                      Email Address:
+                    </label>
+                    <input
+                      type="text"
+                      readOnly
+                      placeholder={user?.email}
+                      className="p-2 border border-gray-300 rounded-md placeholder:text-black"
+                    />
+                  </div>
                 </div>
-                <div className="flex flex-col">
-                  <label className="mb-1 text-sm font-medium md:text-base">
-                    Expiry Date (MM/YY):
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="MM/YY"
-                    className="p-2 border border-gray-300 rounded-md"
-                  />
-                </div>
-                <div className="flex flex-col">
-                  <label className="mb-1 text-sm font-medium md:text-base">
-                    CVV:
-                  </label>
-                  <input
-                    type="password"
-                    placeholder="123"
-                    className="p-2 border border-gray-300 rounded-md"
-                  />
-                </div>
-              </div>
-            </div>
-          ) : (
-            <div className="flex flex-col w-full h-auto p-4">
-              <h3 className="mb-4 text-lg font-medium">
-                Shipping Address Information
-              </h3>
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                <div className="flex flex-col">
-                  <label className="mb-1 text-sm font-medium md:text-base">
-                    Full Name:
-                  </label>
-                  <input
-                    type="text"
-                    readOnly
-                    placeholder={user?.fullname}
-                    className="p-2 border border-gray-300 rounded-md placeholder:text-black"
-                  />
-                </div>
-                <div className="flex flex-col">
-                  <label className="mb-1 text-sm font-medium md:text-base">
-                    Contact Number:
-                  </label>
-                  <input
-                    type="text"
-                    readOnly
-                    placeholder={user?.contact_number}
-                    className="p-2 border border-gray-300 rounded-md placeholder:text-black"
-                  />
-                </div>
-                <div className="flex flex-col">
-                  <label className="mb-1 text-sm font-medium md:text-base">
-                    Address:
-                  </label>
-                  <input
-                    type="text"
-                    readOnly
-                    placeholder={user?.address}
-                    className="p-2 border border-gray-300 rounded-md placeholder:text-black"
-                  />
-                </div>
-                <div className="flex flex-col">
-                  <label className="mb-1 text-sm font-medium md:text-base">
-                    City:
-                  </label>
-                  <input
-                    type="text"
-                    readOnly
-                    value={user?.city}
-                    className="p-2 border border-gray-300 rounded-md placeholder:text-black"
-                  />
-                </div>
-                <div className="flex flex-col">
-                  <label className="mb-1 text-sm font-medium md:text-base">
-                    Email Address:
-                  </label>
-                  <input
-                    type="text"
-                    readOnly
-                    placeholder={user?.email}
-                    className="p-2 border border-gray-300 rounded-md placeholder:text-black"
-                  />
-                </div>
-              </div>
-            </div>
-          )}
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
         <div className="w-full md:w-[30%] h-full border p-4">
