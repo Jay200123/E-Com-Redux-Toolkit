@@ -2,7 +2,7 @@ import { useGetOrdersQuery } from "../../state/api/reducer";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function () {
   const navigate = useNavigate();
@@ -37,7 +37,7 @@ export default function () {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        viewport={{ visible: 0.5,  once: false}}
+        viewport={{ visible: 0.5, once: false }}
         className="w-full md:max-h-[36rem] overflow-y-auto"
       >
         <div className="w-full mt-2 mb-2">
@@ -87,86 +87,95 @@ export default function () {
         </div>
         <h3 className="text-sm md:text-3xl">My Orders</h3>
         <div className="flex flex-col items-center overflow-y-auto h-[44rem] md:h-full">
-          {orderedStatus?.map((order) => (
-            <div
-              key={order?._id}
-              className="w-full p-2 mt-2 mb-2 transition-all duration-500 border-2 rounded-md"
-            >
-              <div className="flex justify-between">
-                <div>
-                  <h4 className="text-sm md:text-lg">
-                    Order No#: {order?.orderNumber}
-                  </h4>
-                  <h4 className="text-sm md:text-lg">
-                    Order Date:{" "}
-                    {
-                      new Date(order?.date_placed.toLocaleString())
-                        .toISOString()
-                        .split("T")[0]
-                    }
-                  </h4>
+          <AnimatePresence>
+            {orderedStatus?.map((order) => (
+              <motion.div
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.7, ease: "easeOut" }}
+                exit={{ opacity: 0, scale: 0 }}
+                key={order?._id}
+                className="w-full p-2 mt-2 mb-2 transition-all duration-500 border-2 rounded-md"
+              >
+                <div className="flex justify-between">
+                  <div>
+                    <h4 className="text-sm md:text-lg">
+                      Order No#: {order?.orderNumber}
+                    </h4>
+                    <h4 className="text-sm md:text-lg">
+                      Order Date:{" "}
+                      {
+                        new Date(order?.date_placed.toLocaleString())
+                          .toISOString()
+                          .split("T")[0]
+                      }
+                    </h4>
+                  </div>
+                  <div>
+                    <h4 className="text-sm md:text-lg">
+                      Status: {order?.status}
+                    </h4>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="text-sm md:text-lg">
-                    Status: {order?.status}
-                  </h4>
-                </div>
-              </div>
-              <div className="flex flex-col">
-                <h4 className="text-sm md:text-lg">Ordered Items:</h4>
-                <ul>
-                  {order?.products?.map((item, index) => (
-                    <li
-                      key={index}
-                      className="flex justify-between p-2 mt-2 border rounded-md border-gray-50"
-                    >
-                      <div className="flex items-center">
-                        <img
-                          src={
-                            item?.product?.image[
-                              Math.floor(
-                                Math.random() * item?.product?.image.length
-                              )
-                            ].url
-                          }
-                          className="object-contain w-28 h-28"
-                          alt="product"
-                        />
-                        <div>
-                          <h4 className="text-xs md:text-lg">
-                            {item?.product?.product_name}
-                          </h4>
-                          <h4 className="text-xs md:text-lg">
-                            ₱{item?.product?.price}
-                          </h4>
+                <div className="flex flex-col">
+                  <h4 className="text-sm md:text-lg">Ordered Items:</h4>
+                  <ul>
+                    {order?.products?.map((item, index) => (
+                      <li
+                        key={index}
+                        className="flex justify-between p-2 mt-2 border rounded-md border-gray-50"
+                      >
+                        <div className="flex items-center">
+                          <img
+                            src={
+                              item?.product?.image[
+                                Math.floor(
+                                  Math.random() * item?.product?.image.length
+                                )
+                              ].url
+                            }
+                            className="object-contain w-28 h-28"
+                            alt="product"
+                          />
+                          <div>
+                            <h4 className="text-xs md:text-lg">
+                              {item?.product?.product_name}
+                            </h4>
+                            <h4 className="text-xs md:text-lg">
+                              ₱{item?.product?.price}
+                            </h4>
+                          </div>
                         </div>
-                      </div>
 
-                      <h4 className="text-xs md:text-lg">x{item?.quantity}</h4>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="flex justify-end mt-2">
-                {order?.status === "Processing" ? (
+                        <h4 className="text-xs md:text-lg">
+                          x{item?.quantity}
+                        </h4>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="flex justify-end mt-2">
+                  {order?.status === "Processing" ? (
+                    <button
+                      onClick={() => navigate(`/order/cancel/${order?._id}`)}
+                      className="p-2 mr-1 text-sm text-white bg-red-500 border rounded-md md:text-lg"
+                    >
+                      <i className="mr-1 fa-solid fa-trash"></i>Cancel Order
+                    </button>
+                  ) : (
+                    <> </>
+                  )}
                   <button
-                    onClick={() => navigate(`/order/cancel/${order?._id}`)}
-                    className="p-2 mr-1 text-sm text-white bg-red-500 border rounded-md md:text-lg"
+                    onClick={() => navigate(`/user/order/${order?._id}`)}
+                    className="p-2 text-sm text-white bg-black border rounded-md border-gray-50 md:text-lg"
                   >
-                    <i className="mr-1 fa-solid fa-trash"></i>Cancel Order
+                    <i className="mr-1 fa-solid fa-circle-info"></i>Order
+                    Details
                   </button>
-                ) : (
-                  <> </>
-                )}
-                <button
-                  onClick={() => navigate(`/user/order/${order?._id}`)}
-                  className="p-2 text-sm text-white bg-black border rounded-md border-gray-50 md:text-lg"
-                >
-                  <i className="mr-1 fa-solid fa-circle-info"></i>Order Details
-                </button>
-              </div>
-            </div>
-          ))}
+                </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </div>
       </motion.div>
     </>
