@@ -111,7 +111,12 @@ export default function () {
           className="m-2 text-lg cursor-pointer md:text-2xl fa fa-arrow-left"
         ></i>
       </span>
-      <div className="grid grid-cols-1 gap-1 w-full max-h-[38rem] md:grid-cols-4 lg:grid-cols-5 overflow-hidden overflow-y-auto p-2">
+      <motion.div
+        initial={{ x: -100, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="grid grid-cols-1 gap-1 w-full max-h-[38rem] md:grid-cols-4 lg:grid-cols-5 overflow-hidden overflow-y-auto p-2"
+      >
         {matchFilters?.length > 0 ? (
           matchFilters.map((p) => (
             <div
@@ -174,7 +179,7 @@ export default function () {
             No Products Found
           </p>
         )}
-      </div>
+      </motion.div>
     </motion.div>
   );
 }
