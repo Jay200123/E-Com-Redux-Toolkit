@@ -109,7 +109,6 @@ export default function () {
               initial={{ opacity: 0, y: 100 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              viewport={{ amount: 0.5 }}
               key={b?._id}
               onClick={() => handleBrand(b?.brand_name)}
               className="flex flex-col items-center justify-center w-1/2 transition-all duration-500 rounded-md cursor-pointer hover:opacity-80 hover:shadow-lg md:p-4 md:w-1/5"
@@ -149,7 +148,6 @@ export default function () {
           initial={{ opacity: 0, x: -100 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ amount: 0.5 }}
           className="relative w-1/2 mr-1"
         >
           <div className="absolute p-2">
@@ -173,7 +171,6 @@ export default function () {
           initial={{ opacity: 0, x: 100 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ amount: 0.5 }}
           className="flex flex-col w-1/2"
         >
           <div className="relative w-full mb-1 h-1/2">
