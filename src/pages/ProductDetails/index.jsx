@@ -7,6 +7,7 @@ import {
 } from "../../state/api/reducer";
 import { addCart } from "../../state/slice/cart";
 import { useDispatch } from "react-redux";
+import { motion } from "framer-motion";
 
 export default function () {
   const dispatch = useDispatch();
@@ -48,14 +49,25 @@ export default function () {
 
   return (
     <>
-      <div className="relative flex flex-col">
+      <motion.div
+        initial={{ y: 100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        exit={{ y: 100, opacity: 0 }}
+        transition={{ duration: 0.8, ease: "easeInOut" }}
+        className="relative flex flex-col"
+      >
         <i
           onClick={back}
           className="absolute m-2 text-2xl cursor-pointer fa fa-arrow-left"
         ></i>
 
         <div className="flex flex-col items-center w-full max-h-62rem md:max-h-[56rem] mt-3 md:flex-row">
-          <div className="flex justify-center w-full h-full transition-all duration-500 ease-in-out md:w-1/2">
+          <motion.div
+            initial={{ x: -100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
+            className="flex justify-center w-full h-full transition-all duration-500 ease-in-out md:w-1/2"
+          >
             {product?.image && product?.image?.length > 1 ? (
               <img
                 className="object-contain w-16rem h-[32rem] overflow-hidden"
@@ -73,8 +85,13 @@ export default function () {
                 alt="image"
               />
             )}
-          </div>
-          <div className="flex flex-col w-full h-full p-2 transition-all duration-700 ease-in-out md:w-1/2 justify-evenly">
+          </motion.div>
+          <motion.div
+            initial={{ x: 100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
+            className="flex flex-col w-full h-full p-2 transition-all duration-700 ease-in-out md:w-1/2 justify-evenly"
+          >
             <h3 className="text-lg text-center md:text-2xl">
               {product?.product_name}
             </h3>
@@ -129,7 +146,7 @@ export default function () {
                 </button>
               )}
             </div>
-          </div>
+          </motion.div>
         </div>
         <div className="flex flex-col w-full max-h3-[16rem] mt-4 transition-all duration-500 ease-in-out border border-gray">
           <h3 className="text-lg font-medium md:font-bold md:text-2xl">
@@ -138,7 +155,14 @@ export default function () {
               : "No Reviews Yet 😞"}
           </h3>
           {productRatings?.map((r) => (
-            <div key={r?._id} className="flex flex-col p-2 md:p-4">
+            <motion.div
+              initial={{ y: 100, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: 100, opacity: 0 }}
+              transition={{ duration: 0.8, ease: "easeInOut" }}
+              key={r?._id}
+              className="flex flex-col p-2 md:p-4"
+            >
               <div className="flex items-center justify-between">
                 <h3 className="text-sm md:text-lg">{r?.user?.fullname}</h3>
                 <div className="text-xs md:text-lg">
@@ -159,10 +183,10 @@ export default function () {
                     />
                   ))}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
-      </div>
+      </motion.div>
     </>
   );
 }
