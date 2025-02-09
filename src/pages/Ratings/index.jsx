@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import { useGetRatingsQuery } from "../../state/api/reducer";
 import { FadeLoader } from "react-spinners";
 import { useNavigate } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function () {
   const navigate = useNavigate();
@@ -21,8 +22,15 @@ export default function () {
         </div>
       ) : (
         <div className="flex flex-col overflow-x-auto p-2 max-h-[28rem] md:max-h-[36rem] border-b border-gray-300">
-          {userRatings?.map((rating) => (
-              <div key={rating?._id} className="flex flex-col h-[14rem] md:h-[10rem] items-center justify-between mt-2 md:flex-row ">
+          <AnimatePresence>
+            {userRatings?.map((rating) => (
+              <motion.div
+                initial={{ y: 100, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                key={rating?._id}
+                className="flex flex-col h-[14rem] md:h-[10rem] items-center justify-between mt-2 md:flex-row "
+              >
                 <div className="flex items-center justify-center w-1/5 h-full">
                   <img
                     src={
@@ -62,8 +70,9 @@ export default function () {
                     </div>
                   </div>
                 </div>
-              </div>     
-          ))}
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </div>
       )}
     </div>
