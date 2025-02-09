@@ -55,7 +55,7 @@ export default function () {
                 {order?.products?.map((item, index) => (
                   <div
                     key={index}
-                    className="flex items-center w-full p-1 overflow-hidden border border-gray-400 rounded-md h-36 md:h-44"
+                    className="flex items-center w-full p-1 mt-2 overflow-hidden border border-gray-400 rounded-md h-44"
                   >
                     <div className="w-1/5 h-full p-2">
                       <img
@@ -91,7 +91,7 @@ export default function () {
                           </div>
                         ) : (
                           <div className="flex">
-                            <h3 className="text-lg md:text-sm">
+                            <h3 className="text-sm md:text-lg">
                               Product Not Reviewed Yet
                             </h3>
                           </div>
