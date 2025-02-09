@@ -8,7 +8,7 @@ import { FaStar, FaCartPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { addCart } from "../../state/slice/cart";
 import { toast } from "react-toastify";
-import { motion } from "framer-motion"; 
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function () {
   const navigate = useNavigate();
@@ -103,68 +103,75 @@ export default function () {
         ></i>
       </span>
       <div className="grid grid-cols-1 gap-1 w-full max-h-[38rem] md:grid-cols-4 lg:grid-cols-5 overflow-hidden overflow-y-auto p-2">
-        {filteredProducts?.length > 0 ? (
-          filteredProducts.map((p) => (
-            <div
-              key={p?._id}
-              className="flex mt-2 flex-col  border border-gray-500 rounded-md h-[18rem] md:h-[19rem] overflow-hidden p-2"
-            >
-              <div className="flex justify-center">
-                {p?.image?.length > 1 ? (
-                  <img
-                    src={
-                      p?.image[Math.floor(Math.random() * p?.image.length)]?.url
-                    }
-                    alt={p?.product_name || "Product Image"}
-                    onClick={() => navigate(`/product/${p?._id}`)}
-                    className="object-contain w-40 h-40 cursor-pointer"
-                  />
-                ) : (
-                  <img
-                    src={p?.image[0]?.url}
-                    alt={p?.name || "Product Image"}
-                    onClick={() => navigate(`/product/${p?._id}`)}
-                    className="object-contain w-40 h-40 cursor-pointer"
-                  />
-                )}
-              </div>
-
-              <p className="text-sm truncate md:text-sm text-medium">
-                {p?.product_name || "Unnamed Product"}
-              </p>
-              <p className="text-sm md:text-sm text-medium">
-                ₱{p?.price || "Unknown Price"}
-              </p>
-              <div className="flex items-center justify-between w-full mb-1">
-                <div className="flex items-center">
-                  {Array(5)
-                    .fill(0)
-                    .map((_, index) => (
-                      <FaStar
-                        key={index}
-                        className={`text-sm md:text-lg ${
-                          index < Math.floor(p.averageRating)
-                            ? "text-yellow-400"
-                            : "text-gray-300"
-                        }`}
-                      />
-                    ))}
+        <AnimatePresence>
+          {filteredProducts?.length > 0 ? (
+            filteredProducts.map((p) => (
+              <motion.div
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                exit={{ opacity: 0, scale: 0 }}
+                key={p?._id}
+                className="flex mt-2 flex-col  border border-gray-500 rounded-md h-[18rem] md:h-[19rem] overflow-hidden p-2"
+              >
+                <div className="flex justify-center">
+                  {p?.image?.length > 1 ? (
+                    <img
+                      src={
+                        p?.image[Math.floor(Math.random() * p?.image.length)]
+                          ?.url
+                      }
+                      alt={p?.product_name || "Product Image"}
+                      onClick={() => navigate(`/product/${p?._id}`)}
+                      className="object-contain w-40 h-40 cursor-pointer"
+                    />
+                  ) : (
+                    <img
+                      src={p?.image[0]?.url}
+                      alt={p?.name || "Product Image"}
+                      onClick={() => navigate(`/product/${p?._id}`)}
+                      className="object-contain w-40 h-40 cursor-pointer"
+                    />
+                  )}
                 </div>
-                <FaCartPlus
-                  onClick={() => {
-                    dispatch(addCart({ product: p, orderQty: 1 }));
-                    toast.success("Product added to cart");
-                  }}
-                  className="text-lg cursor-pointer md:text-2xl"
-                />
-              </div>
-            </div>
-          ))
-        ) : (
-          <p className="text-sm text-center text-gray-600 md:text-2xl">
-            No Products Found
-          </p>
-        )}
+
+                <p className="text-sm truncate md:text-sm text-medium">
+                  {p?.product_name || "Unnamed Product"}
+                </p>
+                <p className="text-sm md:text-sm text-medium">
+                  ₱{p?.price || "Unknown Price"}
+                </p>
+                <div className="flex items-center justify-between w-full mb-1">
+                  <div className="flex items-center">
+                    {Array(5)
+                      .fill(0)
+                      .map((_, index) => (
+                        <FaStar
+                          key={index}
+                          className={`text-sm md:text-lg ${
+                            index < Math.floor(p.averageRating)
+                              ? "text-yellow-400"
+                              : "text-gray-300"
+                          }`}
+                        />
+                      ))}
+                  </div>
+                  <FaCartPlus
+                    onClick={() => {
+                      dispatch(addCart({ product: p, orderQty: 1 }));
+                      toast.success("Product added to cart");
+                    }}
+                    className="text-lg cursor-pointer md:text-2xl"
+                  />
+                </div>
+              </motion.div>
+            ))
+          ) : (
+            <p className="text-sm text-center text-gray-600 md:text-2xl">
+              No Products Found
+            </p>
+          )}
+        </AnimatePresence>
       </div>
     </motion.div>
   );
