@@ -7,7 +7,8 @@ import {
 } from "../../state/api/reducer";
 import { addCart } from "../../state/slice/cart";
 import { useDispatch } from "react-redux";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { toast } from "react-toastify";
 
 export default function () {
   const dispatch = useDispatch();
@@ -46,6 +47,11 @@ export default function () {
   const back = () => {
     window.history.back();
   };
+
+  const handleCart = (product, quantity) => {  
+    dispatch(addCart({ product, orderQty: quantity }));
+    toast.success("Product added to cart");
+  }
 
   return (
     <>
@@ -117,34 +123,61 @@ export default function () {
               <div className="flex items-center space-x-2">
                 <label className="text-sm font-bold md:text-lg">Qty:</label>
                 <div className="flex items-center border border-gray-300 rounded-md">
-                  <button
-                    className="px-3 py-1 text-lg text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-l-md"
+                  <motion.button
+                    className="px-3 py-1 text-lg text-white bg-red-500 rounded-l-md"
                     onClick={decrementQuantity}
+                    disabled={quantity === 0 ? true : false}
+                    whileTap={{ scale: 0.9 }}
                   >
                     -
-                  </button>
-                  <input
-                    type="number"
-                    readOnly
-                    className="w-12 text-center border-l border-r border-gray-300 outline-none"
-                    value={quantity}
-                  />
-                  <button
-                    className="px-3 py-1 text-lg text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-r-md"
+                  </motion.button>
+                  <AnimatePresence key={quantity} mode="exit">
+                    <motion.input
+                      type="number"
+                      readOnly
+                      className="w-12 text-center border-l border-r border-gray-300 outline-none"
+                      value={quantity}
+                      initial={{ y: -10, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      exit={{ y: 10, opacity: 0 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 20,
+                      }}
+                    />
+                  </AnimatePresence>
+
+                  <motion.button
+                    className="px-3 py-1 text-lg text-white bg-green-500 rounded-r-md"
                     onClick={incrementQuantity}
+                    whileTap={{ scale: 0.9 }}
                   >
                     +
-                  </button>
+                  </motion.button>
                 </div>
               </div>
-              {product && (
-                <button
-                  onClick={() => dispatch(addCart(product, quantity))}
-                  className="w-full p-2 mt-4 text-sm text-white transition-all duration-500 bg-black rounded-md md:text-lg hover:opacity-85"
-                >
-                  Add to Cart
-                </button>
-              )}
+              {product &&
+                (product?.quantity === 0 ? (
+                  <button
+                    onClick={() => toast.error("Out of Stocks")}
+                    className="w-full p-2 mt-4 text-sm text-white transition-all duration-500 bg-red-500 rounded-md opacity-50 md:text-lg hover:opacity-85"
+                  >
+                    Out of Stocks
+                  </button>
+                ) : (
+                  <motion.button
+                    onClick={() => handleCart(product, quantity)}
+                    className="w-full p-2 mt-4 text-sm text-white transition-all duration-500 bg-black rounded-md md:text-lg hover:opacity-85"
+                    whileHover={{
+                      scale: 0.9,
+                      transition: { duration: 0.8 },
+                    }}
+                    whileTap={{ scale: 0.9 }}
+                  >
+                    Add to Cart
+                  </motion.button>
+                ))}
             </div>
           </motion.div>
         </div>
