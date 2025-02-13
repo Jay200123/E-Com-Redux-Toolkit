@@ -9,6 +9,7 @@ import {
 import { Table, TD, TH, TR } from "@ag-media/react-pdf-table";
 import { styles } from "../../utils/styles";
 import { useGetOrderByIdQuery } from "../../state/api/reducer";
+import { motion } from "framer-motion";
 
 export default function () {
   const { id } = useParams();
@@ -44,14 +45,14 @@ export default function () {
             <TR key={index}>
               <TD>{item?.product?.product_name}</TD>
               <TD>{item?.quantity}</TD>
-              <TD>₱{(item?.product?.price)?.toFixed(2)}</TD>
+              <TD>₱{item?.product?.price?.toFixed(2)}</TD>
               <TD>₱{item?.quantity * item?.product?.price}</TD>
             </TR>
           ))}
         </Table>
         <View style={styles.totals}>
           <Text style={styles.textBold}>
-            Total: ₱{(order?.price)?.toFixed(2)}
+            Total: ₱{order?.price?.toFixed(2)}
           </Text>
         </View>
       </Page>
@@ -60,7 +61,18 @@ export default function () {
 
   return (
     <>
-      <div className="flex flex-col w-full h-full">
+      <motion.div
+        initial={{ y: -100, opacity: 0 }}
+        animate={{
+          y: 0,
+          opacity: 1,
+          transition: {
+            duration: 0.8,
+            ease: "easeInOut",
+          },
+        }}
+        className="flex flex-col w-full h-full"
+      >
         <h3
           onClick={back}
           className="ml-1 text-sm text-left cursor-pointer md:text-lg"
@@ -79,10 +91,23 @@ export default function () {
                 fileName={`Invoice_${order?.orderNumber}.pdf`}
               >
                 {({ loading }) => (
-                  <button className="p-1 mr-2 text-sm text-white transition-all duration-500 bg-blue-500 border border-gray-500 rounded-md md:p-2 md:font-medium md:text-lg hover:opacity-60">
+                  <motion.button
+                    whileHover={{
+                      scale: 0.9,
+                      animate: {
+                        scale: 0.9,
+                        transition: {
+                          duration: 0.3,
+                          ease: "easeInOut",
+                        },
+                      },
+                    }}
+                    whileTap={{ scale: 0.9 }}
+                    className="p-1 mr-2 text-sm text-white transition-all duration-500 bg-blue-500 border border-gray-500 rounded-md md:p-2 md:font-medium md:text-lg hover:opacity-60"
+                  >
                     <i className="mr-1 fa-solid fa-file-invoice"></i>
                     Generate Invoice
-                  </button>
+                  </motion.button>
                 )}
               </PDFDownloadLink>
             </div>
@@ -109,7 +134,16 @@ export default function () {
           </div>
         </nav>
         {order?.products.map((p, index) => (
-          <div
+          <motion.div
+            initial={{ x: -100, opacity: 0 }}
+            animate={{
+              x: 0,
+              opacity: 1,
+              transition: {
+                duration: 0.8,
+                ease: "easeInOut",
+              },
+            }}
             key={index}
             className="flex flex-col w-full p-1 border border-gray-400 shadow-sm md:flex-row"
           >
@@ -146,9 +180,9 @@ export default function () {
                 <h3 className="text-sm md:text-lg">Qty: x{p?.quantity}</h3>
               </div>
             </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </>
   );
 }
