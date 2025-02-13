@@ -9,6 +9,7 @@ import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { editRatingValidationSchema } from "../../validations";
+import { motion } from "framer-motion";
 
 export default function () {
   const navigate = useNavigate();
@@ -43,6 +44,11 @@ export default function () {
       if (res?.data?.success === true) {
         toast.success("Rating updated successfully");
         navigate("/user/ratings");
+        window.scroll({
+          top: 0,
+          left: 0,
+          behavior: "smooth",
+        });
       } else {
         toast.error(res?.data?.message);
       }
@@ -60,7 +66,16 @@ export default function () {
           <FadeLoader color="#808080" loading={true} height={15} width={5} />
         </div>
       ) : (
-        <form
+        <motion.form
+          initial={{ y: -100, opacity: 0 }}
+          animate={{
+            y: 0,
+            opacity: 1,
+            transition: {
+              duration: 0.8,
+              ease: "easeInOut",
+            },
+          }}
           onSubmit={formik.handleSubmit}
           className="relative flex flex-col w-full h-full md:flex-row"
         >
@@ -199,7 +214,7 @@ export default function () {
               Review Product
             </button>
           </div>
-        </form>
+        </motion.form>
       )}
     </>
   );
