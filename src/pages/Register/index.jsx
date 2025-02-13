@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import ImageOne from "../../assets/register.jpg";
 import { SignUpValidationSchema } from "../../validations";
 import { useState } from "react";
-import { motion } from "framer-motion"; 
+import { motion } from "framer-motion";
 
 export default function () {
   const navigate = useNavigate();
@@ -76,26 +76,38 @@ export default function () {
           onClick={back}
           className="absolute top-0 left-0 m-2 text-2xl cursor-pointer fa fa-arrow-left"
         ></i>
-        <motion.div 
-        initial={{ x: -100, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        viewport={{ amount: 0.5, once: false }}
-        className="hidden md:w-1/2 md:block">
+        <motion.div
+          initial={{ x: -100, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          viewport={{ amount: 0.5, once: false }}
+          className="hidden md:w-1/2 md:block"
+        >
           <img
             className="object-cover w-full h-full rounded-sm"
             src={ImageOne}
             alt="Image"
           />
         </motion.div>
-        <motion.div 
-        initial={{ x: 100, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        viewport={{ amount: 0.5, once: false }}
-        className="flex flex-col justify-center w-full p-4 overflow-y-auto rounded-md md:border md:border-gray-500 md:h-full md:w-1/2">
+        <motion.div
+          initial={{ x: 100, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          viewport={{ amount: 0.5, once: false }}
+          className="flex flex-col justify-center w-full p-4 overflow-y-auto rounded-md md:border md:border-gray-500 md:h-full md:w-1/2"
+        >
           <h3 className="text-lg md:text-3xl">Sign Up</h3>
-          <p className="mb-4 text-xs md:text-[1rem]">
+          <motion.p
+            whileHover={{
+              scale: 0.9,
+              transition: { duration: 0.8 },
+              animate: {
+                ease: "easeInOut",
+              },
+            }}
+            whileTap={{ scale: 0.9 }}
+            className="mb-4 text-xs md:text-[1rem]"
+          >
             Already have an account?
             <span
               onClick={signIn}
@@ -103,7 +115,7 @@ export default function () {
             >
               Sign In
             </span>
-          </p>
+          </motion.p>
           <div className="flex flex-col mt-2">
             <label className="text-sm font-medium md:text-lg">Fullname</label>
             <input
@@ -116,9 +128,18 @@ export default function () {
               type="text"
             />
             {formik.touched.fullname && formik.errors.fullname && (
-              <p className="mt-1 text-sm text-red-500">
+              <motion.p
+                initial={{
+                  scale: 0,
+                }}
+                animate={{
+                  scale: 1,
+                  transition: { duration: 0.5 },
+                }}
+                className="mt-1 text-sm text-red-500"
+              >
                 {formik.errors.fullname}
-              </p>
+              </motion.p>
             )}
           </div>
           <div className="flex flex-col mt-2">
@@ -135,9 +156,18 @@ export default function () {
               type="text"
             />
             {formik.touched.contact_number && formik.errors.contact_number && (
-              <p className="mt-1 text-sm text-red-500">
+              <motion.p
+                initial={{
+                  scale: 0,
+                }}
+                animate={{
+                  scale: 1,
+                  transition: { duration: 0.5 },
+                }}
+                className="mt-1 text-sm text-red-500"
+              >
                 {formik.errors.contact_number}
-              </p>
+              </motion.p>
             )}
           </div>
           <div className="flex flex-col mt-2">
@@ -152,9 +182,18 @@ export default function () {
               type="text"
             />
             {formik.touched.address && formik.errors.address && (
-              <p className="mt-1 text-sm text-red-500">
+              <motion.p
+                initial={{
+                  scale: 0,
+                }}
+                animate={{
+                  scale: 1,
+                  transition: { duration: 0.5 },
+                }}
+                className="mt-1 text-sm text-red-500"
+              >
                 {formik.errors.address}
-              </p>
+              </motion.p>
             )}
           </div>
           <div className="flex flex-col mt-2">
@@ -169,7 +208,18 @@ export default function () {
               type="text"
             />
             {formik.touched.city && formik.errors.city && (
-              <p className="mt-1 text-sm text-red-500">{formik.errors.city}</p>
+              <motion.p
+                initial={{
+                  scale: 0,
+                }}
+                animate={{
+                  scale: 1,
+                  transition: { duration: 0.5 },
+                }}
+                className="mt-1 text-sm text-red-500"
+              >
+                {formik.errors.city}
+              </motion.p>
             )}
           </div>
           <div className="flex flex-col mt-2">
@@ -184,7 +234,18 @@ export default function () {
               type="text"
             />
             {formik.touched.email && formik.errors.email && (
-              <p className="mt-1 text-sm text-red-500">{formik.errors.email}</p>
+              <motion.p
+                initial={{
+                  scale: 0,
+                }}
+                animate={{
+                  scale: 1,
+                  transition: { duration: 0.5 },
+                }}
+                className="mt-1 text-sm text-red-500"
+              >
+                {formik.errors.email}
+              </motion.p>
             )}
           </div>
 
@@ -200,9 +261,18 @@ export default function () {
               type={isShow ? "text" : "password"}
             />
             {formik.touched.password && formik.errors.password && (
-              <p className="mt-1 text-sm text-red-500">
+              <motion.p
+                initial={{
+                  scale: 0,
+                }}
+                animate={{
+                  scale: 1,
+                  transition: { duration: 0.5 },
+                }}
+                className="mt-1 text-sm text-red-500"
+              >
                 {formik.errors.password}
-              </p>
+              </motion.p>
             )}
           </div>
 
@@ -219,7 +289,12 @@ export default function () {
             />
           </div>
 
-          <button
+          <motion.button
+            whileHover={{
+              scale: 0.9,
+              transition: { duration: 0.8 },
+            }}
+            whileTap={{ scale: 0.9 }}
             disabled={!formik.isValid || formik.isSubmitting}
             className={`text-[1rem] p-2 bg-black  transition-all duration-500 hover:opacity-75 rounded-md text-white mt-4 ${
               !formik?.isValid && "cursor-not-allowed opacity-50"
@@ -227,7 +302,7 @@ export default function () {
             type="submit"
           >
             Sign Up
-          </button>
+          </motion.button>
         </motion.div>
       </form>
     </motion.div>
