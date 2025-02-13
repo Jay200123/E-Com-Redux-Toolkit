@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import {
   useGetProductsQuery,
@@ -11,6 +11,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { toast } from "react-toastify";
 
 export default function () {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = useParams();
   const { data } = useGetProductByIdQuery(id);
@@ -42,16 +43,20 @@ export default function () {
       (product?.product_name || "").toLowerCase()
   );
 
-  const productColors = filteredProducts?.map((p) => p?.color?.toLowerCase());
+  const productColors = filteredProducts?.map((p) => ({
+    color: p?.color,
+    id: p?._id,
+  }));
 
   const back = () => {
     window.history.back();
   };
 
-  const handleCart = (product, quantity) => {  
+  const handleCart = (product, quantity) => {
     dispatch(addCart({ product, orderQty: quantity }));
     toast.success("Product added to cart");
-  }
+  };
+
 
   return (
     <>
@@ -107,12 +112,16 @@ export default function () {
             <p className="text-xs md:text-sm">₱{product?.price}</p>
             <h3 className="text-sm md:text-lg">Colors Available:</h3>
             <div className="flex space-x-4">
-              {productColors?.map((color, index) => (
-                <div
-                  key={`${color}-${index}`}
-                  className="w-6 h-6 border border-black rounded-full md:w-8 md:h-8"
+              {productColors?.map(({ id, color }) => (
+                <motion.div
+                  key={id}
+                  onClick={() => navigate(`/product/${id}`)}  
+                  className="w-6 h-6 border border-black rounded-full cursor-pointer md:w-8 md:h-8"
                   style={{ backgroundColor: color }}
-                ></div>
+                  whileHover={{ scale: 1.2 }}
+                  whileTap={{ scale: 0.9 }}
+                  animate={{ scale: 1, transition: { duration: 0.5 } }}
+                ></motion.div>
               ))}
             </div>
 
