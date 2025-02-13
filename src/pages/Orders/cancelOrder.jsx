@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { createCancelOrderValidationSchema } from "../../validations";
 import ImageOne from "../../assets/register.jpg";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 export default function () {
   const { id } = useParams();
@@ -27,12 +28,21 @@ export default function () {
     },
   });
 
-  const back = () => {  
-    window.history.back();  
-  }
-  
+  const back = () => {
+    window.history.back();
+  };
+
   return (
-    <form
+    <motion.form
+      initial={{ y: -100, opacity: 0 }}
+      animate={{
+        y: 0,
+        opacity: 1,
+        transition: {
+          duration: 0.8,
+          ease: "easeInOut",
+        },
+      }}
       onSubmit={formik.handleSubmit}
       className="relative flex flex-col w-full h-screen md:flex-row"
     >
@@ -74,7 +84,18 @@ export default function () {
             className="p-2 text-sm border-b border-gray-700 rounded-sm md:text-base placeholder:text-gray-700"
           />
           {formik.touched.reason && formik.errors.reason && (
-            <p className="mt-1 text-sm text-red-500">{formik.errors.reason}</p>
+            <motion.p
+              initial={{
+                scale: 0,
+              }}
+              animate={{
+                scale: 1,
+                transition: { duration: 0.5 },
+              }}
+              className="mt-1 text-sm text-red-500"
+            >
+              {formik.errors.reason}
+            </motion.p>
           )}
         </div>
         <button
@@ -87,6 +108,6 @@ export default function () {
           Cancel Order
         </button>
       </div>
-    </form>
+    </motion.form>
   );
 }
