@@ -62,14 +62,21 @@ export default function () {
               cart?.item?.map((item, index) => (
                 <motion.div
                   initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
+                  animate={{ 
+                    opacity: 1,
+                    scale: 1,
+                    transition: {
+                      duration: 0.8,
+                      ease: "easeInOut",  
+                    }
+                   }}
                   exit={{ opacity: 0, scale: 0 }}
                   key={index}
                   className="flex flex-col items-center w-full p-4 mt-2 mb-4 border border-gray-300 rounded-lg shadow-sm md:flex-row"
                 >
                   <div className="flex items-center justify-center w-full mb-4 md:w-1/4 md:mb-0">
                     <img
-                      className="object-cover w-24 h-24 rounded-md cursor-pointer"
+                      className="object-contain w-24 h-24 rounded-md cursor-pointer"
                       onClick={() => navigate(`/product/${item?.product?._id}`)}
                       src={
                         item?.product?.image?.length > 1
@@ -175,18 +182,28 @@ export default function () {
             <div className="text-center">
               {cart?.item?.length > 0 ? (
                 <>
-                  <button
+                  <motion.button
+                    whileHover={{
+                      scale: 0.9,
+                      transition: { duration: 0.8 },
+                    }}
+                    whileTap={{ scale: 0.9 }}
                     onClick={() => navigate(`/checkout`)}
                     className="w-full px-4 py-2 text-white bg-red-600 rounded-md"
                   >
                     Proceed to Checkout
-                  </button>
-                  <button
+                  </motion.button>
+                  <motion.button
+                    whileHover={{
+                      scale: 0.9,
+                      transition: { duration: 0.8 },
+                    }}
+                    whileTap={{ scale: 0.9 }}
                     onClick={handleClear}
                     className="w-full px-4 py-2 mt-2 text-white bg-red-600 rounded-md"
                   >
                     Clear Cart
-                  </button>
+                  </motion.button>
                 </>
               ) : (
                 <button
