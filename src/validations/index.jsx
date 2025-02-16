@@ -8,6 +8,7 @@ import editProductValidationSchema from "./editProductValidation";
 import createRatingValidationSchema from "./createRatingValidation";
 import editRatingValidationSchema from "./editRatingValidation";
 import createCancelOrderValidationSchema from "./createCancelOrderValidation";
+import sendOTPValidationSchema from "./createOTPValidation";
 
 export {
   SignInValidationSchema,
@@ -20,4 +21,5 @@ export {
   createRatingValidationSchema,
   editRatingValidationSchema,
   createCancelOrderValidationSchema,
+  sendOTPValidationSchema,
 };
