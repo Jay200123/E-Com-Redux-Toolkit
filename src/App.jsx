@@ -49,6 +49,7 @@ import {
   GetRatingById,
   CancelOrder,
   CancelOrderTable,
+  SendOTP,
 } from "./pages";
 
 function App() {
@@ -64,6 +65,7 @@ function App() {
           <Route path="/cart" index element={<Cart />} />
           <Route path="/product/:id" index element={<ProductDetails />} />
           <Route path="/menu" index element={<Menu />} />
+          <Route path="/otp" index element={<SendOTP />} />
 
           <Route element={<CategoryLayout />}>
             <Route path="products/category" element={<ProductCategory />} />
