@@ -159,7 +159,7 @@ export default function () {
               <label className="ml-1 text-xs md:text-sm">Show Password</label>
             </div>
             <div>
-              <a className="text-xs cursor-pointer md:text-sm">
+              <a onClick={()=>navigate("/otp")} className="text-xs cursor-pointer md:text-sm">
                 Forgot Password
               </a>
             </div>
