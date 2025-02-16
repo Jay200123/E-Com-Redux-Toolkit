@@ -55,10 +55,21 @@ export const deleteById = (builder) => {
   });
 };
 
+export const sendOtpByEmail = (builder) => {
+  return builder.mutation({
+    query: (payload) => ({
+      url: `${PATH.SEND_OTP_ROUTE}`,
+      method: API.POST,
+      body: payload,
+    }),
+  });
+};
+
 export default {
   getAll,
   getById,
   Add,
   updateById,
   deleteById,
+  sendOtpByEmail,
 };
