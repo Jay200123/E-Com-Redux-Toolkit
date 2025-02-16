@@ -90,7 +90,8 @@ export default function () {
   };
 
   return (
-    <div className="flex flex-col w-full h-full">
+    <>
+     <div className="flex flex-col w-full h-full">
       <motion.div
         initial={{ x: -100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
@@ -338,5 +339,7 @@ export default function () {
         </motion.div>
       </div>
     </div>
+    </>
+   
   );
 }
