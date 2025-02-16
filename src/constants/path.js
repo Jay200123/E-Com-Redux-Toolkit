@@ -21,5 +21,7 @@ export default {
     EDIT_RATING_ID_ROUTE:"/rating/edit/:id",
     CANCEL_ORDER_ROUTE: "/order/cancel/:id",
     APPROVE_CANCEL_ROUTE: "/order/cancel/approve/:id",  
+    SEND_OTP_ROUTE:"/user/otp",
+    CHANGE_PASSWORD_OTP_ROUTE:"/user/otp/password",  
 
 }
