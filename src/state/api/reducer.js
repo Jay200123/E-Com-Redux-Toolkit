@@ -7,6 +7,7 @@ import BrandApi from "./routes/brand";
 import OrderApi from "./routes/order";
 import RatingApi from "./routes/rating";
 
+
 const prepareHeaders = (headers, { getState }) => {
   if (getState()?.auth?.isAuthenticated && getState()?.auth?.token) {
     headers.set("authorization", `Bearer ${getState()?.auth?.token}`);
@@ -56,10 +57,11 @@ export const api = createApi({
     deleteRating: RatingApi.deleteById(builder),
     packedOrder: OrderApi.packedById(builder),
     shippedOrder: OrderApi.shippedById(builder),
-    deliverOrder: OrderApi.deliveryById(builder), 
-    logout: AuthApi.logout(builder),  
-    cancelOrder: OrderApi.cancelById(builder), 
-    approvedCancelOrder: OrderApi.approvedCancelById(builder),  
+    deliverOrder: OrderApi.deliveryById(builder),
+    logout: AuthApi.logout(builder),
+    cancelOrder: OrderApi.cancelById(builder),
+    approvedCancelOrder: OrderApi.approvedCancelById(builder),
+    sendOtp: UserApi.sendOtpByEmail(builder),
   }),
 });
 
@@ -90,10 +92,11 @@ export const {
   useAddRatingMutation,
   useUpdateRatingMutation,
   useDeleteRatingMutation,
-  usePackedOrderMutation, 
+  usePackedOrderMutation,
   useShippedOrderMutation,
-  useDeliverOrderMutation,  
-  useLogoutMutation,  
+  useDeliverOrderMutation,
+  useLogoutMutation,
   useCancelOrderMutation,
-  useApprovedCancelOrderMutation, 
+  useApprovedCancelOrderMutation,
+  useSendOtpMutation,
 } = api;
