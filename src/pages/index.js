@@ -33,6 +33,7 @@ import GetRatingById from "./RatingTable/getById";
 import EditRating from "./EditRating";
 import CancelOrder from "./Orders/cancelOrder";
 import CancelOrderTable from "./OrderTable/cancelOrders";
+import SendOTP from "./SendOTP";  
 import ProtectedPage from "./ProtectedPage";
 
 export {
@@ -72,4 +73,5 @@ export {
   ProtectedPage,
   CancelOrder,
   CancelOrderTable,
+  SendOTP,
 };
