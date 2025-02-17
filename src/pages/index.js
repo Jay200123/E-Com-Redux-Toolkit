@@ -34,6 +34,7 @@ import EditRating from "./EditRating";
 import CancelOrder from "./Orders/cancelOrder";
 import CancelOrderTable from "./OrderTable/cancelOrders";
 import SendOTP from "./SendOTP";  
+import ChangePassword from "./ChangePassword";  
 import ProtectedPage from "./ProtectedPage";
 
 export {
@@ -74,4 +75,5 @@ export {
   CancelOrder,
   CancelOrderTable,
   SendOTP,
+  ChangePassword,
 };
