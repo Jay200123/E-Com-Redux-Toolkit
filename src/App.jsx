@@ -50,6 +50,7 @@ import {
   CancelOrder,
   CancelOrderTable,
   SendOTP,
+  ChangePassword,
 } from "./pages";
 
 function App() {
@@ -66,6 +67,11 @@ function App() {
           <Route path="/product/:id" index element={<ProductDetails />} />
           <Route path="/menu" index element={<Menu />} />
           <Route path="/otp" index element={<SendOTP />} />
+          <Route
+            path="/change-password/otp"
+            index
+            element={<ChangePassword />}
+          />
 
           <Route element={<CategoryLayout />}>
             <Route path="products/category" element={<ProductCategory />} />
@@ -322,14 +328,14 @@ function App() {
               }
             />
             <Route
-            path="/orders/cancel"
-            index
-            element={
-              <ProtectedRoutes userRole={["Admin"]}>
-                <CancelOrderTable />
-              </ProtectedRoutes>
-            }
-          />
+              path="/orders/cancel"
+              index
+              element={
+                <ProtectedRoutes userRole={["Admin"]}>
+                  <CancelOrderTable />
+                </ProtectedRoutes>
+              }
+            />
           </Route>
         </Route>
       </Route>
