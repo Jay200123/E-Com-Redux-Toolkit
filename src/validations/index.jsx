@@ -9,6 +9,7 @@ import createRatingValidationSchema from "./createRatingValidation";
 import editRatingValidationSchema from "./editRatingValidation";
 import createCancelOrderValidationSchema from "./createCancelOrderValidation";
 import sendOTPValidationSchema from "./createOTPValidation";
+import changePasswordValidationSchema from "./changePasswordOTPValidation";  
 
 export {
   SignInValidationSchema,
@@ -22,4 +23,5 @@ export {
   editRatingValidationSchema,
   createCancelOrderValidationSchema,
   sendOTPValidationSchema,
+  changePasswordValidationSchema,
 };
