@@ -22,9 +22,9 @@ export default function () {
       const res = await sendOtp(formData);
       if (res?.data?.success === true) {
         toast.success(res?.data?.message);
-        navigate("/");
+        navigate("/change-password/otp");
       } else {
-        toast.error(res?.data?.message);
+        toast.error(`${res?.error?.data?.error.message}`);
       }
     },
   });
@@ -104,14 +104,17 @@ export default function () {
           />
           {formik.touched.email && formik.errors.email && (
             <motion.p
-            initial={{
-              scale: 0,
-            }}
-            animate={{
-              scale: 1,
-              transition: { duration: 0.5 },
-            }}
-             className="mt-1 text-sm text-red-500">{formik.errors.email}</motion.p>
+              initial={{
+                scale: 0,
+              }}
+              animate={{
+                scale: 1,
+                transition: { duration: 0.5 },
+              }}
+              className="mt-1 text-sm text-red-500"
+            >
+              {formik.errors.email}
+            </motion.p>
           )}
         </div>
 
