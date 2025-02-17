@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { TAGS, API, RESOURCE } from "../../constants";
 import AuthApi from "./routes/auth";
 import ProductApi from "./routes/products";
-import UserApi, { changePasswordByOtp } from "./routes/user";
+import UserApi from "./routes/user";
 import BrandApi from "./routes/brand";
 import OrderApi from "./routes/order";
 import RatingApi from "./routes/rating";
