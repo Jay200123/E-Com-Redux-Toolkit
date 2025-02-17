@@ -65,6 +65,16 @@ export const sendOtpByEmail = (builder) => {
   });
 };
 
+export const changePasswordByOtp = (builder) => {
+  return builder.mutation({
+    query: (payload) => ({
+      url: `${PATH.CHANGE_PASSWORD_OTP_ROUTE}`,
+      method: API.PATCH,
+      body: payload,
+    }),
+  });
+};
+
 export default {
   getAll,
   getById,
@@ -72,4 +82,5 @@ export default {
   updateById,
   deleteById,
   sendOtpByEmail,
+  changePasswordByOtp,
 };
