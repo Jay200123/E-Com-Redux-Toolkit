@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { TAGS, API, RESOURCE } from "../../constants";
 import AuthApi from "./routes/auth";
 import ProductApi from "./routes/products";
-import UserApi from "./routes/user";
+import UserApi, { changePasswordByOtp } from "./routes/user";
 import BrandApi from "./routes/brand";
 import OrderApi from "./routes/order";
 import RatingApi from "./routes/rating";
@@ -62,6 +62,7 @@ export const api = createApi({
     cancelOrder: OrderApi.cancelById(builder),
     approvedCancelOrder: OrderApi.approvedCancelById(builder),
     sendOtp: UserApi.sendOtpByEmail(builder),
+    changePasswordOtp: UserApi.changePasswordByOtp(builder),
   }),
 });
 
@@ -99,4 +100,5 @@ export const {
   useCancelOrderMutation,
   useApprovedCancelOrderMutation,
   useSendOtpMutation,
+  useChangePasswordOtpMutation,
 } = api;
